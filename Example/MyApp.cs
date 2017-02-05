@@ -2,6 +2,7 @@
 using System.Threading;
 using GHIElectronics.TinyCLR.Devices.Gpio;
 using GHIElectronics.TinyCLR.Pins;
+using GHIElectronics.TinyCLR.Storage.Streams;
 using GroveModule;
 
 namespace Example
@@ -30,7 +31,7 @@ namespace Example
             _digit.Display4Digit(new byte[] { 0x01, 0x02, 0x04, 0x08 });
 
             Led led = new Led(FEZPandaIII.Gpio.D6);
-            led.Blink();
+            led.Blink(500, 200);
             Thread.Sleep(5000);
             led.StopBlinking();
 
@@ -42,9 +43,19 @@ namespace Example
         {
             _state = !_state;
             if (_state)
-                _digit.Display4Digit(new byte[] { Grove4Digit.Numbers[1], Grove4Digit.Numbers[2], Grove4Digit.Numbers[3], Grove4Digit.Numbers[7] });
+                _digit.Display4Digit(new byte[]
+                    {Grove4Digit.Numbers[1], Grove4Digit.Numbers[2], Grove4Digit.Numbers[3], Grove4Digit.Numbers[7]});
             else
-                _digit.Display4Digit(new byte[] { Grove4Digit.Numbers[0], Grove4Digit.Numbers[4], Grove4Digit.Numbers[6], Grove4Digit.Numbers[8] });
+            {
+                int[] buffer = new int[4];
+                int hour = DateTime.Now.Hour;
+                int min = DateTime.Now.Minute;
+                buffer[0] = hour / 10;
+                buffer[1] = hour % 10;
+                buffer[2] = min / 60;
+                buffer[3] = min % 60;
+                _digit.Display4Digit(new byte[]{ Grove4Digit.Numbers[buffer[0]], Grove4Digit.Numbers[buffer[1]], Grove4Digit.Numbers[buffer[2]], Grove4Digit.Numbers[buffer[3]] });
+            }
         }
 
         private static void _button_OnPress(object sender, GpioPinValueChangedEventArgs e)
