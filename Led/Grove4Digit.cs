@@ -10,6 +10,7 @@ namespace GroveModule
         private readonly GpioPin _dataPin;
 
         public static byte[] Numbers = { 0x3f, 0x06, 0x5b, 0x4f, 0x66, 0x6d, 0x7d, 0x07, 0x7f, 0x6f };
+        public static byte Dot = 0x80;
         private byte _brightness;
         private const byte CmdAutoAddr = 0x40;
         private const byte DisplayOn = 0x88;

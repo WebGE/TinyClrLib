@@ -42,19 +42,35 @@ namespace Example
         private void MyTimerCallback(object state)
         {
             _state = !_state;
-            if (_state)
+            DisplayTime(_state);
+        }
+
+        private void DisplayTime(bool dot = false)
+        {
+            int[] buffer = new int[4];
+            int hour = DateTime.Now.Hour;
+            int min = DateTime.Now.Minute;
+            buffer[0] = hour / 10;
+            buffer[1] = hour % 10;
+            buffer[2] = min / 10;
+            buffer[3] = min % 10;
+            if (dot)
+            {
                 _digit.Display4Digit(new byte[]
-                    {Grove4Digit.Numbers[1], Grove4Digit.Numbers[2], Grove4Digit.Numbers[3], Grove4Digit.Numbers[7]});
+                {
+                    Grove4Digit.Numbers[buffer[0]], (byte) (Grove4Digit.Numbers[buffer[1]] | 0x80),
+                    Grove4Digit.Numbers[buffer[2]],
+                    Grove4Digit.Numbers[buffer[3]]
+                });
+            }
             else
             {
-                int[] buffer = new int[4];
-                int hour = DateTime.Now.Hour;
-                int min = DateTime.Now.Minute;
-                buffer[0] = hour / 10;
-                buffer[1] = hour % 10;
-                buffer[2] = min / 60;
-                buffer[3] = min % 60;
-                _digit.Display4Digit(new byte[]{ Grove4Digit.Numbers[buffer[0]], Grove4Digit.Numbers[buffer[1]], Grove4Digit.Numbers[buffer[2]], Grove4Digit.Numbers[buffer[3]] });
+                _digit.Display4Digit(new byte[]
+                {
+                    Grove4Digit.Numbers[buffer[0]], (byte) (Grove4Digit.Numbers[buffer[1]]),
+                    Grove4Digit.Numbers[buffer[2]],
+                    Grove4Digit.Numbers[buffer[3]]
+                });
             }
         }
 
