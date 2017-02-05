@@ -1,0 +1,7 @@
+*.suo
+Example/obj/
+Led/bin/
+Example/bin/
+Led/obj/
+packages/
+*.user
