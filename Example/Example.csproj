@@ -58,6 +58,10 @@
       <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
       <Name>Application</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Button\Button.csproj">
+      <Project>{855CC543-837F-4CB2-85A9-68EC8570A1C2}</Project>
+      <Name>Button</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Led\Led.csproj">
       <Project>{6902F73C-429F-467D-8543-DD25A4EC78FB}</Project>
       <Name>Led</Name>

@@ -2,7 +2,7 @@
 using System.Threading;
 using GHIElectronics.TinyCLR.Devices.Gpio;
 
-namespace GroveModule
+namespace Module
 {
     public class Led : IDisposable
     {
