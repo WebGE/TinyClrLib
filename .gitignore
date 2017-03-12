@@ -5,3 +5,6 @@ Example/bin/
 Led/obj/
 packages/
 *.user
+/Application/obj/Debug
+/Application/bin/Debug
+/.vs

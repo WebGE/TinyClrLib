@@ -1,9 +1,5 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Threading;
-using GHIElectronics.TinyCLR.Devices.Gpio;
-using GHIElectronics.TinyCLR.Pins;
-using GroveModule;
 
 namespace Example
 {
