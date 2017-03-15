@@ -11,11 +11,12 @@ namespace Application
 
         public virtual void Run()
         {
-            this.ProgramStarted();
+            ProgramStarted();
             while (true)
             {
                 Thread.Sleep(5);
             }
+            // ReSharper disable once FunctionNeverReturns
         }
 
         public abstract void ProgramStarted();

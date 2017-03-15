@@ -12,3 +12,16 @@ packages/
 /Application/obj/Release
 /Button/obj/Release
 Button/bin/
+/LedStrip/bin/Debug
+/LedStrip/bin/Debug
+/LedStrip/obj/Debug
+/Tone/bin/Debug
+/Tone/obj/Debug
+/LedStrip/obj/Release
+/Tone/obj/Release
+/LedStrip/bin/Release
+/Tone/bin/Release
+/Application/bin/Release
+/Application/bin/Release
+/LedStrip/bin/Release
+/Tone/bin/Release

@@ -14,8 +14,6 @@ namespace Module
             _buttonPin = gpio.OpenPin(pinNumber, GpioSharingMode.Exclusive);
             _buttonPin.SetDriveMode(GpioPinDriveMode.Input);
             _buttonPin.ValueChanged += _buttonPin_ValueChanged;
-            _buttonPin.
-
         }
 
         private void _buttonPin_ValueChanged(object sender, GpioPinValueChangedEventArgs e)
