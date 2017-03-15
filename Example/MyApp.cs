@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading;
+using Application;
 using GHIElectronics.TinyCLR.Devices.Gpio;
 using GHIElectronics.TinyCLR.Pins;
 using Module;
@@ -18,6 +19,8 @@ namespace Example
 
         public override void ProgramStarted()
         {
+            var list=I2cScanner.Ping(G120E.I2cBus.I2c1);
+
             Melody mel=new Melody(new MusicNote[]{new MusicNote(Tone.A3, 200),new MusicNote(Tone.B4, 200)  });
             _tunes=new Tunes(G120E.PwmPin.P3_26);
             _tunes.Play(mel);
