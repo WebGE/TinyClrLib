@@ -26,7 +26,7 @@ namespace Module
         public Tunes(int pin)
         {
             string str = PwmController.GetDeviceSelector();
-            PwmController pwm = PwmController.FromId(G400S.);
+            PwmController pwm = PwmController.GetDefault();
             _pwmPin = pwm.OpenPin(pin);
             playlist = new Queue();
             syncRoot = new object();

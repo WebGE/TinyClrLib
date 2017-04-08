@@ -16,7 +16,7 @@ namespace TinyClrCore
             var devices = DeviceInformation.FindAll(filter);
             byte[] readBuffer = new byte[7];
             byte[] writeBuffer = new byte[1];
-            for (int i = 0x63; i < 0x70; i++)
+            for (int i = 0x03; i < 0x77; i++)
             {
                 I2cConnectionSettings settings = new I2cConnectionSettings(i);
                 I2cDevice device = I2cDevice.FromId(devices[0].Id, settings);
@@ -29,7 +29,9 @@ namespace TinyClrCore
                 {
                     writeBuffer[0] = 0x00;
                     var res = device.WriteReadPartial(writeBuffer, readBuffer);
-                    Debug.WriteLine("Device #" + i.ToString("X") + ": " + DisplayReadBuffer(readBuffer) + ", status:" + DisplayStatus(res.Status));
+                    // Debug.WriteLine("Device #" + i.ToString("X") + ": " + DisplayReadBuffer(readBuffer) + ", status:" + DisplayStatus(res.Status));
+                    if (res.Status == I2cTransferStatus.FullTransfer)
+                        list.Add(i);
                 }
                 catch (Exception ex)
                 {
