@@ -1,9 +1,9 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26228.9
+VisualStudioVersion = 15.0.26403.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Example", "Example\Example.csproj", "{B9C55347-B713-4ED2-82FB-AD09FC85EBB7}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestG120E", "Example\TestG120E.csproj", "{B9C55347-B713-4ED2-82FB-AD09FC85EBB7}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Led", "Led\Led.csproj", "{6902F73C-429F-467D-8543-DD25A4EC78FB}"
 EndProject
@@ -13,7 +13,11 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Button", "Button\Button.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LedStrip", "LedStrip\LedStrip.csproj", "{14D35EFA-5F56-4ADE-A025-99E421BCB1F0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tone", "Tone\Tone.csproj", "{704B1259-8A83-4F6B-AA9B-7396C1D3258F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tunes", "Tone\Tunes.csproj", "{704B1259-8A83-4F6B-AA9B-7396C1D3258F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestG80", "TestG80\TestG80.csproj", "{55766925-A597-4E30-8B40-C0950EE2CEE7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestG400S", "TestG400S\TestG400S.csproj", "{A51F39E9-74D9-421F-BEE0-9D55CC059871}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,6 +51,18 @@ Global
 		{704B1259-8A83-4F6B-AA9B-7396C1D3258F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{704B1259-8A83-4F6B-AA9B-7396C1D3258F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{704B1259-8A83-4F6B-AA9B-7396C1D3258F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55766925-A597-4E30-8B40-C0950EE2CEE7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{55766925-A597-4E30-8B40-C0950EE2CEE7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{55766925-A597-4E30-8B40-C0950EE2CEE7}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{55766925-A597-4E30-8B40-C0950EE2CEE7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{55766925-A597-4E30-8B40-C0950EE2CEE7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{55766925-A597-4E30-8B40-C0950EE2CEE7}.Release|Any CPU.Deploy.0 = Release|Any CPU
+		{A51F39E9-74D9-421F-BEE0-9D55CC059871}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A51F39E9-74D9-421F-BEE0-9D55CC059871}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A51F39E9-74D9-421F-BEE0-9D55CC059871}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{A51F39E9-74D9-421F-BEE0-9D55CC059871}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A51F39E9-74D9-421F-BEE0-9D55CC059871}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A51F39E9-74D9-421F-BEE0-9D55CC059871}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

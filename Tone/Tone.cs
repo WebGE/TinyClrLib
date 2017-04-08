@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
+using GHIElectronics.TinyCLR.Devices;
 using GHIElectronics.TinyCLR.Devices.Pwm;
 
 namespace Module
@@ -24,10 +25,11 @@ namespace Module
 
         public Tunes(int pin)
         {
-            PwmController pwm=PwmController.GetDefault();
-            _pwmPin=pwm.OpenPin(pin);
-            playlist=new Queue();
-            syncRoot=new object();
+            string str = PwmController.GetDeviceSelector();
+            PwmController pwm = PwmController.FromId(G400S.);
+            _pwmPin = pwm.OpenPin(pin);
+            playlist = new Queue();
+            syncRoot = new object();
         }
 
         /// <summary>Plays the melody.</summary>
@@ -80,7 +82,7 @@ namespace Module
 
                 if (Math.Abs(note.Tone.Frequency) > 0.01)
                 {
-                    _pwmPin.Controller.SetDesiredFrequency((int) note.Tone.Frequency);
+                    _pwmPin.Controller.SetDesiredFrequency((int)note.Tone.Frequency);
                     _pwmPin.SetActiveDutyCyclePercentage(0.5);
                     _pwmPin.Start();
                 }
@@ -162,8 +164,8 @@ namespace Module
 
         public MusicNote(Tone tone, int duration)
         {
-            if(duration<1)
-                throw new ArgumentException("Duration can't be negative","duration");
+            if (duration < 1)
+                throw new ArgumentException("Duration can't be negative", "duration");
             Tone = tone;
             Duration = duration;
         }
@@ -172,7 +174,6 @@ namespace Module
     /// <summary>Class that holds and manages notes that can be played.</summary>
     public class Tone
     {
-
         /// <summary>A rest note</summary>
         public static readonly Tone Rest = new Tone(0.0);
 
@@ -275,5 +276,4 @@ namespace Module
             Frequency = frequency;
         }
     }
-
 }

@@ -25,3 +25,7 @@ Button/bin/
 /Application/bin/Release
 /LedStrip/bin/Release
 /Tone/bin/Release
+/TestG400S/bin
+/TestG400S/obj
+/TestG80/bin
+/TestG80/obj

@@ -16,15 +16,17 @@ namespace Module
             _buttonPin.ValueChanged += _buttonPin_ValueChanged;
         }
 
+        public bool State => _buttonPin.Read() == GpioPinValue.High;
+
         private void _buttonPin_ValueChanged(object sender, GpioPinValueChangedEventArgs e)
         {
             if (e.Edge == GpioPinEdge.FallingEdge)
             {
-                OnRelease?.Invoke(sender, e);
+                OnPress?.Invoke(sender, e);
             }
             else
             {
-                OnPress?.Invoke(sender, e);
+                OnRelease?.Invoke(sender, e);
             }
         }
     }

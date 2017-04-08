@@ -1,6 +1,6 @@
 ﻿using System.Threading;
 
-namespace Application
+namespace TinyClrCore
 {
     interface IApplication
     {
@@ -14,10 +14,13 @@ namespace Application
             ProgramStarted();
             while (true)
             {
+                UpdateLoop();
                 Thread.Sleep(5);
             }
             // ReSharper disable once FunctionNeverReturns
         }
+
+        public abstract void UpdateLoop();
 
         public abstract void ProgramStarted();
     }
