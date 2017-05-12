@@ -40,20 +40,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="GHIElectronics.TinyCLR.Core, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GHIElectronics.TinyCLR.Core.0.3.0\lib\net452\GHIElectronics.TinyCLR.Core.dll</HintPath>
-    </Reference>
-    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.3.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
-    </Reference>
-    <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GHIElectronics.TinyCLR.Pins.0.3.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\Application\TinyClrCore.csproj">
       <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
       <Name>TinyClrCore</Name>
@@ -74,6 +60,20 @@
       <Project>{704B1259-8A83-4F6B-AA9B-7396C1D3258F}</Project>
       <Name>Tunes</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GHIElectronics.TinyCLR.Core, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Core.0.4.0\lib\net452\GHIElectronics.TinyCLR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.4.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
+    </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Pins.0.4.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

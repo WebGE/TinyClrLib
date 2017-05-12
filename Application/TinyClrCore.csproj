@@ -38,11 +38,11 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="GHIElectronics.TinyCLR.Core, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GHIElectronics.TinyCLR.Core.0.3.0\lib\net452\GHIElectronics.TinyCLR.Core.dll</HintPath>
+    <Reference Include="GHIElectronics.TinyCLR.Core, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Core.0.4.0\lib\net452\GHIElectronics.TinyCLR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.3.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.3.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
+    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.4.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

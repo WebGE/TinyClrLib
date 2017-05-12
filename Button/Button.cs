@@ -16,9 +16,7 @@ namespace Module
             _buttonPin.ValueChanged += _buttonPin_ValueChanged;
         }
 
-        public bool State => _buttonPin.Read() == GpioPinValue.High;
-
-        private void _buttonPin_ValueChanged(object sender, GpioPinValueChangedEventArgs e)
+        private void _buttonPin_ValueChanged(GpioPin sender, GpioPinValueChangedEventArgs e)
         {
             if (e.Edge == GpioPinEdge.FallingEdge)
             {
@@ -29,5 +27,19 @@ namespace Module
                 OnRelease?.Invoke(sender, e);
             }
         }
+
+        public bool State => _buttonPin.Read() == GpioPinValue.High;
+
+        //private void _buttonPin_ValueChanged(object sender, GpioPinValueChangedEventArgs e)
+        //{
+        //    if (e.Edge == GpioPinEdge.FallingEdge)
+        //    {
+        //        OnPress?.Invoke(sender, e);
+        //    }
+        //    else
+        //    {
+        //        OnRelease?.Invoke(sender, e);
+        //    }
+        //}
     }
 }
