@@ -1,7 +1,7 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Threading;
 using GHIElectronics.TinyCLR.Devices.Gpio;
+using GHIElectronics.TinyCLR.Devices.Pwm;
 using GHIElectronics.TinyCLR.Pins;
 using Module;
 using TinyClrCore;
@@ -10,8 +10,8 @@ namespace Example
 {
     public class MyApp : Application
     {
-        private Button btn;
-        private Led btnLed;
+        private Button _btn;
+        private Led _btnLed;
         private LedStrip _ledStrip;
         private Tunes _tunes;
 
@@ -24,32 +24,35 @@ namespace Example
             }
 
             TestLed();
-            // TestLedStrip();
+            TestLedStrip();
             TestTunes();
             TestButton();
+            CheckDevices();
         }
 
 
         private void TestLed()
         {
             Led led = new Led(G120E.GpioPin.P1_31);
-            led.Blink(500, 200);
+            led.Blink(500);
             Thread.Sleep(5000);
             led.StopBlinking();
-            btnLed = new Led(G120E.GpioPin.P2_0) { State = GpioPinValue.High };
+            _btnLed = new Led(G120E.GpioPin.P2_0) { State = GpioPinValue.High };
         }
 
         private void TestButton()
         {
-            btn = new Button(G120E.GpioPin.P2_31);
-            btn.OnPress += Btn_OnPress;
-            btn.OnRelease += Btn_OnRelease;
+            _btn = new Button(G120E.GpioPin.P2_31);
+            _btn.OnPress += Btn_OnPress;
+            _btn.OnRelease += Btn_OnRelease;
         }
 
         private void TestTunes()
         {
-            Melody mel = new Melody(new MusicNote[] { new MusicNote(Tone.A3, 200), new MusicNote(Tone.B4, 200) });
-            _tunes = new Tunes(G120E.PwmPin.Controller1.P3_26);
+            var controller=PwmController.FromId(G120E.PwmPin.Controller1.Id);
+            PwmPin pin=controller.OpenPin(G120E.PwmPin.Controller1.P3_26);
+            Melody mel = new Melody(new MusicNote(Tone.A3, 200), new MusicNote(Tone.B4, 200));
+            _tunes = new Tunes(pin);
             _tunes.Play(mel);
         }
 
@@ -72,12 +75,12 @@ namespace Example
 
         private void Btn_OnRelease(object sender, GpioPinValueChangedEventArgs e)
         {
-            btnLed.State = GpioPinValue.Low;
+            _btnLed.State = GpioPinValue.Low;
         }
 
         private void Btn_OnPress(object sender, GpioPinValueChangedEventArgs e)
         {
-            btnLed.State = GpioPinValue.High;
+            _btnLed.State = GpioPinValue.High;
         }
 
         public override void UpdateLoop()

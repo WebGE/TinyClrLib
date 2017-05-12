@@ -23,11 +23,11 @@ namespace Module
             }
         }
 
-        public Tunes(int pin)
+        public Tunes(PwmPin pin)
         {
-            string str = PwmController.GetDeviceSelector();
-            PwmController pwm = PwmController.GetDefault();
-            _pwmPin = pwm.OpenPin(pin);
+            //string str = PwmController.GetDeviceSelector();
+            //PwmController pwm = PwmController.GetDefault();
+            _pwmPin = pin;
             playlist = new Queue();
             syncRoot = new object();
         }
