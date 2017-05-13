@@ -4,19 +4,18 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{55766925-A597-4E30-8B40-C0950EE2CEE7}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>TestG80</RootNamespace>
-    <AssemblyName>TestG80</AssemblyName>
+    <ProjectGuid>{9576EBA2-A4E4-4609-9A49-AE65C313924B}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>I2cGroveColor</RootNamespace>
+    <AssemblyName>I2cGroveColor</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NoStdLib>true</NoStdLib>
     <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
     <ProjectTypeGuids>{A1948822-69DD-4150-919B-F3F42EFB71CC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,7 +25,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -35,29 +33,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MyG80App.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="I2cGroveColor.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\Application\TinyClrCore.csproj">
-      <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
-      <Name>TinyClrCore</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\I2cGroveColor\I2cGroveColor.csproj">
-      <Project>{9576EBA2-A4E4-4609-9A49-AE65C313924B}</Project>
-      <Name>I2cGroveColor</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Core, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Core.0.4.0\lib\net452\GHIElectronics.TinyCLR.Core.dll</HintPath>
     </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.4.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
+    </Reference>
     <Reference Include="GHIElectronics.TinyCLR.Drawing, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Drawing.0.4.0\lib\net452\GHIElectronics.TinyCLR.Drawing.dll</HintPath>
-    </Reference>
-    <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GHIElectronics.TinyCLR.Pins.0.4.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

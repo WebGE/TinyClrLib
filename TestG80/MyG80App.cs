@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Drawing;
 using GHIElectronics.TinyCLR.Pins;
 using TinyClrCore;
 
@@ -18,6 +19,11 @@ namespace TestG80
                 Debug.WriteLine(((int)value).ToString("X"));
             }
             Debug.WriteLine("End scanning.");
+
+            I2cGroveColor.I2cGroveColor module=new I2cGroveColor.I2cGroveColor(FEZPandaIII.I2cBus.I2c1);
+            Color color =module.GetRgbColor();
+            Debug.WriteLine("Module initialized.");
+
         }
     }
 }
