@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{B9C55347-B713-4ED2-82FB-AD09FC85EBB7}</ProjectGuid>
+    <ProjectGuid>{55766925-A597-4E30-8B40-C0950EE2CEE7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>Example</RootNamespace>
-    <AssemblyName>Example</AssemblyName>
+    <RootNamespace>TestG80</RootNamespace>
+    <AssemblyName>TestG80</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,38 +35,26 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MyApp.cs" />
+    <Compile Include="MyG80App.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Application\TinyClrCore.csproj">
+    <ProjectReference Include="..\..\Core\Application\Application.csproj">
       <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
       <Name>TinyClrCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Button\Button.csproj">
-      <Project>{855CC543-837F-4CB2-85A9-68EC8570A1C2}</Project>
-      <Name>Button</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\LedStrip\LedStrip.csproj">
-      <Project>{14D35EFA-5F56-4ADE-A025-99E421BCB1F0}</Project>
-      <Name>LedStrip</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Led\Led.csproj">
-      <Project>{6902F73C-429F-467D-8543-DD25A4EC78FB}</Project>
-      <Name>Led</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Tone\Tunes.csproj">
-      <Project>{704B1259-8A83-4F6B-AA9B-7396C1D3258F}</Project>
-      <Name>Tunes</Name>
+    <ProjectReference Include="..\..\Modules\Grove\I2cGroveColor\I2cGroveColor.csproj">
+      <Project>{9576EBA2-A4E4-4609-9A49-AE65C313924B}</Project>
+      <Name>I2cGroveColor</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Core, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Core.0.4.0\lib\net452\GHIElectronics.TinyCLR.Core.dll</HintPath>
     </Reference>
-    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.4.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
+    <Reference Include="GHIElectronics.TinyCLR.Drawing, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Drawing.0.4.0\lib\net452\GHIElectronics.TinyCLR.Drawing.dll</HintPath>
     </Reference>
     <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Pins.0.4.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>

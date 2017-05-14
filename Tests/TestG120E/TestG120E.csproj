@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A51F39E9-74D9-421F-BEE0-9D55CC059871}</ProjectGuid>
+    <ProjectGuid>{B9C55347-B713-4ED2-82FB-AD09FC85EBB7}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TestG400S</RootNamespace>
-    <AssemblyName>TestG400S</AssemblyName>
+    <RootNamespace>Example</RootNamespace>
+    <AssemblyName>Example</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,28 +35,28 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MyG400SApp.cs" />
+    <Compile Include="MyApp.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Application\TinyClrCore.csproj">
+    <ProjectReference Include="..\..\Core\Application\Application.csproj">
       <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
       <Name>TinyClrCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Button\Button.csproj">
+    <ProjectReference Include="..\..\Core\Button\Button.csproj">
       <Project>{855CC543-837F-4CB2-85A9-68EC8570A1C2}</Project>
       <Name>Button</Name>
     </ProjectReference>
-    <ProjectReference Include="..\LedStrip\LedStrip.csproj">
+    <ProjectReference Include="..\..\Modules\Gadgeteer\LedStrip\LedStrip.csproj">
       <Project>{14D35EFA-5F56-4ADE-A025-99E421BCB1F0}</Project>
       <Name>LedStrip</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Led\Led.csproj">
+    <ProjectReference Include="..\..\Core\Led\Led.csproj">
       <Project>{6902F73C-429F-467D-8543-DD25A4EC78FB}</Project>
       <Name>Led</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Tone\Tunes.csproj">
+    <ProjectReference Include="..\..\Modules\Gadgeteer\Tone\Tunes.csproj">
       <Project>{704B1259-8A83-4F6B-AA9B-7396C1D3258F}</Project>
       <Name>Tunes</Name>
     </ProjectReference>
