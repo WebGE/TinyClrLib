@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{55766925-A597-4E30-8B40-C0950EE2CEE7}</ProjectGuid>
+    <ProjectGuid>{BEFC825A-9421-4DAF-9B70-DAF88131EE97}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>TestG80</RootNamespace>
-    <AssemblyName>TestG80</AssemblyName>
+    <RootNamespace>TestBrainPad</RootNamespace>
+    <AssemblyName>TestBrainPad</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -35,33 +35,32 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="MyG80App.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="Startup.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Application\Application.csproj">
-      <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
-      <Name>Application</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Modules\Grove\I2cGroveColor\I2cGroveColor.csproj">
-      <Project>{9576EBA2-A4E4-4609-9A49-AE65C313924B}</Project>
-      <Name>I2cGroveColor</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="GHIElectronics.TinyCLR.Core, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GHIElectronics.TinyCLR.Core.0.4.0\lib\net452\GHIElectronics.TinyCLR.Core.dll</HintPath>
+    <Reference Include="GHIElectronics.TinyCLR.BrainPad, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.BrainPad.0.4.0\lib\net452\GHIElectronics.TinyCLR.BrainPad.dll</HintPath>
     </Reference>
-    <Reference Include="GHIElectronics.TinyCLR.Drawing, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GHIElectronics.TinyCLR.Drawing.0.4.0\lib\net452\GHIElectronics.TinyCLR.Drawing.dll</HintPath>
+    <Reference Include="GHIElectronics.TinyCLR.Core, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Core.0.4.0\lib\net452\GHIElectronics.TinyCLR.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Devices.0.4.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
     <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.4.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GHIElectronics.TinyCLR.Pins.0.4.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Pins.0.4.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Modules\Click\BlepClick\BlepClick.csproj">
+      <Project>{1AEA4858-90AC-4D0E-8761-61720B5B642B}</Project>
+      <Name>BlepClick</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
