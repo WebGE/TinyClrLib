@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Threading;
 using BlepClick.Commands;
 using BlepClick.Events;
-using BLEPBrainpad;
 using GHIElectronics.TinyCLR.Devices.Gpio;
 using GHIElectronics.TinyCLR.Devices.Spi;
 
@@ -41,10 +40,7 @@ namespace BlepClick
         private readonly GpioPin _activate;
         private readonly SpiDevice _spi;
 
-        public GpioPinValue Activate
-        {
-            get => _activate.Read();
-        }
+        public GpioPinValue Activate => _activate.Read();
 
         //public event DeviceStartedEvent OnDeviceStartedEvent;
         //public event CommandResponseEvent OnCommandResponseEvent;
@@ -105,7 +101,7 @@ namespace BlepClick
         private void ProcessEvent(byte[] content)
         {
             var eventType = (AciEventType)content[0];
-            AciEvent aciEvent = null;
+            AciEvent aciEvent;
 
             switch (eventType)
             {
@@ -157,8 +153,7 @@ namespace BlepClick
 
             Debug.WriteLine("Event: " + eventType.GetName());
 
-            if (AciEventReceived != null)
-                AciEventReceived(aciEvent);
+            AciEventReceived?.Invoke(aciEvent);
         }
 
         private void HandleCommandResponseEvent(CommandResponseEvent aciEvent)
@@ -178,6 +173,21 @@ namespace BlepClick
                 Bonded = true;
         }
 
+        private void HandleDataCreditEvent(DataCreditEvent aciEvent)
+        {
+            DataCreditsAvailable = aciEvent.DataCreditsAvailable;
+        }
+
+        private void HandleDataReceivedEvent(DataReceivedEvent aciEvent)
+        {
+            DataReceived?.Invoke(aciEvent);
+        }
+
+        private void HandleDeviceStartedEvent(DeviceStartedEvent aciEvent)
+        {
+            State = aciEvent.State;
+            DataCreditsAvailable = aciEvent.DataCreditsAvailable;
+        }
 
 
         public void Setup(byte[][] setupData)
@@ -291,13 +301,12 @@ namespace BlepClick
             Debug.WriteLine("#Beginnig of event transmission#");
             byte[] debug = new byte[1];
             byte[] length = new byte[1];
-            byte[] buff;
             _reqn.Write(GpioPinValue.Low);
             // read debug byte and discard
             _spi.ReadLsb(debug);
             _spi.ReadLsb(length);
             //Debug.WriteLine("Must be read: length:" + length[0]);
-            buff = new byte[length[0]];
+            var buff = new byte[length[0]];
             _spi.ReadLsb(buff);
             //Debug.WriteLine("Event: 0x" + buff[0].ToString("X"));
             _reqn.Write(GpioPinValue.High);

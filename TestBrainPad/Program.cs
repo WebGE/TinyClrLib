@@ -1,7 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Threading;
 using BlepClick;
-using BLEPBrainpad;
 using GHIElectronics.TinyCLR.Devices.Gpio;
 using GHIElectronics.TinyCLR.Pins;
 

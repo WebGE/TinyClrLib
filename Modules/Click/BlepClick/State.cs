@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections;
-using System.Text;
-using System.Threading;
 
-namespace BLEPBrainpad
+namespace BlepClick
 {
     public class Nrf8001Exception : Exception
     {

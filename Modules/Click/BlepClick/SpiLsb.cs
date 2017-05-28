@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Text;
-using System.Threading;
-using GHIElectronics.TinyCLR.Devices.Spi;
+﻿using GHIElectronics.TinyCLR.Devices.Spi;
 
-namespace BLEPBrainpad
+namespace BlepClick
 {
     public static class SpiLsb
     {

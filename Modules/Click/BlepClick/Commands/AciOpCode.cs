@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Text;
-using System.Threading;
-
-namespace BlepClick.Commands
+﻿namespace BlepClick.Commands
 {
     public enum AciOpCode:byte
     {
