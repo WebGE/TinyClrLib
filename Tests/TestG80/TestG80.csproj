@@ -44,9 +44,9 @@
       <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
       <Name>Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Modules\Grove\I2cGroveColor\I2cGroveColor.csproj">
-      <Project>{9576EBA2-A4E4-4609-9A49-AE65C313924B}</Project>
-      <Name>I2cGroveColor</Name>
+    <ProjectReference Include="..\..\Modules\Modules\Modules.csproj">
+      <Project>{55378620-50BD-4002-A8FB-FA61D991097E}</Project>
+      <Name>Modules</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

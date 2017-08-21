@@ -48,17 +48,9 @@
       <Project>{855CC543-837F-4CB2-85A9-68EC8570A1C2}</Project>
       <Name>Button</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Modules\Gadgeteer\LedStrip\LedStrip.csproj">
-      <Project>{14D35EFA-5F56-4ADE-A025-99E421BCB1F0}</Project>
-      <Name>LedStrip</Name>
-    </ProjectReference>
     <ProjectReference Include="..\..\Core\Led\Led.csproj">
       <Project>{6902F73C-429F-467D-8543-DD25A4EC78FB}</Project>
       <Name>Led</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\Modules\Gadgeteer\Tone\Tunes.csproj">
-      <Project>{704B1259-8A83-4F6B-AA9B-7396C1D3258F}</Project>
-      <Name>Tunes</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
