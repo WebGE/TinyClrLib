@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Text;
 using System.Threading;
+using TinyClrCore;
 
 namespace TestNetduino
 {
@@ -9,6 +10,8 @@ namespace TestNetduino
     {
         static void Main()
         {
+            MyNetduino3App app=new MyNetduino3App();
+            app.Run();
         }
     }
 }

@@ -37,11 +37,27 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="MyNetduino3App.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Core\Application\Application.csproj">
+      <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
+      <Name>Application</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modules\Modules\Modules.csproj">
+      <Project>{55378620-50BD-4002-A8FB-FA61D991097E}</Project>
+      <Name>Modules</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GHIElectronics.TinyCLR.Pins.0.5.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\GHIElectronics.TinyCLR.Core.0.5.0\build\net452\GHIElectronics.TinyCLR.Core.targets" Condition="Exists('..\..\packages\GHIElectronics.TinyCLR.Core.0.5.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" />
