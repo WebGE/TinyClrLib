@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.26430.6
+VisualStudioVersion = 15.0.26730.8
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestG120E", "Tests\TestG120E\TestG120E.csproj", "{B9C55347-B713-4ED2-82FB-AD09FC85EBB7}"
 EndProject
@@ -22,6 +22,21 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{FC39C051-E3A0-4F57-B1AB-DC2AC66B2799}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Grove", "Grove", "{76D0E0BA-4926-475E-8399-1E5D831BC5CC}"
+	ProjectSection(SolutionItems) = preProject
+		Modules\Grove\Button.cs = Modules\Grove\Button.cs
+		Modules\Grove\Buzzer.cs = Modules\Grove\Buzzer.cs
+		Modules\Grove\FourDigitDisplay.cs = Modules\Grove\FourDigitDisplay.cs
+		Modules\Grove\LcdRgbBacklight.cs = Modules\Grove\LcdRgbBacklight.cs
+		Modules\Grove\LedSocket.cs = Modules\Grove\LedSocket.cs
+		Modules\Grove\LightSensor.cs = Modules\Grove\LightSensor.cs
+		Modules\Grove\Relay.cs = Modules\Grove\Relay.cs
+		Modules\Grove\RotaryAngleSensor.cs = Modules\Grove\RotaryAngleSensor.cs
+		Modules\Grove\Rtc.cs = Modules\Grove\Rtc.cs
+		Modules\Grove\ServoMotor.cs = Modules\Grove\ServoMotor.cs
+		Modules\Grove\SoundSensor.cs = Modules\Grove\SoundSensor.cs
+		Modules\Grove\TemperatureSensor.cs = Modules\Grove\TemperatureSensor.cs
+		Modules\Grove\TouchSensor.cs = Modules\Grove\TouchSensor.cs
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Gadgeteer", "Gadgeteer", "{AE7ECB5D-73F5-40CD-B826-3CAD48719169}"
 EndProject
@@ -114,5 +129,8 @@ Global
 		{9576EBA2-A4E4-4609-9A49-AE65C313924B} = {76D0E0BA-4926-475E-8399-1E5D831BC5CC}
 		{1AEA4858-90AC-4D0E-8761-61720B5B642B} = {F737043D-87DC-484C-8002-89D864D50D1C}
 		{BEFC825A-9421-4DAF-9B70-DAF88131EE97} = {114B8843-7395-4069-A241-8DAA0323681C}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {DFE8F872-04F4-4FB3-97A0-0280C96B9F74}
 	EndGlobalSection
 EndGlobal
