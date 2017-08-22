@@ -49,10 +49,6 @@
       <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
       <Name>Application</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Modules\Modules\Modules.csproj">
-      <Project>{55378620-50BD-4002-A8FB-FA61D991097E}</Project>
-      <Name>Modules</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">

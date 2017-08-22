@@ -54,10 +54,6 @@
       <Project>{6902F73C-429F-467D-8543-DD25A4EC78FB}</Project>
       <Name>Led</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\Modules\Modules\Modules.csproj">
-      <Project>{55378620-50BD-4002-A8FB-FA61D991097E}</Project>
-      <Name>Modules</Name>
-    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

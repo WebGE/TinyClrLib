@@ -55,12 +55,6 @@
       <HintPath>..\..\packages\GHIElectronics.TinyCLR.Pins.0.5.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
     </Reference>
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Modules\Modules\Modules.csproj">
-      <Project>{55378620-50BD-4002-A8FB-FA61D991097E}</Project>
-      <Name>Modules</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\packages\GHIElectronics.TinyCLR.Core.0.5.0\build\net452\GHIElectronics.TinyCLR.Core.targets" Condition="Exists('..\..\packages\GHIElectronics.TinyCLR.Core.0.5.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
