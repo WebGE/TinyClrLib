@@ -1,5 +1,4 @@
-﻿using System;
-using System.Diagnostics;
+﻿using System.Diagnostics;
 using System.Drawing;
 using System.Threading;
 using GHIElectronics.TinyCLR.Devices.Enumeration;
@@ -7,6 +6,38 @@ using GHIElectronics.TinyCLR.Devices.I2c;
 
 namespace I2cGroveColor
 {
+    public enum Transaction
+    {
+        Byte = 0x00 << 5,
+        Word = 0x01 << 5,
+        Block = 0x02 << 5,
+        InterruptClear = 0x03 << 5
+    }
+
+    public enum Register
+    {
+        Control = 0x00,
+        Timing = 0x01,
+        Interrupt = 0x02,
+        InterruuptSource = 0x03,
+        // ReSharper disable once InconsistentNaming
+        ID = 0x04,
+        Gain = 0x07,
+        LowThresholdLowByte = 0x08,
+        LowThresholdHighByte = 0x09,
+        HighThresholdLowByte = 0x0A,
+        HighThresholdHighByte = 0x0B,
+        BlockRead = 0x0F,
+        Data1Low = 0x10,
+        Data1High = 0x11,
+        Data2Low = 0x12,
+        Data2High = 0x13,
+        Data3Low = 0x14,
+        Data3High = 0x15,
+        Data4Low = 0x16,
+        Data4High = 0x17
+    }
+
     // ReSharper disable once InconsistentNaming
     public class I2cGroveColor
     {
