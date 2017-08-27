@@ -19,7 +19,7 @@ Version: __0.5.0__
 - Light (from GHI)
 - Relay (from GHI)
 - Rotary Angle(from GHI)
-- Rtc (WIP)
+- Rtc
 - ServoMotor (from GHI)
 - Sound (from GHI)
 - Temperature (from GHI)
