@@ -42,10 +42,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Core\Application\Core.csproj">
+    <ProjectReference Include="..\..\Core\Core.csproj">
       <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
       <Name>Core</Name>
     </ProjectReference>
@@ -53,6 +50,9 @@
       <Project>{55378620-50BD-4002-A8FB-FA61D991097E}</Project>
       <Name>Modules</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.5.0.0, Culture=neutral, processorArchitecture=MSIL">

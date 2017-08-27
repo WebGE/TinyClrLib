@@ -2,5 +2,6 @@
 *.user
 /.vs/
 /packages/
+/_ReSharper.Caches/
 bin/
 obj/
