@@ -36,7 +36,9 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Application.cs" />
+    <Compile Include="Button.cs" />
     <Compile Include="I2cScanner.cs" />
+    <Compile Include="Led.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

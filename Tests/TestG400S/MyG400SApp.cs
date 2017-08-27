@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.Text;
 using System.Threading;
 using GHIElectronics.TinyCLR.Pins;
-using Module;
 using TinyClrCore;
 
 namespace TestG400S

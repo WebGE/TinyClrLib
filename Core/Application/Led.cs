@@ -2,7 +2,7 @@
 using System.Threading;
 using GHIElectronics.TinyCLR.Devices.Gpio;
 
-namespace Module
+namespace TinyClrCore
 {
     public class Led : IDisposable
     {

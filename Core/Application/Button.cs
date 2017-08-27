@@ -1,6 +1,6 @@
 ﻿using GHIElectronics.TinyCLR.Devices.Gpio;
 
-namespace Module
+namespace TinyClrCore
 { 
     public class Button
     {

@@ -42,9 +42,13 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Core\Application\Application.csproj">
+    <ProjectReference Include="..\..\Core\Application\Core.csproj">
       <Project>{54548267-2CFB-410E-952F-E5312FFE6633}</Project>
-      <Name>Application</Name>
+      <Name>Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Modules\Modules.csproj">
+      <Project>{55378620-50BD-4002-A8FB-FA61D991097E}</Project>
+      <Name>Modules</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
