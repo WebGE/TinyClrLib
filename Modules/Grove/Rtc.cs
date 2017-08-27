@@ -100,5 +100,33 @@ namespace Modules.Grove
             writedByte[7] = DecToBcd((byte)(Year - 2000));
             _rtcDevice.Write(writedByte);
         }
+
+        /// <summary>
+        /// Return the string representing the day of the week
+        /// </summary>
+        /// <param name="d">Day of the week to represent by a string</param>
+        /// <returns>String representing day of week</returns>
+        public static string GetDayOfWeek(DayOfWeek d)
+        {
+            switch (d)
+            {
+                case DayOfWeek.Friday:
+                    return "Vendredi";
+                case DayOfWeek.Monday:
+                    return "Lundi";
+                case DayOfWeek.Saturday:
+                    return "Samedi";
+                case DayOfWeek.Sunday:
+                    return "Dimanche";
+                case DayOfWeek.Thursday:
+                    return "Mardi";
+                case DayOfWeek.Tuesday:
+                    return "Jeudi";
+                case DayOfWeek.Wednesday:
+                    return "Mercredi";
+                default:
+                    return "Unknow day";
+            }
+        }
     }
 }
