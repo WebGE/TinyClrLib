@@ -1,13 +1,15 @@
-﻿using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Text;
-using System.Threading;
-using GHIElectronics.TinyCLR.Devices.I2c;
+﻿using GHIElectronics.TinyCLR.Devices.I2c;
 
-namespace SeeedGrove
+namespace Modules.Grove
 {
+    /// <summary>
+    /// Days of the week which are represented in Rtc
+    /// </summary>
     public enum DayOfWeek { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday }
+
+    /// <summary>
+    /// Object to manage rtc component
+    /// </summary>
     public class Rtc
     {
         private readonly I2cDevice _rtcDevice;
@@ -18,14 +20,22 @@ namespace SeeedGrove
         public DayOfWeek DayOfWeek;
         public byte Month;
         public ushort Year;
-        public bool AMMode;
+        /// <summary>
+        /// Set true to use AM/PM mode, false to use 24 Hrs mode
+        /// </summary>
+        public bool AmPmMode;
 
-
-        public Rtc(string i2c)
+        /// <summary>
+        /// Constructor of Rtc component
+        /// </summary>
+        /// <param name="i2C">String that represent i2c bus</param>
+        public Rtc(string i2C)
         {
-            var settings = new I2cConnectionSettings(0x68);
-            settings.BusSpeed = I2cBusSpeed.FastMode;
-            _rtcDevice = I2cDevice.FromId(i2c, settings);
+            var settings = new I2cConnectionSettings(0x68)
+            {
+                BusSpeed = I2cBusSpeed.FastMode
+            };
+            _rtcDevice = I2cDevice.FromId(i2C, settings);
         }
 
         private byte DecToBcd(byte b)
@@ -33,78 +43,62 @@ namespace SeeedGrove
             return (byte)((b / 10 * 16) + (b % 10));
         }
 
+        public static string To2Digit(int number)
+        {
+                return number < 10 ? ("0" + number) : number.ToString();
+        }
+
         private byte BcdToDec(byte b)
         {
             return (byte)((b / 16 * 10) + (b % 16));
         }
 
-        private ushort DecToBcd(ushort b)
+        /// <summary>
+        /// Indicates if rtc has been reset (lost of power)
+        /// </summary>
+        /// <returns>true if rtc power has been lost, else false</returns>
+        public bool HasBeenReset()
         {
-            return (ushort)((b / 10 * 16) + (b % 10));
+            byte[] readBuffer = new byte[1];
+            _rtcDevice.Write(new byte[] { 0x00 });
+            _rtcDevice.Read(readBuffer);
+            return (readBuffer[0] & 0x80) != 0;
+
         }
 
-        private ushort BcdToDec(ushort b)
-        {
-            return (ushort)((b / 16 * 10) + (b % 16));
-        }
-
-        public void StartClock()
-        {
-            GetTime();
-            byte[] writedByte = new byte[8];
-            writedByte[0] = 0x00;
-            writedByte[1] = (byte)(DecToBcd(Seconds) & 0x7f);
-            writedByte[2] = DecToBcd(Minutes);
-            writedByte[3] = (byte)(DecToBcd(Hours) + (AMMode ? 0x40 : 0x00));
-            writedByte[4] = (byte)DayOfWeek;
-            writedByte[5] = DecToBcd(Day);
-            writedByte[6] = DecToBcd(Month);
-            writedByte[7] = DecToBcd((byte)(Year - 2000));
-            _rtcDevice.Write(writedByte);
-        }
-
-        public void StopClock()
-        {
-            GetTime();
-            byte[] writedByte = new byte[8];
-            writedByte[0] = 0x00;
-            writedByte[1] = (byte)(DecToBcd(Seconds) | 0x80);
-            writedByte[2] = DecToBcd(Minutes);
-            writedByte[3] = (byte)(DecToBcd(Hours) + (AMMode ? 0x40 : 0x00));
-            writedByte[4] = (byte)DayOfWeek;
-            writedByte[5] = DecToBcd(Day);
-            writedByte[6] = DecToBcd(Month);
-            writedByte[7] = DecToBcd((byte)(Year - 2000));
-            _rtcDevice.Write(writedByte);
-        }
-
+        /// <summary>
+        /// Retrieve time store in rtc
+        /// </summary>
         public void GetTime()
         {
             byte[] readBuffer = new byte[7];
             _rtcDevice.Write(new byte[] { 0x00 });
             _rtcDevice.Read(readBuffer);
-            DisplayRead(readBuffer);
             Seconds = BcdToDec((byte)(readBuffer[0] & 0x7f));
             Minutes = BcdToDec(readBuffer[1]);
             Hours = BcdToDec((byte)(readBuffer[2] & 0x3f));
-            AMMode = (readBuffer[2] & 0x40) == 1;
+            AmPmMode = (readBuffer[2] & 0x40) == 1;
             DayOfWeek = (DayOfWeek)readBuffer[3];
             Day = BcdToDec(readBuffer[4]);
             Month = BcdToDec(readBuffer[5]);
-            Year = (ushort) (BcdToDec(readBuffer[6]) + 2000);
+            Year = (ushort)(BcdToDec(readBuffer[6]) + 2000);
         }
 
+        /// <summary>
+        /// Set time in rtc using value of this object
+        /// </summary>
         public void SetTime()
         {
-            //TODO: To complete
-        }
-        private void DisplayRead(byte[] readBuffer)
-        {
-            Debug.WriteLine("Read result:");
-            foreach (byte b in readBuffer)
-            {
-                Debug.WriteLine("0x" + b.ToString("X"));
-            }
+            byte[] writedByte = new byte[8];
+            writedByte[0] = 0x00;
+            writedByte[1] = (byte)(DecToBcd(Seconds) & 0x7f);
+            writedByte[2] = DecToBcd(Minutes);
+            writedByte[3] = (byte)(DecToBcd(Hours) + (AmPmMode ? 0x40 : 0x00));
+            writedByte[4] = (byte)DayOfWeek;
+            writedByte[5] = DecToBcd(Day);
+            writedByte[6] = DecToBcd(Month);
+            writedByte[7] = DecToBcd((byte)(Year - 2000));
+            _rtcDevice.Write(writedByte);
         }
     }
 }
