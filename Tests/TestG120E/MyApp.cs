@@ -17,7 +17,7 @@ namespace Example
 
         public override void ProgramStarted()
         {
-            var list = I2CScanner.Ping(G120E.I2cBus.I2c1);
+            var list = I2CScanner.Ping(G120E.I2cBus.I2c0);
             foreach (var value in list)
             {
                 Debug.WriteLine("Device: " + ((int)value).ToString("X"));
@@ -99,7 +99,7 @@ namespace Example
         private void CheckDevices()
         {
             Debug.WriteLine("Checking ...");
-            foreach (var value in I2CScanner.Ping(G120E.I2cBus.I2c1))
+            foreach (var value in I2CScanner.Ping(G120E.I2cBus.I2c0))
             {
                 Debug.WriteLine(((int)value).ToString("X"));
             }

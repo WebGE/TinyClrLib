@@ -43,14 +43,14 @@ partial class Program
     {
         //Put your setup code here. It runs once when the BrainPad starts up.
         _blepModule = new BlepModule(
-            GHIElectronics.TinyCLR.Pins.BrainPad.GpioPin.Rst,
-            GHIElectronics.TinyCLR.Pins.BrainPad.GpioPin.Cs,
-            GHIElectronics.TinyCLR.Pins.BrainPad.GpioPin.Int,
-            GHIElectronics.TinyCLR.Pins.BrainPad.GpioPin.An,
-            GHIElectronics.TinyCLR.Pins.BrainPad.GpioPin.Miso,
-            GHIElectronics.TinyCLR.Pins.BrainPad.GpioPin.Mosi,
-            GHIElectronics.TinyCLR.Pins.BrainPad.GpioPin.Sck,
-            GHIElectronics.TinyCLR.Pins.BrainPad.GpioPin.Pwm
+            GHIElectronics.TinyCLR.Pins.BrainPad.Expansion.GpioPin.Rst,
+            GHIElectronics.TinyCLR.Pins.BrainPad.Expansion.GpioPin.Cs,
+            GHIElectronics.TinyCLR.Pins.BrainPad.Expansion.GpioPin.Int,
+            GHIElectronics.TinyCLR.Pins.BrainPad.Expansion.GpioPin.An,
+            GHIElectronics.TinyCLR.Pins.BrainPad.Expansion.GpioPin.Miso,
+            GHIElectronics.TinyCLR.Pins.BrainPad.Expansion.GpioPin.Mosi,
+            GHIElectronics.TinyCLR.Pins.BrainPad.Expansion.GpioPin.Sck,
+            GHIElectronics.TinyCLR.Pins.BrainPad.Expansion.GpioPin.Pwm
             );
         _trigger = GpioController.GetDefault().OpenPin(GHIElectronics.TinyCLR.Pins.G30.GpioPin.PA15);
         _trigger.SetDriveMode(GpioPinDriveMode.InputPullUp);

@@ -1,5 +1,5 @@
 # TinyClr Library
-Version: __0.5.0__
+Version: __0.6.0__
 ## Core:
 - __Application__ class with Initialization and loop function,
 - __Led__ class to help with test easily,
