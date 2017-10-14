@@ -78,6 +78,9 @@
     <Reference Include="GHIElectronics.TinyCLR.Drawing, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\GHIElectronics.TinyCLR.Drawing.0.6.0\lib\net452\GHIElectronics.TinyCLR.Drawing.dll</HintPath>
     </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Storage, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\GHIElectronics.TinyCLR.Storage.0.6.0\lib\net452\GHIElectronics.TinyCLR.Storage.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets" Condition="Exists('..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" />
