@@ -6,7 +6,7 @@
     <title>Gadgeteer Button</title>
     <authors>N. Bauland</authors>
     <owners>N. Bauland</owners>
-    <iconUrl>http://www.bauland.fr/Content/img/DotNet_2014_64.png</iconUrl>
+    <iconUrl>http://www.bauland.fr/Content/img/Logo-NuGet.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>Use Gadgeteer button easily in TinyClr</description>
     <releaseNotes>Initial release of the package.</releaseNotes>
