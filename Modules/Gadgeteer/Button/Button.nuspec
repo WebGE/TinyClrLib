@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>Bauland.Gadgeteer.Button</id>
+    <version>0.6.0.0</version>
+    <title>Gadgeteer Button</title>
+    <authors>N. Bauland</authors>
+    <owners>N. Bauland</owners>
+    <iconUrl>http://www.bauland.fr/Content/img/DotNet_2014_64.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>Use Gadgeteer button easily in TinyClr</description>
+    <releaseNotes>Initial release of the package.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>TinyClr Gadgeteer Button</tags>
+    <dependencies>
+      <dependency id="GHIElectronics.TinyCLR.Core" version="[0.6.0, 0.7.0)" />
+      <dependency id="GHIElectronics.TinyCLR.Devices" version="[0.6.0, 0.7.0)" />
+    </dependencies>
+  </metadata>
+</package>
