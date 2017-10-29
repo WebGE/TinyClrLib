@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Diagnostics;
-using System.Text;
 using System.Threading;
 using GHIElectronics.TinyCLR.Devices.Enumeration;
 using GHIElectronics.TinyCLR.Devices.I2c;

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Diagnostics;
-using System.Text;
-using System.Threading;
+﻿using System.Threading;
 using GHIElectronics.TinyCLR.Pins;
 using TinyClrCore;
 

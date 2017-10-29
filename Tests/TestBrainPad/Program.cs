@@ -2,7 +2,6 @@
 using System.Threading;
 using BlepClick;
 using GHIElectronics.TinyCLR.Devices.Gpio;
-using GHIElectronics.TinyCLR.Pins;
 
 partial class Program
 {

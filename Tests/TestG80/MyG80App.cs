@@ -1,5 +1,4 @@
 ﻿using System.Diagnostics;
-using System.Drawing;
 using System.Threading;
 using GHIElectronics.TinyCLR.Pins;
 using TinyClrCore;

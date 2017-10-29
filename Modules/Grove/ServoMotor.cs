@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using GHIElectronics.TinyCLR.Devices.Pwm;
 
 namespace SeeedGrove

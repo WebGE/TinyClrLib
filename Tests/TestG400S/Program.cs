@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Text;
-using System.Threading;
-
-namespace TestG400S
+﻿namespace TestG400S
 {
     public class Program
     {

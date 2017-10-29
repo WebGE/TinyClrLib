@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Text;
-using System.Threading;
-using TinyClrCore;
-
-namespace TestNetduino
+﻿namespace TestNetduino
 {
     class Program
     {

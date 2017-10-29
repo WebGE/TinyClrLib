@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections;
 using System.Threading;
-using GHIElectronics.TinyCLR.Devices;
 using GHIElectronics.TinyCLR.Devices.Pwm;
 
 namespace Module

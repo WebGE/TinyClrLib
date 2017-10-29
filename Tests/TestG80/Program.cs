@@ -1,5 +1,4 @@
-﻿using System;
-using TinyClrCore;
+﻿using TinyClrCore;
 
 namespace TestG80
 {
