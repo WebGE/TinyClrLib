@@ -4,11 +4,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Gadgeteer Button")]
-[assembly: AssemblyDescription("Wrapper for Gadgeteer Button")]
+[assembly: AssemblyTitle("Gadgeteer LightSense")]
+[assembly: AssemblyDescription("Wrapper for Gadgeteer LightSense module")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("N. Bauland")]
-[assembly: AssemblyProduct("Button")]
+[assembly: AssemblyProduct("LightSense")]
 [assembly: AssemblyCopyright("Copyright © Bauland 2017")]
 [assembly: AssemblyTrademark("N. Bauland")]
 [assembly: AssemblyCulture("")]
@@ -19,7 +19,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("6b5c0f1d-06ab-407a-b28b-4ae9b51d7776")]
+[assembly: Guid("93768df5-e83c-40a1-9ed6-1bb5af08f244")]
 
 // Version information for an assembly consists of the following four values:
 //
