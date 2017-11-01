@@ -11,7 +11,8 @@ Note: If environment variable __NUGET_REPOSITORY__ is define, some project gener
 - Color Sensor (1334)
 ### Gadgeteer
 - Button (generates Nuget Package)
-- LedStrip
+- LedStrip (generates Nuget Package)
+- LightSense (generates Nuget Package)
 - Tone
 ### Grove
 - Button 
