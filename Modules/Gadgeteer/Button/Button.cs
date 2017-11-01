@@ -84,10 +84,21 @@ namespace Bauland.Gadgeteer
         }
     }
 
+    /// <summary>
+    /// Delegate of event button
+    /// </summary>
+    /// <param name="sender">Reference of component which raises the event</param>
+    /// <param name="args">Args of event</param>
     public delegate void ButtonEventHandler(object sender, ButtonEventHandlerArgs args);
 
+    /// <summary>
+    /// Contains arguments of event
+    /// </summary>
     public class ButtonEventHandlerArgs
     {
+        /// <summary>
+        /// Contains time at which event occurs
+        /// </summary>
         public DateTime Time { get; set; }
     }
 }
