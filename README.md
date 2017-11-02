@@ -2,15 +2,18 @@
 Version: __0.6.0__
 
 Note: If environment variable __NUGET_REPOSITORY__ is define, some project generate a Nuget package for them, and copy generated package into it.
+
 ## Core:
 - __Application__ class with Initialization and loop function,
 - __Led__ class to help with test easily,
 - __Button__ class to help with test easily
+
 ## Modules:
 ### Adafruit
 - Color Sensor (1334)
 ### Gadgeteer
 - Button (generates Nuget Package)
+- DisplayN18 (generates Nuget Package)
 - LedStrip (generates Nuget Package)
 - LightSense (generates Nuget Package)
 - Tone
