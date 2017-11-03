@@ -9,15 +9,19 @@ Note: If environment variable __NUGET_REPOSITORY__ is define, some project gener
 - __Button__ class to help with test easily
 
 ## Modules:
+
 ### Adafruit
 - Color Sensor (1334)
+
+
 ### Gadgeteer
 - AccelG248 (generates Nuget Package)
 - Button (generates Nuget Package)
 - DisplayN18 (generates Nuget Package)
 - LedStrip (generates Nuget Package)
 - LightSense (generates Nuget Package)
-- Tone
+- Tunes (generates Nuget Package)
+
 ### Grove
 - Button 
 - Buzzer
@@ -31,6 +35,8 @@ Note: If environment variable __NUGET_REPOSITORY__ is define, some project gener
 - ServoMotor (from GHI)
 - Sound (from GHI)
 - Temperature (from GHI)
+
+
 ### Mikro Click
 - Bluetooth LE p module (WIP)
 
