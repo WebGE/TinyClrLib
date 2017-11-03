@@ -2,9 +2,7 @@
 using System.Threading;
 using Bauland.Gadgeteer;
 using GHIElectronics.TinyCLR.Devices.Gpio;
-using GHIElectronics.TinyCLR.Devices.Pwm;
 using GHIElectronics.TinyCLR.Pins;
-using Module;
 using TinyClrCore;
 
 namespace Example
@@ -50,10 +48,8 @@ namespace Example
 
         private void TestTunes()
         {
-            var controller=PwmController.FromId(G120E.PwmPin.Controller1.Id);
-            PwmPin pin=controller.OpenPin(G120E.PwmPin.Controller1.P3_26);
             Melody mel = new Melody(new MusicNote(Tone.A3, 200), new MusicNote(Tone.B4, 200));
-            _tunes = new Tunes(pin);
+            _tunes = new Tunes(G120E.PwmPin.Controller1.P3_26);
             _tunes.Play(mel);
         }
 
