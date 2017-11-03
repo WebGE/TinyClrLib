@@ -30,12 +30,13 @@ namespace Bauland.Gadgeteer
         /// <summary>
         /// Constructor of Tunes
         /// </summary>
+        /// <param name="controller">string of controller (must be a P Socket)</param>
         /// <param name="pin">Pin number (generally pin 9 of P Socket)</param>
-        public Tunes(int pin)
+        public Tunes(string controller, int pin)
         {
-            //string str = PwmController.GetDeviceSelector();
-            //PwmController pwm = PwmController.GetDefault();
-            _pwmPin = PwmController.GetDefault().OpenPin(pin);
+            PwmController ctl = PwmController.FromId(controller);
+            _pwmPin = ctl.OpenPin(pin);
+
             _playlist = new Queue();
             _syncRoot = new object();
         }

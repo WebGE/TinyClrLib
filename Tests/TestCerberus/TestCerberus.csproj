@@ -50,6 +50,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Bauland.Gadgeteer.Tunes, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bauland.Gadgeteer.Tunes.0.6.0\lib\net452\Bauland.Gadgeteer.Tunes.dll</HintPath>
+    </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\GHIElectronics.TinyCLR.Devices.0.6.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
+    </Reference>
     <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\GHIElectronics.TinyCLR.Pins.0.6.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
     </Reference>
