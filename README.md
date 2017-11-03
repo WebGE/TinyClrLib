@@ -12,6 +12,7 @@ Note: If environment variable __NUGET_REPOSITORY__ is define, some project gener
 ### Adafruit
 - Color Sensor (1334)
 ### Gadgeteer
+- AccelG248 (generates Nuget Package)
 - Button (generates Nuget Package)
 - DisplayN18 (generates Nuget Package)
 - LedStrip (generates Nuget Package)
