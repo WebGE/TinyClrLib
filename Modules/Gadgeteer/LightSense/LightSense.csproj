@@ -47,15 +47,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="GHIElectronics.TinyCLR.Core" Version="[0.6.0, 0.7.0)" />
-  </ItemGroup>
-  <ItemGroup>
-    <PackageReference Include="GHIElectronics.TinyCLR.Pins" Version="[0.6.0, 0.7.0)" />
-  </ItemGroup>
-  <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\GHIElectronics.TinyCLR.Devices.0.6.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="GHIElectronics.TinyCLR.Pins">
+      <Version>0.6.0</Version>
+    </PackageReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets" Condition="Exists('..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" />

@@ -71,7 +71,6 @@ namespace Modules.Adafruit
 
         private readonly I2cDevice _colorSensorDevice;
         private Gain _gain;
-        private Color _color;
 
         public ColorSensor1334(string i2CBus)
         {

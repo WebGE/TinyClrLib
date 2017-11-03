@@ -1,14 +1,17 @@
 ﻿using System;
 using GHIElectronics.TinyCLR.Devices.Gpio;
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Global
 
 namespace Bauland.Gadgeteer
 {
     /// <summary>
-    /// 
+    /// Wrapper class for Button Gadgeteer Module
     /// </summary>
     public class Button
     {
         private readonly GpioPin _pinLed;
+        // ReSharper disable once PrivateFieldCanBeConvertedToLocalVariable
         private readonly GpioPin _pinButton;
         private DateTime _time;
         private TimeSpan _longPressTimeout;

@@ -55,6 +55,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="Bauland.Gadgeteer.LedStrip, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Bauland.Gadgeteer.LedStrip.0.6.0\lib\net452\Bauland.Gadgeteer.LedStrip.dll</HintPath>
+    </Reference>
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\GHIElectronics.TinyCLR.Devices.0.6.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>

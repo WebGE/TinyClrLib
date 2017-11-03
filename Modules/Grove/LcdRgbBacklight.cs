@@ -1,55 +1,57 @@
-﻿using GHIElectronics.TinyCLR.Devices.I2c;
-using System.Threading;
+﻿using System.Threading;
+using GHIElectronics.TinyCLR.Devices.I2c;
 
-namespace SeeedGrove
+// ReSharper disable UnusedMember.Local
+// ReSharper disable UnusedMember.Global
+// ReSharper disable MemberCanBePrivate.Global
+
+namespace Modules.Grove
 {
     public class LcdRgbBacklight
     {
-        private I2cDevice DisplayDevice;
-        private I2cDevice BacklightDevice;
+        private readonly I2cDevice _displayDevice;
+        private readonly I2cDevice _backlightDevice;
 
-        private byte _displayfunction;
+        private readonly byte _displayfunction;
         private byte _displaycontrol;
-        private byte _displaymode;
-        private byte _numlines, _currline;
 
+        private const byte LcdClearDisplay = 0x01;
+        private const byte LcdReturnHome = 0x02;
+        private const byte LcdEntryModeSet = 0x04;
+        private const byte LcdDisplaycontrol = 0x08;
+        private const byte LcdCursorshift = 0x10;
+        private const byte LcdFunctionset = 0x20;
+        private const byte LcdSetcgramaddr = 0x40;
+        private const byte LcdSetddramaddr = 0x80;
 
-        private byte LCD_CLEARDISPLAY = 0x01;
-        private byte LCD_RETURNHOME = 0x02;
-        private byte LCD_ENTRYMODESET = 0x04;
-        private byte LCD_DISPLAYCONTROL = 0x08;
-        private byte LCD_CURSORSHIFT = 0x10;
-        private byte LCD_FUNCTIONSET = 0x20;
-        private byte LCD_SETCGRAMADDR = 0x40;
-        private byte LCD_SETDDRAMADDR = 0x80;
+        private const byte LcdDisplayon = 0x04;
+        private const byte LcdDisplayoff = 0x00;
+        private const byte LcdCursoron = 0x02;
+        private const byte LcdCursoroff = 0x00;
+        private const byte LcdBlinkon = 0x01;
+        private const byte LcdBlinkoff = 0x00;
+        private const byte LcdEntryright = 0x00;
+        private const byte LcdEntryleft = 0x02;
+        private const byte LcdEntryshiftincrement = 0x01;
+        private const byte LcdEntryshiftdecrement = 0x00;
 
-        private byte LCD_DISPLAYON = 0x04;
-        private byte LCD_DISPLAYOFF = 0x00;
-        private byte LCD_CURSORON = 0x02;
-        private byte LCD_CURSOROFF = 0x00;
-        private byte LCD_BLINKON = 0x01;
-        private byte LCD_BLINKOFF = 0x00;
-        private byte LCD_ENTRYRIGHT = 0x00;
-        private byte LCD_ENTRYLEFT = 0x02;
-        private byte LCD_ENTRYSHIFTINCREMENT = 0x01;
-        private byte LCD_ENTRYSHIFTDECREMENT = 0x00;
+        private const byte RegMode1 = 0x00;
+        private const byte RegMode2 = 0x01;
+        private const byte RegOutput = 0x08;
 
-        private byte REG_MODE1 = 0x00;
-        private byte REG_MODE2 = 0x01;
-        private byte REG_OUTPUT = 0x08;
-
-        public LcdRgbBacklight(string I2cBus)
+        public LcdRgbBacklight(string i2CBus)
         {
-            var settings = new I2cConnectionSettings((0x7c >> 1));
-            settings.BusSpeed = I2cBusSpeed.FastMode;
+            var settings = new I2cConnectionSettings(0x7c >> 1) { BusSpeed = I2cBusSpeed.FastMode };
 
             //string aqs = I2cDevice.GetDeviceSelector("I2C1");
-            DisplayDevice = I2cDevice.FromId(I2cBus, settings);
+            _displayDevice = I2cDevice.FromId(i2CBus, settings);
 
-            settings = new I2cConnectionSettings((0xc4 >> 1));
-            settings.BusSpeed = I2cBusSpeed.FastMode;
+            settings = new I2cConnectionSettings(0xc4 >> 1)
+            {
+                BusSpeed = I2cBusSpeed.FastMode
+            };
 
-            BacklightDevice = I2cDevice.FromId(I2cBus, settings);
+            _backlightDevice = I2cDevice.FromId(i2CBus, settings);
 
             ////////////////////////////////////
             // get the display going
@@ -63,8 +65,6 @@ namespace SeeedGrove
             {
                 _displayfunction |= 0x08;// LCD_2LINE;
             }
-            _numlines = lines;
-            _currline = 0;
 
             // for some 1 line displays you can select a 10 pixel high font
             if ((dotsize != 0) && (lines == 1))
@@ -82,45 +82,45 @@ namespace SeeedGrove
             // page 45 figure 23
 
             // Send function set command sequence
-            command((byte)(LCD_FUNCTIONSET | _displayfunction));
+            Command((byte)(LcdFunctionset | _displayfunction));
             //delayMicroseconds(4500);  // wait more than 4.1ms
             Thread.Sleep(5);
 
             // second try
-            command((byte)(LCD_FUNCTIONSET | _displayfunction));
+            Command((byte)(LcdFunctionset | _displayfunction));
             //delayMicroseconds(150);
             Thread.Sleep(1);
 
             // third go
-            command((byte)(LCD_FUNCTIONSET | _displayfunction));
+            Command((byte)(LcdFunctionset | _displayfunction));
 
 
             // finally, set # lines, font size, etc.
-            command((byte)(LCD_FUNCTIONSET | _displayfunction));
+            Command((byte)(LcdFunctionset | _displayfunction));
 
             // turn the display on with no cursor or blinking default
-            _displaycontrol = (byte)(LCD_DISPLAYON | LCD_CURSOROFF | LCD_BLINKOFF);
+            _displaycontrol = LcdDisplayon | LcdCursoroff | LcdBlinkoff;
             EnableDisplay(true);
 
             // clear it off
             Clear();
 
             // Initialize to default text direction (for romance languages)
-            _displaymode = (byte)(LCD_ENTRYLEFT | LCD_ENTRYSHIFTDECREMENT);
+            byte displaymode = LcdEntryleft | LcdEntryshiftdecrement;
             // set the entry mode
-            command((byte)(LCD_ENTRYMODESET | _displaymode));
+            Command((byte)(LcdEntryModeSet | displaymode));
 
 
             // backlight init
-            WriteBacklightReg(REG_MODE1, 0);
+            WriteBacklightReg(RegMode1, 0);
             // set LEDs controllable by both PWM and GRPPWM registers
-            WriteBacklightReg(REG_OUTPUT, 0xFF);
+            WriteBacklightReg(RegOutput, 0xFF);
             // set MODE2 values
             // 0010 0000 -> 0x20  (DMBLNK to 1, ie blinky mode)
-            WriteBacklightReg(REG_MODE2, 0x20);
+            WriteBacklightReg(RegMode2, 0x20);
 
             //setColorWhite();
-            SetBacklightRGB(255, 0, 100);
+            SetBacklightRgb(255, 0, 100);
 
         }
 
@@ -150,50 +150,51 @@ namespace SeeedGrove
         }*/
 
         // send command
-        private void command(byte value)
+        private void Command(byte value)
         {
-            byte[] dta = new byte[2] { 0x80, value };
-            DisplayDevice.Write(dta);
+            byte[] data = { 0x80, value };
+            _displayDevice.Write(data);
             //i2c_send_byteS(dta, 2);
         }
 
         // send data
-        private void write(byte value)
+        private void Write(byte value)
         {
 
-            byte[] dta = new byte[2] { 0x40, value };
+            byte[] data = { 0x40, value };
             //i2c_send_byteS(dta, 2);
-            DisplayDevice.Write(dta);
+            _displayDevice.Write(data);
             //return 1; // assume sucess
         }
-        
+
         /********** high level commands, for the user! */
 
         public void Write(string s)
         {
 
             for (int i = 0; i < s.Length; i++)
-                write((byte)s[i]);
+                Write((byte)s[i]);
         }
+
         public void Clear()
         {
-            command(LCD_CLEARDISPLAY);        // clear display, set cursor position to zero
+            Command(LcdClearDisplay);        // clear display, set cursor position to zero
             //delayMicroseconds(2000);          // this command takes a long time!
             Thread.Sleep(2);
         }
 
         public void GoHome()
         {
-            command(LCD_RETURNHOME);        // set cursor position to zero
+            Command(LcdReturnHome);        // set cursor position to zero
             //delayMicroseconds(2000);        // this command takes a long time!
             Thread.Sleep(2);
         }
 
-        public  void SetCursor(byte col, byte row)
+        public void SetCursor(byte col, byte row)
         {
 
             col = (byte)(row == 0 ? (col | 0x80) : (col | 0xc0));
-            command(col);
+            Command(col);
             //byte[] dta = new byte[2] { 0x80, col };
             //DisplayDevice.Write(dta);
 
@@ -205,11 +206,11 @@ namespace SeeedGrove
         public void EnableDisplay(bool on)
         {
             if (on)
-                _displaycontrol |= LCD_DISPLAYON;
+                _displaycontrol |= LcdDisplayon;
             else
-                _displaycontrol &= (byte)~LCD_DISPLAYON;
+                _displaycontrol = (byte)(~LcdDisplayon & _displaycontrol);
 
-            command((byte)(LCD_DISPLAYCONTROL | _displaycontrol));
+            Command((byte)(LcdDisplaycontrol | _displaycontrol));
         }
 
         // =============================================================================
@@ -221,7 +222,7 @@ namespace SeeedGrove
             wb[0] = addr;
             wb[1] = data;
 
-            BacklightDevice.Write(wb);
+            _backlightDevice.Write(wb);
 
             //I2C.WriteRead((0xc4 >> 1), wb, 0, 2, rb, 0, 0, out written, out read);
 
@@ -242,16 +243,16 @@ namespace SeeedGrove
                 WriteBacklightReg(0x06, 0xff);
             }
         }
-        public void SetBacklightRGB(byte r, byte g, byte b)
+        public void SetBacklightRgb(byte r, byte g, byte b)
         {
 
-            byte REG_RED = 0x04;    // pwm2 
-            byte REG_GREEN = 0x03;      // pwm1 
-            byte REG_BLUE = 0x02;      // pwm0 
+            byte regRed = 0x04;    // pwm2 
+            byte regGreen = 0x03;      // pwm1 
+            byte regBlue = 0x02;      // pwm0 
 
-            WriteBacklightReg(REG_RED, r);
-            WriteBacklightReg(REG_GREEN, g);
-            WriteBacklightReg(REG_BLUE, b);
+            WriteBacklightReg(regRed, r);
+            WriteBacklightReg(regGreen, g);
+            WriteBacklightReg(regBlue, b);
         }
     }
 }
