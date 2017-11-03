@@ -49,7 +49,7 @@ namespace Example
         private void TestTunes()
         {
             Melody mel = new Melody(new MusicNote(Tone.A3, 200), new MusicNote(Tone.B4, 200));
-            _tunes = new Tunes(G120E.PwmPin.Controller1.P3_26);
+            _tunes = new Tunes(G120E.PwmPin.Controller1.Id, G120E.PwmPin.Controller1.P3_26);
             _tunes.Play(mel);
         }
 
