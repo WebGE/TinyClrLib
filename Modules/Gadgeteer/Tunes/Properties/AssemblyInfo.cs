@@ -5,13 +5,13 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("TestCerberus")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyTitle("Gadgeteer Tunes")]
+[assembly: AssemblyDescription("Wrapper for Gadgeteer Tunes")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("TestCerberus")]
-[assembly: AssemblyCopyright("Copyright ©  2017")]
-[assembly: AssemblyTrademark("")]
+[assembly: AssemblyCompany("N. Bauland")]
+[assembly: AssemblyProduct("Tunes")]
+[assembly: AssemblyCopyright("Copyright © Bauland 2017")]
+[assembly: AssemblyTrademark("N. Bauland")]
 [assembly: AssemblyCulture("")]
 
 // Setting ComVisible to false makes the types in this assembly not visible
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("bdb53418-5e51-4181-9fc9-ab395ba27316")]
+[assembly: Guid("95df2aab-8c5b-4e9a-8720-229d84216d0d")]
 
 // Version information for an assembly consists of the following four values:
 //
