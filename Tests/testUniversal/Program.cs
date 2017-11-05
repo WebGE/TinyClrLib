@@ -30,10 +30,7 @@ namespace testUniversal
             }
             while (true)
             {
-                _led.Write(GpioPinValue.High);
-                Thread.Sleep(200);
-                _led.Write(GpioPinValue.Low);
-                Thread.Sleep(800);
+                Thread.Sleep(20);
             }
         }
 
@@ -44,7 +41,7 @@ namespace testUniversal
 
             _tempHumidity=new TempHumidity(FEZCerberus.GpioPin.Socket2.Pin4,FEZCerberus.GpioPin.Socket2.Pin5);
             _tempHumidity.MeasurementComplete += _tempHumidity_MeasurementComplete;
-            _tempHumidity.MeasurementInterval = 1000;
+            _tempHumidity.MeasurementInterval = 2000;
             _tempHumidity.StartTakingMeasurements();
         }
 

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Threading;
-using GHIElectronics.TinyCLR.Devices.Gpio;
 using GHIElectronics.TinyCLR.Devices.I2c;
 
 // ReSharper disable MemberCanBePrivate.Global
@@ -16,10 +15,9 @@ namespace Bauland.Gadgeteer
 	public class TempHumidity
     {
         private Thread _timer;
-        private readonly GpioPin _data;
-        private readonly GpioPin _sck;
         private bool _running;
         private int _interval;
+        private readonly I2cDevice _device;
 
         private MeasurementCompleteEventHandler _onMeasurementComplete;
 
@@ -59,19 +57,19 @@ namespace Bauland.Gadgeteer
             var softwareProvider = new I2cSoftwareProvider(dataPin, sckPin);
             var controllers = I2cController.GetControllers(softwareProvider);
             var controller = controllers[0];
-            var device = controller.GetDevice(new I2cConnectionSettings( /* TODO */0x00)
+            _device = controller.GetDevice(new I2cConnectionSettings(0x40)
             {
                 BusSpeed = I2cBusSpeed.StandardMode,
                 SharingMode = I2cSharingMode.Exclusive
             });
-            _sck = GpioController.GetDefault().OpenPin(sckPin);
-            _sck.SetDriveMode(GpioPinDriveMode.Output);
-            // GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Four, false, this);
-            _data = GpioController.GetDefault().OpenPin(dataPin);
-            _data.SetDriveMode(GpioPinDriveMode.Output);
-            // GTI.DigitalIOFactory.Create(socket, Socket.Pin.Three, true, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, this);
+
+            // Reset device
+            Thread.Sleep(80);
+            _device.Write(new byte[] { 0xFE });
+
             _running = false;
         }
+
 
         /// <summary>Obtains a single measurement and raises the event when complete.</summary>
         public void RequestSingleMeasurement()
@@ -102,17 +100,20 @@ namespace Bauland.Gadgeteer
         {
             do
             {
-                ResetCommuncation();
+                byte[] readBuffer = new byte[2];
+                // Read humidity
+                _device.Write(new byte[] { 0xF5 });
+                Thread.Sleep(20);
+                _device.Read(readBuffer);
+                int rawHumidity = readBuffer[0] << 8 | readBuffer[1];
+                // Read Temperature
+                _device.Write(new byte[] { 0xE0 });
+                Thread.Sleep(20);
+                _device.Read(readBuffer);
+                int rawTemp = readBuffer[0] << 8 | readBuffer[1];
 
-                TransmissionStart();
-
-                double temperature = -39.65 + 0.01 * MeasureTemperature();
-
-                TransmissionStart();
-
-                int rawHumidity = MeasureHumidity();
-                double humidity = -2.0468 + 0.0367 * rawHumidity - 1.5955E-6 * rawHumidity * rawHumidity;
-                humidity = (temperature - 25) * (0.01 + 0.00008 * rawHumidity) + humidity;
+                double temperature = 175.72 * rawTemp / 65536.0 - 46.85;
+                double humidity = 125.0 * rawHumidity / 65536.0 - 6.0;
 
                 temperature = Math.Round(100.0 * temperature) / 100.0;
                 humidity = Math.Round(100.0 * humidity) / 100.0;
@@ -121,165 +122,6 @@ namespace Bauland.Gadgeteer
 
                 Thread.Sleep(_interval);
             } while (_running);
-        }
-
-        private void TransmissionStart()
-        {
-            _data.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.High);
-            _data.Write(GpioPinValue.Low);
-            _sck.Write(GpioPinValue.Low);
-            _sck.Write(GpioPinValue.High);
-            _data.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-        }
-
-        private int MeasureTemperature()
-        {
-            _data.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _data.Write(GpioPinValue.High);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _data.Write(GpioPinValue.Low);
-
-            _data.Write(GpioPinValue.High);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-
-            _data.Read();
-
-            _sck.Write(GpioPinValue.Low);
-
-            //while (_data.Read() == GpioPinValue.High)
-            //    Thread.Sleep(1);
-
-            int reading = 0;
-
-            for (int i = 0; i < 8; i++)
-            {
-                reading |= _data.Read() == GpioPinValue.High ? (1 << (15 - i)) : 0;
-                _sck.Write(GpioPinValue.High);
-                _sck.Write(GpioPinValue.Low);
-            }
-
-            _data.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            for (int i = 8; i < 16; i++)
-            {
-                reading |= _data.Read() == GpioPinValue.High ? (1 << (15 - i)) : 0;
-                _sck.Write(GpioPinValue.High);
-                _sck.Write(GpioPinValue.Low);
-            }
-
-            _data.Write(GpioPinValue.High);
-
-            return reading;
-        }
-
-        private int MeasureHumidity()
-        {
-            _data.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _data.Write(GpioPinValue.High);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _data.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _data.Write(GpioPinValue.High);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-
-            _data.Read();
-
-            _sck.Write(GpioPinValue.Low);
-
-            //while (_data.Read() == GpioPinValue.High)
-            //    Thread.Sleep(1);
-
-            int reading = 0;
-            for (int i = 0; i < 8; i++)
-            {
-                reading |= _data.Read() == GpioPinValue.High ? (1 << (15 - i)) : 0;
-                _sck.Write(GpioPinValue.High);
-                _sck.Write(GpioPinValue.Low);
-            }
-
-            _data.Write(GpioPinValue.Low);
-
-            _sck.Write(GpioPinValue.High);
-            _sck.Write(GpioPinValue.Low);
-
-            for (int i = 8; i < 16; i++)
-            {
-                reading |= _data.Read() == GpioPinValue.High ? (1 << (15 - i)) : 0;
-                _sck.Write(GpioPinValue.High);
-                _sck.Write(GpioPinValue.Low);
-            }
-
-            _data.Write(GpioPinValue.High);
-
-            return reading;
-        }
-
-        private void ResetCommuncation()
-        {
-            _data.Write(GpioPinValue.High);
-
-            for (int i = 0; i < 9; i++)
-            {
-                _sck.Write(GpioPinValue.High);
-                _sck.Write(GpioPinValue.Low);
-            }
         }
 
         private void OnMeasurementComplete(TempHumidity sender, MeasurementCompleteEventArgs e)
