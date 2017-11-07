@@ -16,6 +16,7 @@ Note: If environment variable __NUGET_REPOSITORY__ is define, some project gener
 
 ### Gadgeteer
 - AccelG248 (generates Nuget Package)
+- Bluetooth (generates Nuget Package)
 - Button (generates Nuget Package)
 - DisplayN18 (generates Nuget Package)
 - Led7C (generates Nuget Package)
