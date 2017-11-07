@@ -10,50 +10,87 @@ namespace testUniversal
 {
     static class Program
     {
-        private static GpioPin  _led;
-        private static TempHumidity _tempHumidity;
+        private static GpioPin _led;
+        private static Led7C _led7C;
 
         static void Main()
         {
-            switch (DeviceInformation.DeviceName)
+            // Config system
+            Setup(DeviceInformation.DeviceName);
+
+            // Run loop
+            while (true)
+            {
+                _led7C.SetColor(Led7C.LedColor.Blue);
+                Thread.Sleep(2000);
+                _led7C.SetColor(Led7C.LedColor.White);
+                Thread.Sleep(2000);
+                _led7C.SetColor(Led7C.LedColor.Red);
+                Thread.Sleep(2000);
+                _led7C.SetColor(Led7C.LedColor.Cyan);
+                Thread.Sleep(2000);
+                _led7C.SetColor(Led7C.LedColor.Off);
+                Thread.Sleep(2000);
+            }
+        }
+
+        private static void Setup(string deviceName)
+        {
+            // Specific part
+            switch (deviceName)
             {
                 case "FEZ":
                     SetupFez();
                     break;
-
                 case "Cerb":
                     SetupCerb();
+                    break;
+                case "G120":
+                    SetupG120();
+                    break;
+                case "ELECTRON":
+                    SetupElectron();
                     break;
                 default:
                     Debug.WriteLine("Unkown board: " + DeviceInformation.DeviceName);
                     throw new Exception("Unkown board: " + DeviceInformation.DeviceName);
             }
-            while (true)
-            {
-                Thread.Sleep(20);
-            }
-        }
-
-        private static void SetupCerb()
-        {
-            _led = GpioController.GetDefault().OpenPin(FEZCerberus.GpioPin.DebugLed);
+            // Common part
             _led.SetDriveMode(GpioPinDriveMode.Output);
-
-            _tempHumidity=new TempHumidity(FEZCerberus.GpioPin.Socket2.Pin4,FEZCerberus.GpioPin.Socket2.Pin5);
-            _tempHumidity.MeasurementComplete += _tempHumidity_MeasurementComplete;
-            _tempHumidity.MeasurementInterval = 2000;
-            _tempHumidity.StartTakingMeasurements();
+            Thread t = new Thread(LedBlink);
+            t.Start();
         }
 
-        private static void _tempHumidity_MeasurementComplete(TempHumidity sender, TempHumidity.MeasurementCompleteEventArgs e)
+        private static void SetupG120()
         {
-            Debug.WriteLine("Temp: "+e.Temperature.ToString("F1")+"°C ; Humdity: "+e.RelativeHumidity.ToString("F1")+"%");
+            _led = GpioController.GetDefault().OpenPin(FEZSpiderII.GpioPin.DebugLed);
+            _led7C=new Led7C(FEZSpiderII.GpioPin.Socket10.Pin3,FEZSpiderII.GpioPin.Socket10.Pin4,FEZSpiderII.GpioPin.Socket10.Pin5);
+        }
+
+        private static void SetupElectron()
+        {
+            _led = GpioController.GetDefault().OpenPin(8);
         }
 
         private static void SetupFez()
         {
             _led = GpioController.GetDefault().OpenPin(1);
-            _led.SetDriveMode(GpioPinDriveMode.Output);
+        }
+
+        private static void SetupCerb()
+        {
+            _led = GpioController.GetDefault().OpenPin(FEZCerberus.GpioPin.DebugLed);
+        }
+
+        private static void LedBlink()
+        {
+            while (true)
+            {
+                _led.Write(GpioPinValue.High);
+                Thread.Sleep(2);
+                _led.Write(GpioPinValue.Low);
+                Thread.Sleep(8);
+            }
         }
     }
 }
