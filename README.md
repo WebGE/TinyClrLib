@@ -19,8 +19,10 @@ Note: If environment variable __NUGET_REPOSITORY__ is define, some project gener
 - Button (generates Nuget Package)
 - DisplayN18 (generates Nuget Package)
 - Led7C (generates Nuget Package)
+- Led7R (generates Nuget Package)
 - LedStrip (generates Nuget Package)
 - LightSense (generates Nuget Package)
+- Potentiometer (generates Nuget Package)
 - TempHumid (generates Nuget Package)
 - Tunes (generates Nuget Package)
 
