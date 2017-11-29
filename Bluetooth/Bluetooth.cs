@@ -82,7 +82,7 @@ namespace Bauland.Gadgeteer
         /// <summary>Constructs a new instance.</summary>
         /// <param name="pinStatus">pin to get status of module (usually pin 3 of U Socket)</param>
         /// <param name="pinReset">pin to reset module (usually pin 6 of U Socket)</param>
-        /// <param name="serialId">string which represent Id of serial port of socket (usually pin 4 & 5 of U Socket)</param>
+        /// <param name="serialId">string which represent Id of serial port of socket (usually pin 4 and 5 of U Socket)</param>
         public Bluetooth(int pinStatus, int pinReset, string serialId)
         {
             _reset = GpioController.GetDefault().OpenPin(pinReset, GpioSharingMode.Exclusive);

@@ -11,7 +11,8 @@ namespace testUniversal
     static class Program
     {
         private static GpioPin _led;
-        private static Led7C _led7C;
+        private static Bluetooth _bluetooth;
+        private static Bluetooth.Client client;
 
         static void Main()
         {
@@ -21,16 +22,7 @@ namespace testUniversal
             // Run loop
             while (true)
             {
-                _led7C.SetColor(Led7C.LedColor.Blue);
-                Thread.Sleep(2000);
-                _led7C.SetColor(Led7C.LedColor.White);
-                Thread.Sleep(2000);
-                _led7C.SetColor(Led7C.LedColor.Red);
-                Thread.Sleep(2000);
-                _led7C.SetColor(Led7C.LedColor.Cyan);
-                Thread.Sleep(2000);
-                _led7C.SetColor(Led7C.LedColor.Off);
-                Thread.Sleep(2000);
+                Thread.Sleep(20);
             }
         }
 
@@ -64,7 +56,35 @@ namespace testUniversal
         private static void SetupG120()
         {
             _led = GpioController.GetDefault().OpenPin(FEZSpiderII.GpioPin.DebugLed);
-            _led7C=new Led7C(FEZSpiderII.GpioPin.Socket10.Pin3,FEZSpiderII.GpioPin.Socket10.Pin4,FEZSpiderII.GpioPin.Socket10.Pin5);
+            _bluetooth=new Bluetooth(FEZSpiderII.GpioPin.Socket9.Pin3,FEZSpiderII.GpioPin.Socket9.Pin6,FEZSpiderII.UartPort.Socket8);
+            _bluetooth.SetDeviceName("Test");
+            _bluetooth.SetPinCode("1234");
+            client = _bluetooth.ClientMode;
+            
+            _bluetooth.BluetoothStateChanged += _bluetooth_BluetoothStateChanged;
+            _bluetooth.DataReceived += _bluetooth_DataReceived;
+            _bluetooth.DeviceInquired += _bluetooth_DeviceInquired;
+            _bluetooth.PinRequested += _bluetooth_PinRequested;
+        }
+
+        private static void _bluetooth_PinRequested(Bluetooth sender)
+        {
+            Debug.WriteLine("PinRequest");
+        }
+
+        private static void _bluetooth_DeviceInquired(Bluetooth sender, string macAddress, string name)
+        {
+            Debug.WriteLine("DeviceInquired: "+name+", "+macAddress);
+        }
+
+        private static void _bluetooth_DataReceived(Bluetooth sender, string data)
+        {
+            Debug.WriteLine("DataReceived: "+data);
+        }
+
+        private static void _bluetooth_BluetoothStateChanged(Bluetooth sender, Bluetooth.BluetoothState btState)
+        {
+            Debug.WriteLine("BluetoothStateChanged:"+btState);
         }
 
         private static void SetupElectron()
@@ -80,6 +100,18 @@ namespace testUniversal
         private static void SetupCerb()
         {
             _led = GpioController.GetDefault().OpenPin(FEZCerberus.GpioPin.DebugLed);
+            _bluetooth = new Bluetooth(FEZCerberus.GpioPin.Socket2.Pin3, FEZCerberus.GpioPin.Socket2.Pin6, FEZCerberus.UartPort.Socket2);
+            client = _bluetooth.ClientMode;
+            _bluetooth.SetDeviceName("Test");
+            _bluetooth.SetPinCode("1234");
+            _bluetooth.
+            _bluetooth.BluetoothStateChanged += _bluetooth_BluetoothStateChanged;
+            _bluetooth.DataReceived += _bluetooth_DataReceived;
+            _bluetooth.DeviceInquired += _bluetooth_DeviceInquired;
+            _bluetooth.PinRequested += _bluetooth_PinRequested;
+            Thread.Sleep(1000);
+           Debug.WriteLine("### Entering pairing Mode ###");
+             client.EnterPairingMode();
         }
 
         private static void LedBlink()

@@ -52,9 +52,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Modules\Gadgeteer\Led7C\Led7C.csproj">
-      <Project>{B5EC8C3E-B8BF-40D6-B6E1-BF15884725B1}</Project>
-      <Name>Led7C</Name>
+    <ProjectReference Include="..\..\Bluetooth\Bluetooth.csproj">
+      <Project>{5376A809-7752-4F41-A6C8-44A8962FFD7D}</Project>
+      <Name>Bluetooth</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
