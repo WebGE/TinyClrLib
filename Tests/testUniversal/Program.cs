@@ -12,6 +12,7 @@ namespace testUniversal
     {
         private static GpioPin _led;
         private static Led7R _led7R;
+        private static Potentiometer _potentiometer;
 
         static void Main()
         {
@@ -21,19 +22,10 @@ namespace testUniversal
             // Run loop
             while (true)
             {
-                _led7R.TurnAllLedsOn();
-                Thread.Sleep(2000);
-                _led7R.TurnAllLedsOff();
-                Thread.Sleep(2000);
-                _led7R.SetPercentage(0.25);
-                Thread.Sleep(2000);
-                _led7R.SetPercentage(0.5);
-                Thread.Sleep(2000);
-                _led7R.SetPercentage(0.75);
-                Thread.Sleep(2000);
-                _led7R.SetPercentage(1.0);
-                Thread.Sleep(2000);
+                _led7R.SetPercentage(_potentiometer.ReadProportion());
+                Thread.Sleep(20);
             }
+            // ReSharper disable once FunctionNeverReturns
         }
 
         private static void Setup(string deviceName)
@@ -67,6 +59,8 @@ namespace testUniversal
         {
             _led = GpioController.GetDefault().OpenPin(FEZSpiderII.GpioPin.DebugLed);
             _led7R = new Led7R(FEZSpiderII.GpioPin.Socket4.Pin3, FEZSpiderII.GpioPin.Socket4.Pin4, FEZSpiderII.GpioPin.Socket4.Pin5, FEZSpiderII.GpioPin.Socket4.Pin6, FEZSpiderII.GpioPin.Socket4.Pin7, FEZSpiderII.GpioPin.Socket4.Pin8, FEZSpiderII.GpioPin.Socket4.Pin9);
+            _potentiometer = new Potentiometer(FEZSpiderII.AdcChannel.Socket9.Pin3);
+
         }
 
         private static void SetupElectron()
@@ -83,6 +77,7 @@ namespace testUniversal
         {
             _led = GpioController.GetDefault().OpenPin(FEZCerberus.GpioPin.DebugLed);
             _led7R = new Led7R(FEZCerberus.GpioPin.Socket7.Pin3, FEZCerberus.GpioPin.Socket7.Pin4, FEZCerberus.GpioPin.Socket7.Pin5, FEZCerberus.GpioPin.Socket7.Pin6, FEZCerberus.GpioPin.Socket7.Pin7, FEZCerberus.GpioPin.Socket7.Pin8, FEZCerberus.GpioPin.Socket7.Pin9);
+            _potentiometer = new Potentiometer(FEZCerberus.AdcChannel.Socket4.Pin3);
         }
 
         private static void LedBlink()
@@ -94,6 +89,7 @@ namespace testUniversal
                 _led.Write(GpioPinValue.Low);
                 Thread.Sleep(8);
             }
+            // ReSharper disable once FunctionNeverReturns
         }
     }
 }
