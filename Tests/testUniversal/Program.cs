@@ -11,7 +11,7 @@ namespace testUniversal
     static class Program
     {
         private static GpioPin _led;
-        private static Led7C _led7C;
+        private static Led7R _led7R;
 
         static void Main()
         {
@@ -21,15 +21,17 @@ namespace testUniversal
             // Run loop
             while (true)
             {
-                _led7C.SetColor(Led7C.LedColor.Blue);
+                _led7R.TurnAllLedsOn();
                 Thread.Sleep(2000);
-                _led7C.SetColor(Led7C.LedColor.White);
+                _led7R.TurnAllLedsOff();
                 Thread.Sleep(2000);
-                _led7C.SetColor(Led7C.LedColor.Red);
+                _led7R.SetPercentage(0.25);
                 Thread.Sleep(2000);
-                _led7C.SetColor(Led7C.LedColor.Cyan);
+                _led7R.SetPercentage(0.5);
                 Thread.Sleep(2000);
-                _led7C.SetColor(Led7C.LedColor.Off);
+                _led7R.SetPercentage(0.75);
+                Thread.Sleep(2000);
+                _led7R.SetPercentage(1.0);
                 Thread.Sleep(2000);
             }
         }
@@ -64,7 +66,7 @@ namespace testUniversal
         private static void SetupG120()
         {
             _led = GpioController.GetDefault().OpenPin(FEZSpiderII.GpioPin.DebugLed);
-            _led7C=new Led7C(FEZSpiderII.GpioPin.Socket10.Pin3,FEZSpiderII.GpioPin.Socket10.Pin4,FEZSpiderII.GpioPin.Socket10.Pin5);
+            _led7R = new Led7R(FEZSpiderII.GpioPin.Socket4.Pin3, FEZSpiderII.GpioPin.Socket4.Pin4, FEZSpiderII.GpioPin.Socket4.Pin5, FEZSpiderII.GpioPin.Socket4.Pin6, FEZSpiderII.GpioPin.Socket4.Pin7, FEZSpiderII.GpioPin.Socket4.Pin8, FEZSpiderII.GpioPin.Socket4.Pin9);
         }
 
         private static void SetupElectron()
@@ -80,6 +82,7 @@ namespace testUniversal
         private static void SetupCerb()
         {
             _led = GpioController.GetDefault().OpenPin(FEZCerberus.GpioPin.DebugLed);
+            _led7R = new Led7R(FEZCerberus.GpioPin.Socket7.Pin3, FEZCerberus.GpioPin.Socket7.Pin4, FEZCerberus.GpioPin.Socket7.Pin5, FEZCerberus.GpioPin.Socket7.Pin6, FEZCerberus.GpioPin.Socket7.Pin7, FEZCerberus.GpioPin.Socket7.Pin8, FEZCerberus.GpioPin.Socket7.Pin9);
         }
 
         private static void LedBlink()

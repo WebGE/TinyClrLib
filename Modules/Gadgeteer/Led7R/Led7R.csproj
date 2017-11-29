@@ -4,13 +4,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{280763D7-FBFD-46EC-B487-6FD2F93E345F}</ProjectGuid>
-    <OutputType>Exe</OutputType>
-    <RootNamespace>testUniversal</RootNamespace>
-    <AssemblyName>testUniversal</AssemblyName>
+    <ProjectGuid>{EC7B4578-E960-488B-873C-1075F94E9E3F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Bauland.Gadgeteer</RootNamespace>
+    <AssemblyName>Bauland.Gadgeteer.Led7R</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <NoStdLib>true</NoStdLib>
     <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
     <ProjectTypeGuids>{A1948822-69DD-4150-919B-F3F42EFB71CC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -18,7 +18,6 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,43 +25,41 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Debug\Bauland.Gadgeteer.Led7R.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <DocumentationFile>bin\Release\Bauland.Gadgeteer.Led7R.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Program.cs" />
+    <Compile Include="Led7R.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Led7R.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GHIElectronics.TinyCLR.Devices.0.6.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
+      <HintPath>..\..\..\packages\GHIElectronics.TinyCLR.Devices.0.6.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
-    <Reference Include="GHIElectronics.TinyCLR.Pins, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\GHIElectronics.TinyCLR.Pins.0.6.0\lib\net452\GHIElectronics.TinyCLR.Pins.dll</HintPath>
-    </Reference>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\..\Modules\Gadgeteer\Led7R\Led7R.csproj">
-      <Project>{EC7B4578-E960-488B-873C-1075F94E9E3F}</Project>
-      <Name>Led7R</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets" Condition="Exists('..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" />
+  <Import Project="..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets" Condition="Exists('..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
       <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
     </PropertyGroup>
-    <Error Condition="!Exists('..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets'))" />
+    <Error Condition="!Exists('..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets'))" />
   </Target>
+  <PropertyGroup>
+    <PostBuildEvent>nuget pack "$(ProjectPath)" -Properties Configuration=$(ConfigurationName)
+if defined NUGET_REPOSITORY (echo NUGET_REPOSITORY is defined: %25NUGET_REPOSITORY%25) else (echo NUGET_REPOSITORY is NOT defined; exit 1)
+copy /Y "$(TargetDir)*.nupkg" "$(NUGET_REPOSITORY)"</PostBuildEvent>
+  </PropertyGroup>
 </Project>
