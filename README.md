@@ -18,6 +18,7 @@ Note: If environment variable __NUGET_REPOSITORY__ is define, some project gener
 - AccelG248 (generates Nuget Package)
 - Button (generates Nuget Package)
 - DisplayN18 (generates Nuget Package)
+- Gyro (generates Nuget Package)
 - Led7C (generates Nuget Package)
 - Led7R (generates Nuget Package)
 - LedStrip (generates Nuget Package)
