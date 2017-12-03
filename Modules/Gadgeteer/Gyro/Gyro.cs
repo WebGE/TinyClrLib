@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Threading;
 using GHIElectronics.TinyCLR.Devices.I2c;
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
@@ -12,7 +11,7 @@ namespace Bauland.Gadgeteer
     /// </summary>
     public class Gyro
     {
-        private GTI.Timer _timer;
+        private readonly Timer _timer;
         private readonly I2cDevice _i2CDevice;
         private readonly byte[] _readBuffer1;
         private readonly byte[] _writeBuffer1;
@@ -97,12 +96,14 @@ namespace Bauland.Gadgeteer
             TemperatureOutHigh = 0x1B,
         }
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="socketNumber">The socket that this module is plugged in to.</param>
-        public Gyro(int socketNumber)
+        /// <summary>
+        /// Constructor of Gyro
+        /// </summary>
+        /// <param name="deviceId">string of i2c bus of I Socket</param>
+        public Gyro(string deviceId)
         {
-            Socket socket = Socket.GetSocket(socketNumber, true, this, null);
-            socket.EnsureTypeIsSupported('I', this);
+            //Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+            //socket.EnsureTypeIsSupported('I', this);
 
             _readBuffer1 = new byte[1];
             _writeBuffer1 = new byte[1];
@@ -113,10 +114,11 @@ namespace Bauland.Gadgeteer
             _offsetY = 0;
             _offsetZ = 0;
 
-            _timer = new GT.Timer(200);
-            _timer.Tick += (a) => TakeMeasurement();
+            _timer = new Timer(TimeSpan.FromMilliseconds(200));
+            _timer.Tick += TakeMeasurement;
 
-            _i2CDevice = GTI.I2CBusFactory.Create(socket, 0x68, 100, this);
+            // _i2CDevice = GTI.I2CBusFactory.Create(socket, 0x68, 100, this);
+            _i2CDevice=I2cDevice.FromId(deviceId,new I2cConnectionSettings(0x68){BusSpeed = I2cBusSpeed.StandardMode});
 
             SetFullScaleRange();
         }
@@ -185,7 +187,7 @@ namespace Bauland.Gadgeteer
             _i2CDevice.Write(_writeBuffer2);
         }
 
-        private void TakeMeasurement()
+        private void TakeMeasurement(object sender, EventHandlerArgs args)
         {
             Read(Register.TemperatureOutHigh, _readBuffer8);
 
@@ -194,14 +196,14 @@ namespace Bauland.Gadgeteer
             int rawY = (_readBuffer8[4] << 8) | _readBuffer8[5];
             int rawZ = (_readBuffer8[6] << 8) | _readBuffer8[7];
 
-            rawT = (((rawT >> 15) == 1) ? -32767 : 0) + (rawT & 0x7FFF);
-            rawX = (((rawX >> 15) == 1) ? -32767 : 0) + (rawX & 0x7FFF);
-            rawY = (((rawY >> 15) == 1) ? -32767 : 0) + (rawY & 0x7FFF);
-            rawZ = (((rawZ >> 15) == 1) ? -32767 : 0) + (rawZ & 0x7FFF);
+            rawT = (rawT >> 15 == 1 ? -32767 : 0) + (rawT & 0x7FFF);
+            rawX = (rawX >> 15 == 1 ? -32767 : 0) + (rawX & 0x7FFF);
+            rawY = (rawY >> 15 == 1 ? -32767 : 0) + (rawY & 0x7FFF);
+            rawZ = (rawZ >> 15 == 1 ? -32767 : 0) + (rawZ & 0x7FFF);
 
-            double x = (rawX / 14.375) + _offsetX;
-            double y = (rawY / 14.375) + _offsetY;
-            double z = (rawZ / 14.375) + _offsetZ;
+            double x = rawX / 14.375 + _offsetX;
+            double y = rawY / 14.375 + _offsetY;
+            double z = rawZ / 14.375 + _offsetZ;
             double t = (rawT + 13200) / 280.0 + 35;
 
             OnMeasurementComplete(this, new MeasurementCompleteEventArgs(x, y, z, t));

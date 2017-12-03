@@ -39,6 +39,7 @@
   <ItemGroup>
     <Compile Include="Gyro.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Timer.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Gyro.nuspec" />
@@ -58,8 +59,12 @@
     <Error Condition="!Exists('..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets'))" />
   </Target>
   <PropertyGroup>
-    <PreBuildEvent>nuget pack "$(ProjectPath)" -Properties Configuration=$(ConfigurationName)
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PostBuildEvent>nuget pack "$(ProjectPath)" -Properties Configuration=$(ConfigurationName)
 if defined NUGET_REPOSITORY (echo NUGET_REPOSITORY is defined: %25NUGET_REPOSITORY%25) else (echo NUGET_REPOSITORY is NOT defined; exit 1)
-copy /Y "$(TargetDir)*.nupkg" "$(NUGET_REPOSITORY)"</PreBuildEvent>
+copy /Y "$(TargetDir)*.nupkg" "$(NUGET_REPOSITORY)"</PostBuildEvent>
   </PropertyGroup>
 </Project>

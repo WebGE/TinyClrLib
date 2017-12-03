@@ -5,7 +5,6 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Gyro")]
 [assembly: AssemblyTitle("Gadgeteer Gyro")]
 [assembly: AssemblyDescription("Wrapper for Gadgeteer Gyro")]
 [assembly: AssemblyConfiguration("")]
