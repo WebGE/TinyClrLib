@@ -6,6 +6,9 @@ using GHIElectronics.TinyCLR.Devices.Gpio;
 
 namespace Bauland.Gadgeteer
 {
+    /// <summary>
+    /// Wrapper class for Led7R Gadgeteer Module
+    /// </summary>
     public class Led7R
     {
         private readonly GpioPin[] _leds;

@@ -85,9 +85,9 @@ namespace testUniversal
             while (true)
             {
                 _led.Write(GpioPinValue.High);
-                Thread.Sleep(2);
+                Thread.Sleep(200);
                 _led.Write(GpioPinValue.Low);
-                Thread.Sleep(8);
+                Thread.Sleep(800);
             }
             // ReSharper disable once FunctionNeverReturns
         }

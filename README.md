@@ -1,5 +1,5 @@
 # TinyClr Library
-Version: __0.6.0__
+Version: __0.7.0__
 
 Note: If environment variable __NUGET_REPOSITORY__ is define, some project generate a Nuget package for them, and copy generated package into it.
 
