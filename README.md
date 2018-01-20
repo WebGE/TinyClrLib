@@ -3,7 +3,7 @@ Version: __0.7.0__
 
 Note: If environment variable __NUGET_REPOSITORY__ is define, some project generate a Nuget package for them, and copy generated package into it.
 
-Documentation is in progress 
+Documentation is in progress (each file of module documentation is in project folder with MarkDown File)
 
 ***
 :construction: : Work In Progress
@@ -42,6 +42,7 @@ Documentation is in progress
 - Buzzer
 - 4-Digit Display
 - I2C Color :construction:
+- LcdRgbBacklight
 - LedSocket (from GHI)
 - Light (from GHI)
 - Relay (from GHI)
@@ -50,6 +51,8 @@ Documentation is in progress
 - ServoMotor (from GHI)
 - Sound (from GHI)
 - Temperature (from GHI)
+- TouchSensor
+- UltrasonicRanger :package: :closed_book:
 
 
 ### Mikro Click
@@ -61,5 +64,9 @@ Documentation is in progress
 ***
 
 :construction: : Work In Progress
+
 :package: : Module which create Nuget package
+
 :closed_book: : Documented module
+
+***

@@ -5,11 +5,11 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{3A949AA1-38A2-4D30-A48B-D9DEAACB249F}</ProjectGuid>
+    <ProjectGuid>{3B87CB7C-909C-41EA-8366-C467F3749B27}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Bauland.Other</RootNamespace>
-    <AssemblyName>Bauland.Other.HCSR04</AssemblyName>
+    <RootNamespace>Bauland.Grove</RootNamespace>
+    <AssemblyName>Bauland.Grove.UltrasonicRanger</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{A1948822-69DD-4150-919B-F3F42EFB71CC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -24,7 +24,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Debug\Bauland.Other.HCSR04.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\Bauland.Grove.UltrasonicRanger.xml</DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,19 +33,19 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <DocumentationFile>bin\Release\Bauland.Other.HCSR04.xml</DocumentationFile>
+    <DocumentationFile>bin\Release\Bauland.Grove.UltrasonicRanger.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
-    <Compile Include="HCSR04.cs" />
+    <Compile Include="UltrasonicRanger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="HC-SR04.md" />
-    <None Include="HCSR04.nuspec" />
     <None Include="packages.config" />
+    <None Include="UltrasonicRanger.md" />
+    <None Include="UltrasonicRanger.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">

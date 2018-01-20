@@ -2,6 +2,8 @@
 using GHIElectronics.TinyCLR.Devices.Gpio;
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
+// ReSharper disable UnusedAutoPropertyAccessor.Global
+// ReSharper disable EventNeverSubscribedTo.Global
 
 namespace Bauland.Gadgeteer
 {
