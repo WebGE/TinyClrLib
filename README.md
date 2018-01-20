@@ -3,6 +3,16 @@ Version: __0.7.0__
 
 Note: If environment variable __NUGET_REPOSITORY__ is define, some project generate a Nuget package for them, and copy generated package into it.
 
+Documentation is in progress 
+
+***
+:construction: : Work In Progress
+
+:package: : Module which create Nuget package
+
+:closed_book: : Documented module
+***
+
 ## Core:
 - __Application__ class with Initialization and loop function,
 - __Led__ class to help with test easily,
@@ -11,27 +21,27 @@ Note: If environment variable __NUGET_REPOSITORY__ is define, some project gener
 ## Modules:
 
 ### Adafruit
-- Color Sensor (1334)
+- Color Sensor (1334) :package:
 
 
 ### Gadgeteer
-- AccelG248 (generates Nuget Package)
-- Button (generates Nuget Package)
-- DisplayN18 (generates Nuget Package)
-- Gyro (generates Nuget Package)
-- Led7C (generates Nuget Package)
-- Led7R (generates Nuget Package)
-- LedStrip (generates Nuget Package)
-- LightSense (generates Nuget Package)
-- Potentiometer (generates Nuget Package)
-- TempHumid (generates Nuget Package)
-- Tunes (generates Nuget Package)
+- AccelG248 :package:
+- Button :package:
+- DisplayN18 :package:
+- Gyro :package:
+- Led7C :package:
+- Led7R :package:
+- LedStrip :package:
+- LightSense :package:
+- Potentiometer :package:
+- TempHumid :package:
+- Tunes :package:
 
 ### Grove
 - Button 
 - Buzzer
 - 4-Digit Display
-- I2C Color (WIP)
+- I2C Color :construction:
 - LedSocket (from GHI)
 - Light (from GHI)
 - Relay (from GHI)
@@ -43,10 +53,13 @@ Note: If environment variable __NUGET_REPOSITORY__ is define, some project gener
 
 
 ### Mikro Click
-- Bluetooth LE p module (WIP)
+- Bluetooth LE p module :construction:
 
 ### Others
-- HC-SR04 (generates Nuget Package)
+- HC-SR04 :package: :closed_book:
 
 ***
-WIP: Work In Progress
+
+:construction: : Work In Progress
+:package: : Module which create Nuget package
+:closed_book: : Documented module
