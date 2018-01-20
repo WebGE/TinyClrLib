@@ -43,13 +43,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Gyro", "Modules\Gadgeteer\Gyro\Gyro.csproj", "{351D0F38-4FFE-4D60-9888-B6BC81315D59}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{CBC8DD28-C854-4412-ADBD-2A60DD0707F4}"
-	ProjectSection(SolutionItems) = preProject
-		Modules\Others\HCSR04\HCSR04.nuspec = Modules\Others\HCSR04\HCSR04.nuspec
-	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HCSR04", "Modules\Others\HCSR04\HCSR04.csproj", "{3A949AA1-38A2-4D30-A48B-D9DEAACB249F}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{FD743AF1-7B0D-4FAC-9840-15A67166FF4E}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Documentation", "Documentation", "{648F6A6D-7562-450F-806B-05C0FF3FD1BE}"
 EndProject
@@ -59,6 +54,15 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Others", "Others", "{0EF861
 	ProjectSection(SolutionItems) = preProject
 		Documentation\Modules\HC-SR04\HC-SR04.md = Documentation\Modules\HC-SR04\HC-SR04.md
 	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "_Shared", "_Shared", "{6C7C85BB-0967-4F49-BFA8-4C5D93392E85}"
+	ProjectSection(SolutionItems) = preProject
+		Modules\SharedAssemblyInfo.cs = Modules\SharedAssemblyInfo.cs
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ColorSensor1334", "Modules\Adafruit\ColorSensor1334\ColorSensor1334.csproj", "{7344A3CC-62B5-4AD8-95C5-ABA2ACC2C0FD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Adafruit", "Adafruit", "{86A69051-7BD9-4F8A-B26C-C747DB4883E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -128,6 +132,10 @@ Global
 		{3A949AA1-38A2-4D30-A48B-D9DEAACB249F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3A949AA1-38A2-4D30-A48B-D9DEAACB249F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3A949AA1-38A2-4D30-A48B-D9DEAACB249F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7344A3CC-62B5-4AD8-95C5-ABA2ACC2C0FD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7344A3CC-62B5-4AD8-95C5-ABA2ACC2C0FD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7344A3CC-62B5-4AD8-95C5-ABA2ACC2C0FD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7344A3CC-62B5-4AD8-95C5-ABA2ACC2C0FD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -152,6 +160,8 @@ Global
 		{3A949AA1-38A2-4D30-A48B-D9DEAACB249F} = {CBC8DD28-C854-4412-ADBD-2A60DD0707F4}
 		{E283AE13-99A5-4D8B-BAB6-F464A8DD7524} = {648F6A6D-7562-450F-806B-05C0FF3FD1BE}
 		{0EF8619E-ED43-4F27-9CF6-BCD54C8FA0CA} = {E283AE13-99A5-4D8B-BAB6-F464A8DD7524}
+		{7344A3CC-62B5-4AD8-95C5-ABA2ACC2C0FD} = {86A69051-7BD9-4F8A-B26C-C747DB4883E7}
+		{86A69051-7BD9-4F8A-B26C-C747DB4883E7} = {D67AE6F9-8A0C-4F73-88CD-DC100B086850}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DFE8F872-04F4-4FB3-97A0-0280C96B9F74}

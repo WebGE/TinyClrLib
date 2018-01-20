@@ -36,6 +36,9 @@
     <DocumentationFile>bin\Release\Bauland.Gadgeteer.Tunes.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Melody.cs" />
     <Compile Include="MusicNote.cs" />
     <Compile Include="Tone.cs" />

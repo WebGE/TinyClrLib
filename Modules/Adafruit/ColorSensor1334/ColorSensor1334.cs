@@ -1,15 +1,42 @@
 ﻿using System.Threading;
 using GHIElectronics.TinyCLR.Devices.I2c;
+// ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable NotAccessedField.Global
+// ReSharper disable UnusedMember.Global
+// ReSharper disable InconsistentNaming
+// ReSharper disable NotAccessedField.Local
 
-namespace Modules.Adafruit
+namespace Bauland.Adafruit
 {
+    /// <summary>
+    /// Represent color object
+    /// </summary>
     public class Color
     {
+        /// <summary>
+        /// Clear component of color
+        /// </summary>
         public ushort Clear;
+        /// <summary>
+        /// Red component of color
+        /// </summary>
         public ushort Red;
+        /// <summary>
+        /// Green component of color
+        /// </summary>
         public ushort Green;
+        /// <summary>
+        /// Blue component of color
+        /// </summary>
         public ushort Blue;
 
+        /// <summary>
+        /// Constructor of Color object
+        /// </summary>
+        /// <param name="c">Clear component of color</param>
+        /// <param name="r">Red component of color</param>
+        /// <param name="g">Green component of color</param>
+        /// <param name="b">Blue component of color</param>
         public Color(ushort c, ushort r, ushort g, ushort b)
         {
             Clear = c;
@@ -19,6 +46,9 @@ namespace Modules.Adafruit
         }
     }
 
+    /// <summary>
+    /// Wrapper class for ColorSensor1334 Module
+    /// </summary>
     public class ColorSensor1334
     {
         private IntegrationTime _it;
@@ -47,23 +77,59 @@ namespace Modules.Adafruit
         #endregion
 
         #region IntegrationTime
+        /// <summary>
+        /// Time for sensor to capture color
+        /// </summary>
         public enum IntegrationTime : byte
         {
+            /// <summary>
+            /// 2.4 ms of Integration Time
+            /// </summary>
             It_2_4ms = 0xFF,
+            /// <summary>
+            /// 24 ms of Integration Time
+            /// </summary>
             It_24ms = 0xF6,
+            /// <summary>
+            /// 50 ms of Integration Time
+            /// </summary>
             It_50ms = 0xEB,
+            /// <summary>
+            /// 101 ms of Integration Time
+            /// </summary>
             It_101ms = 0xD5,
+            /// <summary>
+            /// 154 ms of Integration Time
+            /// </summary>
             It_154ms = 0xC0,
+            /// <summary>
+            /// 700 ms of Integration Time
+            /// </summary>
             It_700ms = 0x00
         }
         #endregion
         #region Gain
+        /// <summary>
+        /// Gain of sensor
+        /// </summary>
         public enum Gain : byte
         {
-            Gain1X = 0x00,   //  No gain
-            Gain4X = 0x01,   //  4x gain
-            Gain16X = 0x02,   //  16x gain
-            Gain60X = 0x03    //  60x gain
+            /// <summary>
+            /// No gain
+            /// </summary>
+            Gain1X = 0x00,
+            /// <summary>
+            /// 4x gain
+            /// </summary>
+            Gain4X = 0x01,  
+            /// <summary>
+            /// 16x gain
+            /// </summary>
+            Gain16X = 0x02,
+            /// <summary>
+            /// 60x gain
+            /// </summary>
+            Gain60X = 0x03 
         }
         #endregion
 
@@ -72,6 +138,10 @@ namespace Modules.Adafruit
         private readonly I2cDevice _colorSensorDevice;
         private Gain _gain;
 
+        /// <summary>
+        /// Constructor of ColorSensor
+        /// </summary>
+        /// <param name="i2CBus">string which represent I2C bus</param>
         public ColorSensor1334(string i2CBus)
         {
             var settings = new I2cConnectionSettings(Address)
@@ -84,18 +154,30 @@ namespace Modules.Adafruit
             Enable(true);
         }
 
+        /// <summary>
+        /// Set Integration Time for sensor
+        /// </summary>
+        /// <param name="it">Value of integration</param>
         public void SetIntegrationTime(IntegrationTime it)
         {
             WriteRegister(Register.RegisterTimeIntegration, (byte)it);
             _it = it;
         }
 
+        /// <summary>
+        /// Set gain of sensor
+        /// </summary>
+        /// <param name="gain">Value of gain</param>
         public void SetGain(Gain gain)
         {
             WriteRegister(Register.RegisterControl, (byte)gain);
             _gain = gain;
         }
 
+        /// <summary>
+        /// Get Id of sensor
+        /// </summary>
+        /// <returns>Id of sensor</returns>
         public byte GetId()
         {
             var readBuffer = ReadRegister(Bit.BitCommand | Register.RegisterId);
@@ -126,6 +208,10 @@ namespace Modules.Adafruit
             _colorSensorDevice.Write(writeBuffer);
         }
 
+        /// <summary>
+        /// Retrieve raw data of capture
+        /// </summary>
+        /// <returns>Raw color</returns>
         public Color GetRawData()
         {
             var c = ReadRegister16(Register.RegisterClearDataLow);
@@ -156,6 +242,10 @@ namespace Modules.Adafruit
             return new Color(c, r, g, b);
         }
 
+        /// <summary>
+        /// Enable sensor
+        /// </summary>
+        /// <param name="enable">true to enable, false to disable</param>
         public void Enable(bool enable)
         {
             if (enable)
@@ -172,3 +262,4 @@ namespace Modules.Adafruit
         }
     }
 }
+
