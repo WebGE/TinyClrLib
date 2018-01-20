@@ -45,5 +45,8 @@ Note: If environment variable __NUGET_REPOSITORY__ is define, some project gener
 ### Mikro Click
 - Bluetooth LE p module (WIP)
 
+### Others
+- HC-SR04 (generates Nuget Package)
+
 ***
 WIP: Work In Progress
