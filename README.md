@@ -52,14 +52,14 @@ Documentation is in progress (each file of module documentation is in project fo
 - Sound (from GHI)
 - Temperature (from GHI)
 - TouchSensor
-- UltrasonicRanger :package: :closed_book:
+- UltrasonicRanger :package: [ :closed_book: ](https://github.com/bauland/TinyClrLib/blob/master/Modules/Grove/UltrasonicRanger/UltrasonicRanger.md)
 
 
 ### Mikro Click
 - Bluetooth LE p module :construction:
 
 ### Others
-- HC-SR04 :package: :closed_book:
+- HC-SR04 :package: [:closed_book:](https://github.com/bauland/TinyClrLib/blob/master/Modules/Others/HCSR04/HC-SR04.md)
 
 ***
 
