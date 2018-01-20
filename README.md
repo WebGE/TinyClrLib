@@ -10,7 +10,7 @@ Documentation is in progress (each file of module documentation is in project fo
 
 :package: : Module which create Nuget package
 
-:closed_book: : Documented module
+:closed_book: : Documented module (you can click on book to access documentation)
 ***
 
 ## Core:
@@ -52,7 +52,7 @@ Documentation is in progress (each file of module documentation is in project fo
 - Sound (from GHI)
 - Temperature (from GHI)
 - TouchSensor
-- UltrasonicRanger :package: [ :closed_book: ](https://github.com/bauland/TinyClrLib/blob/master/Modules/Grove/UltrasonicRanger/UltrasonicRanger.md)
+- UltrasonicRanger :package: [:closed_book:](https://github.com/bauland/TinyClrLib/blob/master/Modules/Grove/UltrasonicRanger/UltrasonicRanger.md)
 
 
 ### Mikro Click
@@ -67,6 +67,6 @@ Documentation is in progress (each file of module documentation is in project fo
 
 :package: : Module which create Nuget package
 
-:closed_book: : Documented module
+:closed_book: : Documented module (you can click on book to access documentation)
 
 ***
