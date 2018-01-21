@@ -45,6 +45,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="DisplayN18.md" />
     <None Include="DisplayN18.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -52,6 +53,12 @@
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\GHIElectronics.TinyCLR.Devices.0.7.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DisplayN18.html">
+      <DependentUpon>DisplayN18.md</DependentUpon>
+    </Content>
+    <Content Include="Gadgeteer-N18Display-Cerberus.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
