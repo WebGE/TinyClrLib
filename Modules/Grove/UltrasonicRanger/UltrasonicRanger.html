@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>UltrasonicRanger Grove module</title>
+</head>
+<body>
+
+    <h1 id="ultrasonicranger-grove-module">UltrasonicRanger Grove module</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>UltrasonicRanger is connected as followed on <a href="http://www.ingenuitymicro.com/products/electron/">Electron</a>:</p>
+<p><img src="UltrasonicRanger-Electron.png" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>UltrasonicRanger</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Gnd</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Vcc</td>
+<td>3.3V <strong>(not working on 5V !)</strong></td>
+</tr>
+<tr>
+<td>NC</td>
+<td>Not connected</td>
+</tr>
+<tr>
+<td>Sig</td>
+<td>PA2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Grove;
+
+namespace testTinyClrUltrasonicRanger
+{
+    static class Program
+    {
+        static void Main()
+        {
+            UltrasonicRanger ultrasonicRanger = new UltrasonicRanger((0 * 16) + 2)
+            {
+                // You can change linear coefficient to adjust measure, but it is not mandatory
+                A = 0.82f,
+                B = 2.10f
+            };
+
+            while (true)
+            {
+                Debug.WriteLine(ultrasonicRanger.ReadCentimeters() + &quot; cm, &quot; + ultrasonicRanger.ReadInches() + &quot; in.&quot;);
+                Thread.Sleep(500);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>

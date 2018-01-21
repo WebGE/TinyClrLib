@@ -16,4 +16,9 @@
       <dependency id="GHIElectronics.TinyCLR.Core" version="[0.7.0, 0.8.0)" />
     </dependencies>
   </metadata>
+  <files>
+    <!-- Add documentation and image -->
+    <file src="HC-SR04.html" target="" />
+    <file src="HC-SR04-Electron.png" target="" />
+  </files>
 </package>
