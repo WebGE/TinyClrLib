@@ -7,10 +7,6 @@ Documentation is in progress (each file of module documentation is in project fo
 
 ***
 :construction: : Work In Progress
-
-:package: : Module which create Nuget package
-
-:closed_book: : Documented module (you can click on book to access documentation)
 ***
 
 ## Core:
@@ -21,52 +17,59 @@ Documentation is in progress (each file of module documentation is in project fo
 ## Modules:
 
 ### Adafruit
-- Color Sensor (1334) :package:
 
+Module              | State       | Package     | Documentation
+------------------- | ----------- | ----------- | -------------
+Color Sensor (1334) | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Adafruit.ColorSensor1334.0.7.0.nupkg) | Not yet
 
 ### Gadgeteer
-- AccelG248 :package:
-- Button :package:
-- DisplayN18 :package:
-- Gyro :package:
-- Led7C :package:
-- Led7R :package:
-- LedStrip :package:
-- LightSense :package:
-- Potentiometer :package:
-- TempHumid :package:
-- Tunes :package:
+
+Module        | State       | Package     | Documentation
+------        | ----------- | ----------- | -------------
+AccelG248     | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.AccelG248.0.7.0.nupkg) | Not yet
+Button        | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Button.0.7.0.nupkg) | Not yet
+DisplayN18    | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.DisplayN18.0.7.0.nupkg) | Not yet
+Gyro          | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Gyro.0.7.0.nupkg) | Not yet
+Led7C         | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Led7C.0.7.0.nupkg) | Not yet
+Led7R         | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Led7R.0.7.0.nupkg) | Not yet
+LedStrip      | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.LedStrip.0.7.0.nupkg) | Not yet
+LightSense    | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.LightSense.0.7.0.nupkg) | Not yet
+Potentiometer | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Potentiometer.0.7.0.nupkg) | Not yet
+TempHumid     | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.TempHumid.0.7.0.nupkg) | Not yet
+Tunes         | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Tunes.0.7.0.nupkg) | Not yet
 
 ### Grove
-- Button 
-- Buzzer
-- 4-Digit Display
-- I2C Color :construction:
-- LcdRgbBacklight
-- LedSocket (from GHI)
-- Light (from GHI)
-- Relay (from GHI)
-- Rotary Angle(from GHI)
-- Rtc
-- ServoMotor (from GHI)
-- Sound (from GHI)
-- Temperature (from GHI)
-- TouchSensor
-- UltrasonicRanger :package: [:closed_book:](https://github.com/bauland/TinyClrLib/blob/master/Modules/Grove/UltrasonicRanger/UltrasonicRanger.md)
 
+Module          | State          | Package     | Documentation | Notes
+--------------- | -------------- | ----------- | ------------- | -----
+Button          | __Working__    |             | Not yet       |
+Buzzer          | __Working__    |             | Not yet       |
+4-Digit Display | __Working__    |             | Not yet       |
+I2C Color       | :construction: |             | Not yet       |
+LcdRgbBacklight | __Working__    |             | Not yet       |
+LedSocket       | __Working__    |             | Not yet       | from GHI
+Light           | __Working__    |             | Not yet       | from GHI
+Relay           | __Working__    |             | Not yet       | from GHI
+Rotary Angle    | __Working__    |             | Not yet       | from GHI
+Rtc             | __Working__    |             | Not yet       |
+ServoMotor      | __Working__    |             | Not yet       | from GHI
+Sound           | __Working__    |             | Not yet       | from GHI
+Temperature     | __Working__    |             | Not yet       | from GHI
+TouchSensor     | __Working__    |             | Not yet       |
+UltrasonicRanger| __Working__    |             | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Grove/UltrasonicRanger/UltrasonicRanger.md)       |
 
 ### Mikro Click
-- Bluetooth LE p module :construction:
+
+Module                | State          | Package     | Documentation
+--------------------- | -------------- | ----------- | -------------
+Bluetooth LE P module | :construction: |             | Not yet
 
 ### Others
-- HC-SR04 :package: [:closed_book:](https://github.com/bauland/TinyClrLib/blob/master/Modules/Others/HCSR04/HC-SR04.md)
+
+Module  | State       | Package     | Documentation
+------- | ----------- | ----------- | -------------
+HC-SR04 | __Working__ | [Package]() | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Others/HCSR04/HC-SR04.md)
 
 ***
-
 :construction: : Work In Progress
-
-:package: : Module which create Nuget package
-
-:closed_book: : Documented module (you can click on book to access documentation)
-
 ***
