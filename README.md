@@ -40,23 +40,23 @@ Tunes         | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Pa
 
 ### Grove
 
-Module          | State          | Package     | Documentation                                                                                                         | Notes
---------------- | -------------- | ----------- | --------------------------------------------------------------------------------------------------------------------- | -----
-Button          | __Working__    |             | Not yet                                                                                                               |
-Buzzer          | __Working__    |             | Not yet                                                                                                               |
-4-Digit Display | __Working__    |             | Not yet                                                                                                               |
-I2C Color       | :construction: |             | Not yet                                                                                                               |
-LcdRgbBacklight | __Working__    |             | Not yet                                                                                                               |
-LedSocket       | __Working__    |             | Not yet                                                                                                               | from GHI
-Light           | __Working__    |             | Not yet                                                                                                               | from GHI
-Relay           | __Working__    |             | Not yet                                                                                                               | from GHI
-Rotary Angle    | __Working__    |             | Not yet                                                                                                               | from GHI
-Rtc             | __Working__    |             | Not yet                                                                                                               |
-ServoMotor      | __Working__    |             | Not yet                                                                                                               | from GHI
-Sound           | __Working__    |             | Not yet                                                                                                               | from GHI
-Temperature     | __Working__    |             | Not yet                                                                                                               | from GHI
-TouchSensor     | __Working__    |             | Not yet                                                                                                               |
-UltrasonicRanger| __Working__    |             | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Grove/UltrasonicRanger/UltrasonicRanger.md) |
+Module          | State          | Package                                                                                          | Documentation                                                                                                         | Notes
+--------------- | -------------- | ------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------- | -----
+Button          | __Working__    |                                                                                                  | Not yet                                                                                                               |
+Buzzer          | __Working__    |                                                                                                  | Not yet                                                                                                               |
+4-Digit Display | __Working__    |                                                                                                  | Not yet                                                                                                               |
+I2C Color       | :construction: |                                                                                                  | Not yet                                                                                                               |
+LcdRgbBacklight | __Working__    |                                                                                                  | Not yet                                                                                                               |
+LedSocket       | __Working__    |                                                                                                  | Not yet                                                                                                               | from GHI
+Light           | __Working__    |                                                                                                  | Not yet                                                                                                               | from GHI
+Relay           | __Working__    |                                                                                                  | Not yet                                                                                                               | from GHI
+Rotary Angle    | __Working__    |                                                                                                  | Not yet                                                                                                               | from GHI
+Rtc             | __Working__    |                                                                                                  | Not yet                                                                                                               |
+ServoMotor      | __Working__    |                                                                                                  | Not yet                                                                                                               | from GHI
+Sound           | __Working__    |                                                                                                  | Not yet                                                                                                               | from GHI
+Temperature     | __Working__    |                                                                                                  | Not yet                                                                                                               | from GHI
+TouchSensor     | __Working__    |                                                                                                  | Not yet                                                                                                               |
+UltrasonicRanger| __Working__    | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Grove.UltrasonicRanger.0.7.0.nupkg) | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Grove/UltrasonicRanger/UltrasonicRanger.md) |
 
 ### Mikro Click
 
@@ -66,9 +66,9 @@ Bluetooth LE P module | :construction: |             | Not yet
 
 ### Others
 
-Module  | State       | Package     | Documentation
-------- | ----------- | ----------- | -------------
-HC-SR04 | __Working__ | [Package]() | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Others/HCSR04/HC-SR04.md)
+Module  | State       | Package                                                                                | Documentation
+------- | ----------- | -------------------------------------------------------------------------------------- | -------------
+HC-SR04 | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Other.HCSR04.0.7.0.nupkg) | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Others/HCSR04/HC-SR04.md)
 
 ***
 :construction: : Work In Progress
