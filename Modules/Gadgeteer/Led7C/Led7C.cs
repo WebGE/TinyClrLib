@@ -15,9 +15,9 @@ namespace Bauland.Gadgeteer
         /// <summary>
         /// Constructor of Led7C
         /// </summary>
-        /// <param name="pinR">pin connected on red led (usually pin 3 of Socket)</param>
-        /// <param name="pinG">pin connected to green led (usually pin 4 of Socket)</param>
-        /// <param name="pinB">pin connected to blue led (usually pin 5 of Socket)</param>
+        /// <param name="pinB">pin connected to blue led (usually pin 3 of Socket)</param>
+        /// <param name="pinR">pin connected on red led (usually pin 4 of Socket)</param>
+        /// <param name="pinG">pin connected to green led (usually pin 5 of Socket)</param>
         public Led7C(int pinB, int pinR, int pinG)
         {
             _mRedPin = GpioController.GetDefault().OpenPin(pinR);

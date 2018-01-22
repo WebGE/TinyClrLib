@@ -44,12 +44,19 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Led7C.nuspec" />
+    <None Include="Led7C.md" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\GHIElectronics.TinyCLR.Devices.0.7.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Gadgeteer-LED7C-Cerberus.jpg" />
+    <Content Include="Led7C.html">
+      <DependentUpon>Led7C.md</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

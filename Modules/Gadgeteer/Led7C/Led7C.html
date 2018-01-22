@@ -1,0 +1,62 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Led7C modules</title>
+</head>
+<body>
+
+    <h1 id="led7c-modules">Led7C modules</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Led7C is connected as followed on <a href="http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html">Cerberus</a>:</p>
+<p><img src="Gadgeteer-Led7C-Cerberus.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Led7C</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socket Type X</td>
+<td>Socket 5</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Threading;
+using Bauland.Gadgeteer;
+using GHIElectronics.TinyCLR.Pins;
+
+namespace TestLED7C
+{
+    static class Program
+    {
+        static void Main()
+        {
+            // LedStrip connected on Socket 4 (Type Y) of FEZ Cerberus mainboard.
+            Led7C led7C = new Led7C(FEZCerberus.GpioPin.Socket5.Pin3, FEZCerberus.GpioPin.Socket5.Pin4, FEZCerberus.GpioPin.Socket5.Pin5);
+            while (true)
+            {
+                led7C.SetColor(Led7C.LedColor.Blue);
+                Thread.Sleep(500);
+                led7C.SetColor(Led7C.LedColor.Off);
+                Thread.Sleep(500);
+                led7C.SetColor(Led7C.LedColor.Green);
+                Thread.Sleep(500);
+                led7C.SetColor(Led7C.LedColor.Off);
+                Thread.Sleep(500);
+                led7C.SetColor(Led7C.LedColor.Magenta);
+                Thread.Sleep(500);
+                led7C.SetColor(Led7C.LedColor.Off);
+                Thread.Sleep(500);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>
