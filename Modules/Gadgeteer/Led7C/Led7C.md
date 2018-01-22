@@ -4,7 +4,7 @@ Version: __0.7.0__
 ## Connections ##
 Led7C is connected as followed on [Cerberus](http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html):
 
-![Schematic](Gadgeteer-Led7C-Cerberus.jpg)
+![Schematic](Gadgeteer-LED7C-Cerberus.jpg)
 
 Led7C    | Mainboard
 ------------- | ----------
