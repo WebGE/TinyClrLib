@@ -27,7 +27,7 @@ Color Sensor (1334) | __Working__ | [Package](https://www.bauland.fr/Nuget/Downl
 Module        | State       | Package                                                                                           | Documentation
 ------        | ----------- | ------------------------------------------------------------------------------------------------- | -------------
 AccelG248     | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.AccelG248.0.7.0.nupkg)     | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Gadgeteer/AccelG248/AccelG248.md)
-Button        | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Button.0.7.0.nupkg)        | Not yet
+Button        | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Button.0.7.0.nupkg)        | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Gadgeteer/Button/Button.md)
 DisplayN18    | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.DisplayN18.0.7.0.nupkg)    | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Gadgeteer/DisplayN18/DisplayN18.md)
 Gyro          | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Gyro.0.7.0.nupkg)          | Not yet
 Led7C         | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Led7C.0.7.0.nupkg)         | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Gadgeteer/Led7C/Led7C.md)

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using GHIElectronics.TinyCLR.Devices.Gpio;
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
@@ -34,7 +35,7 @@ namespace Bauland.Gadgeteer
         public event ButtonEventHandler LongPressed;
 
         /// <summary>
-        /// Time that must be waited before LongPress event is fired
+        /// Time that must be waited before LongPress event is fired (default is 2 seconds).
         /// </summary>
         public TimeSpan LongPressTimeout
         {
@@ -59,9 +60,9 @@ namespace Bauland.Gadgeteer
             _pinLed.Write(GpioPinValue.Low);
 
             _pinButton = GpioController.GetDefault().OpenPin(pinButton);
+            _pinButton.DebounceTimeout=TimeSpan.FromMilliseconds(100);
             _pinButton.SetDriveMode(GpioPinDriveMode.InputPullUp);
             _pinButton.ValueChanged += _pinButton_ValueChanged;
-
         }
 
         /// <summary>
