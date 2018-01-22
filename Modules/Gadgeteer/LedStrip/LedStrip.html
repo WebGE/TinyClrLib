@@ -1,0 +1,72 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>LedStrip modules</title>
+</head>
+<body>
+
+    <h1 id="ledstrip-modules">LedStrip modules</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>LedStrip is connected as followed on <a href="http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html">Cerberus</a>:</p>
+<p><img src="Gadgeteer-LedStrip-Cerberus.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>LedStrip</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socket Type Y</td>
+<td>Socket 4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Threading;
+using Bauland.Gadgeteer;
+using GHIElectronics.TinyCLR.Pins;
+
+namespace Test_LedStrip
+{
+    static class Program
+    {
+        static void Main()
+        {
+            // LedStrip connected on Socket 4 (Type Y) of FEZ Cerberus mainboard.
+            LedStrip ledStrip = new LedStrip(FEZCerberus.GpioPin.Socket4.Pin3, FEZCerberus.GpioPin.Socket4.Pin4, FEZCerberus.GpioPin.Socket4.Pin5, FEZCerberus.GpioPin.Socket4.Pin6, FEZCerberus.GpioPin.Socket4.Pin7, FEZCerberus.GpioPin.Socket4.Pin8, FEZCerberus.GpioPin.Socket4.Pin9);
+            while (true)
+            {
+                // Set individual state of led
+                for (int i = 0; i &lt; 7; i++)
+                {
+                    if (i == 0)
+                    {
+                        ledStrip.SetLed(6, false);
+                        ledStrip.SetLed(i, true);
+                    }
+                    else
+                    {
+                        ledStrip.SetLed(i - 1, false);
+                        ledStrip.SetLed(i, true);
+                    }
+                    Thread.Sleep(500);
+                }
+
+                // Set group state of led
+                for (int i = 0; i &lt; 7; i++)
+                {
+                    ledStrip.SetToLed(i);
+                    Thread.Sleep(500);
+                }
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>
