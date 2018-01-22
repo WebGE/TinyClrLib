@@ -4,7 +4,7 @@ Version: __0.7.0__
 ## Connections ##
 N18Display is connected as followed on [Cerberus](http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html):
 
-![Schematic](Gadgeteer-N18Display-Cerberus.png)
+![Schematic](Gadgeteer-N18Display-Cerberus.jpg)
 
 N18Display    | Mainboard
 ------------- | ----------

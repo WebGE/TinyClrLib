@@ -53,7 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="UltrasonicRanger-Electron.png" />
+    <Content Include="UltrasonicRanger-Electron.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="UltrasonicRanger.html">

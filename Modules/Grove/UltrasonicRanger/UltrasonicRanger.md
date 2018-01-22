@@ -4,7 +4,7 @@ Version: __0.7.0__
 ## Connections ##
 UltrasonicRanger is connected as followed on [Electron](http://www.ingenuitymicro.com/products/electron/):
 
-![Schematic](UltrasonicRanger-Electron.png)
+![Schematic](UltrasonicRanger-Electron.jpg)
 
 UltrasonicRanger | Mainboard
 -------- | ----------

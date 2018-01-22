@@ -53,7 +53,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="HC-SR04-Electron.png" />
+    <Content Include="HC-SR04-Electron.jpg" />
     <Content Include="HC-SR04.html">
       <DependentUpon>HC-SR04.md</DependentUpon>
     </Content>

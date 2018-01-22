@@ -58,7 +58,7 @@
     <Content Include="DisplayN18.html">
       <DependentUpon>DisplayN18.md</DependentUpon>
     </Content>
-    <Content Include="Gadgeteer-N18Display-Cerberus.png" />
+    <Content Include="Gadgeteer-N18Display-Cerberus.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

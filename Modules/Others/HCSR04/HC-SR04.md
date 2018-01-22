@@ -4,7 +4,7 @@ Version: __0.7.0__
 ## Connections ##
 HC-SR04 is connected as followed on [Electron](http://www.ingenuitymicro.com/products/electron/):
 
-![Schematic](HC-SR04-Electron.png)
+![Schematic](HC-SR04-Electron.jpg)
 
 HC-SR04 | Mainboard
 -------- | ----------

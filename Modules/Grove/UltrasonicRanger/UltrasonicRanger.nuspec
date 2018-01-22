@@ -19,6 +19,6 @@
   <files>
     <!-- Add documentation and image -->
     <file src="UltrasonicRanger.html" target="" />
-    <file src="UltrasonicRanger-Electron.png" target="" />
+    <file src="UltrasonicRanger-Electron.jpg" target="" />
   </files>
 </package>
