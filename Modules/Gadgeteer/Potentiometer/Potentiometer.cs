@@ -14,13 +14,13 @@ namespace Bauland.Gadgeteer
         /// <param name="channelNumber">pin 3 of A socket</param>
         public Potentiometer(int channelNumber)
         {
-            _input=AdcController.GetDefault().OpenChannel(channelNumber);
+            _input = AdcController.GetDefault().OpenChannel(channelNumber);
         }
 
         /// <summary>Gets the current voltage reading of the potentiometer.</summary>
         public double ReadVoltage()
         {
-            return _input.ReadValue();
+            return _input.ReadValue() / 1000.0;
         }
 
         /// <summary>Gets the current position of the potentiometer between 0.0 and 1.0.</summary>
