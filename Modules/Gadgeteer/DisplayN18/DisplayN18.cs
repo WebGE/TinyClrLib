@@ -12,7 +12,7 @@ using GHIElectronics.TinyCLR.Devices.Spi;
 namespace Bauland.Gadgeteer
 {
     /// <summary> 
-    /// Controls the display on the BrainPad.
+    /// Wrapper class for N18Display Gadgeteer Module
     /// </summary>
     public class DisplayN18
     {
