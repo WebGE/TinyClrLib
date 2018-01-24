@@ -1,0 +1,86 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Led7R modules</title>
+</head>
+<body>
+
+    <h1 id="led7r-modules">Led7R modules</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Led7C is connected as followed on <a href="http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html">Cerberus</a>:</p>
+<p><img src="Gadgeteer-LED7R-Cerberus.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Led7R</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socket Type Y</td>
+<td>Socket 4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Gadgeteer;
+using GHIElectronics.TinyCLR.Pins;
+
+namespace TestLed7R
+{
+    static class Program
+    {
+        static void Main()
+        {
+            int timeout = 2000;
+            // Led7R connected on Socket 4 (Type Y) of FEZ Cerberus mainboard.
+            Led7R led7R = new Led7R(FEZCerberus.GpioPin.Socket4.Pin3, FEZCerberus.GpioPin.Socket4.Pin4, FEZCerberus.GpioPin.Socket4.Pin5, FEZCerberus.GpioPin.Socket4.Pin6, FEZCerberus.GpioPin.Socket4.Pin7, FEZCerberus.GpioPin.Socket4.Pin8, FEZCerberus.GpioPin.Socket4.Pin9);
+            while (true)
+            {
+                Debug.WriteLine(&quot;Switch off all led&quot;);
+                led7R.TurnAllLedsOff();
+                Thread.Sleep(timeout);
+
+                Debug.WriteLine(&quot;Turn on only Led 3&quot;);
+                led7R.SetLed(3,true);
+                Thread.Sleep(timeout);
+
+                Debug.WriteLine(&quot;Set led state according to a mask 0x5c&quot;);
+                led7R.TurnAllLedsOff();
+                led7R.SetBitmask(0x5c);
+                Thread.Sleep(timeout);
+
+                Debug.WriteLine(&quot;Set led state according to a percentage value: 0.75&quot;);
+                led7R.TurnAllLedsOff();
+                led7R.SetPercentage(0.75);
+                Thread.Sleep(timeout);
+
+
+                Debug.WriteLine(&quot;Turn on one specific led&quot;);
+                led7R.TurnAllLedsOff();
+                Thread.Sleep(500);
+                for (int i = 0; i &lt; 7; i++)
+                {
+                    led7R.TurnLedOn(i);
+                    Thread.Sleep(500);
+                }
+                Thread.Sleep(timeout);
+
+                Debug.WriteLine(&quot;Animate module&quot;);
+                led7R.TurnAllLedsOff();
+                Thread.Sleep(500);
+                led7R.Animate(500,false,true,false);
+                Thread.Sleep(timeout);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>

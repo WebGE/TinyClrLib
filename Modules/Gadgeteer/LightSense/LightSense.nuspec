@@ -13,8 +13,11 @@
     <copyright>Copyright 2017</copyright>
     <tags>TinyClr Gadgeteer LightSense</tags>
     <dependencies>
-      <dependency id="GHIElectronics.TinyCLR.Core" version="[0.6.0, 0.7.0)" />
-      <dependency id="GHIElectronics.TinyCLR.Devices" version="[0.6.0, 0.7.0)" />
+      <dependency id="GHIElectronics.TinyCLR.Core" version="[0.7.0, 0.8.0)" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="LightSense.html" target="" />
+    <file src="Gadgeteer-LightSense-Cerberus.jpg" target="" />
+  </files>
 </package>

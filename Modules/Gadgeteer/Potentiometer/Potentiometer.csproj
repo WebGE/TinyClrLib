@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\..\..\packages\GHIElectronics.TinyCLR.Core.0.7.0\build\net452\GHIElectronics.TinyCLR.Core.props" Condition="Exists('..\..\..\packages\GHIElectronics.TinyCLR.Core.0.7.0\build\net452\GHIElectronics.TinyCLR.Core.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -11,8 +12,6 @@
     <AssemblyName>Bauland.Gadgeteer.Potentiometer</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
-    <NoStdLib>true</NoStdLib>
-    <AddAdditionalExplicitAssemblyReferences>false</AddAdditionalExplicitAssemblyReferences>
     <ProjectTypeGuids>{A1948822-69DD-4150-919B-F3F42EFB71CC};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
@@ -37,29 +36,38 @@
     <DocumentationFile>bin\Release\Bauland.Gadgeteer.Potentiometer.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Potentiometer.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="Potentiometer.md" />
     <None Include="Potentiometer.nuspec" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.6.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\..\packages\GHIElectronics.TinyCLR.Devices.0.6.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
+    <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\GHIElectronics.TinyCLR.Devices.0.7.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Gadgeteer-Potentiometer-Cerberus.jpg" />
+    <Content Include="Potentiometer.html">
+      <DependentUpon>Potentiometer.md</DependentUpon>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Import Project="..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets" Condition="Exists('..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" />
-  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
-    <PropertyGroup>
-      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
-    </PropertyGroup>
-    <Error Condition="!Exists('..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\GHIElectronics.TinyCLR.Core.0.6.0\build\net452\GHIElectronics.TinyCLR.Core.targets'))" />
-  </Target>
   <PropertyGroup>
     <PostBuildEvent>nuget pack "$(ProjectPath)" -Properties Configuration=$(ConfigurationName)
 if defined NUGET_REPOSITORY (echo NUGET_REPOSITORY is defined: %25NUGET_REPOSITORY%25) else (echo NUGET_REPOSITORY is NOT defined; exit 1)
 copy /Y "$(TargetDir)*.nupkg" "$(NUGET_REPOSITORY)"</PostBuildEvent>
   </PropertyGroup>
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>Ce projet fait référence à des packages NuGet qui sont manquants sur cet ordinateur. Utilisez l'option de restauration des packages NuGet pour les télécharger. Pour plus d'informations, consultez http://go.microsoft.com/fwlink/?LinkID=322105. Le fichier manquant est : {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\..\..\packages\GHIElectronics.TinyCLR.Core.0.7.0\build\net452\GHIElectronics.TinyCLR.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\packages\GHIElectronics.TinyCLR.Core.0.7.0\build\net452\GHIElectronics.TinyCLR.Core.props'))" />
+  </Target>
 </Project>

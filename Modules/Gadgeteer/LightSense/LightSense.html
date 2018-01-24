@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>LightSense modules</title>
+</head>
+<body>
+
+    <h1 id="lightsense-modules">LightSense modules</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>LightSense is connected as followed on <a href="http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html">Cerberus</a>:</p>
+<p><img src="Gadgeteer-LightSense-Cerberus.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>LightSense</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socket Type A</td>
+<td>Socket 4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Gadgeteer;
+using GHIElectronics.TinyCLR.Pins;
+
+namespace TestLightSense
+{
+    static class Program
+    {
+        static void Main()
+        {
+            // LightSense connected on Socket 4 (Type A) of FEZ Cerberus mainboard.
+            LightSense lightSense = new LightSense(FEZCerberus.AdcChannel.Socket4.Pin3);
+
+            while (true)
+            {
+                Debug.WriteLine(&quot;Light value: &quot; + lightSense.Value + &quot;, ratio: &quot; + lightSense.Ratio.ToString(&quot;F1&quot;));
+                Thread.Sleep(1000);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>

@@ -1,0 +1,76 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>ColorSensor1334 modules</title>
+</head>
+<body>
+
+    <h1 id="colorsensor1334-modules">ColorSensor1334 modules</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>ColorSensor1334 is connected as followed on <a href="https://old.ghielectronics.com/catalog/product/474">FEZ Panda III</a>:</p>
+<p><img src="Adafruit-ColorSensor1334-PandaIII.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>ColorSensor1334</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Vin</td>
+<td>3.3V</td>
+</tr>
+<tr>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>SCL</td>
+<td>SCL (D3)</td>
+</tr>
+<tr>
+<td>SDA</td>
+<td>SDA (D2)</td>
+</tr>
+<tr>
+<td>LED</td>
+<td>D0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Adafruit;
+using GHIElectronics.TinyCLR.Pins;
+// ReSharper disable FunctionNeverReturns
+
+namespace TestColorSensor
+{
+    class Program
+    {
+        static void Main()
+        {
+            // ColorSensor1334 connected on I2C1 of FEZ Panda III (pin D2 and D3)
+            ColorSensor1334 colorSensor1334 =new ColorSensor1334(FEZPandaIII.I2cBus.I2c1, FEZPandaIII.GpioPin.D0)
+            {
+                Led = true
+            };
+
+            Debug.WriteLine(colorSensor1334.GetId().ToString());
+            while (true)
+            {
+                var color=colorSensor1334.GetRawData();
+                Debug.WriteLine(&quot;Color: C:&quot;+color.Clear+&quot;, R:&quot;+color.Red+&quot;, G:&quot;+color.Green+&quot;, B:&quot;+color.Blue);
+                Thread.Sleep(500);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>

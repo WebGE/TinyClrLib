@@ -1,0 +1,69 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>HC-SR04 modules</title>
+</head>
+<body>
+
+    <h1 id="hc-sr04-modules">HC-SR04 modules</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>HC-SR04 is connected as followed on <a href="http://www.ingenuitymicro.com/products/electron/">Electron</a>:</p>
+<p><img src="HC-SR04-Electron.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>HC-SR04</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GND</td>
+<td>GND</td>
+</tr>
+<tr>
+<td>Echo</td>
+<td>PA3</td>
+</tr>
+<tr>
+<td>trig</td>
+<td>PA2</td>
+</tr>
+<tr>
+<td>Vcc</td>
+<td>3.3V <strong>(not working on 5V !)</strong></td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Other;
+
+namespace testTinyClrHCSR04
+{
+    static class Program
+    {
+        static void Main()
+        {
+            Hcsr04 hcsr04 = new Hcsr04((0 * 16) + 2, (0 * 16) + 3)
+            {
+                // You can change linear coefficient to adjust measure, but it is not mandatory
+                A = 0.82f,
+                B = 2.10f
+            };
+
+            while (true)
+            {
+                Debug.WriteLine(hcsr04.ReadCentimeters() + &quot; cm, &quot; + hcsr04.ReadInches() + &quot; in.&quot;);
+                Thread.Sleep(500);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>

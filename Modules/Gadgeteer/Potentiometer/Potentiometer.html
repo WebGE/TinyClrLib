@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Potentiometer modules</title>
+</head>
+<body>
+
+    <h1 id="potentiometer-modules">Potentiometer modules</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Potentiometer is connected as followed on <a href="http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html">Cerberus</a>:</p>
+<p><img src="Gadgeteer-Potentiometer-Cerberus.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Potentiometer</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socket Type A</td>
+<td>Socket 4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Gadgeteer;
+using GHIElectronics.TinyCLR.Pins;
+
+namespace TestPotentiometer
+{
+    static class Program
+    {
+        static void Main()
+        {
+            // Potentiometer connected on Socket 4 (Type A) of FEZ Cerberus mainboard.
+            Potentiometer potentiometer=new Potentiometer(FEZCerberus.AdcChannel.Socket4.Pin3);
+
+            while (true)
+            {
+                Debug.WriteLine(&quot;Potentiometer voltage: &quot;+potentiometer.ReadVoltage()+&quot;V, percentage:&quot;+(potentiometer.ReadProportion()*100).ToString(&quot;F1&quot;)+&quot;%&quot;);
+                Thread.Sleep(500);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>

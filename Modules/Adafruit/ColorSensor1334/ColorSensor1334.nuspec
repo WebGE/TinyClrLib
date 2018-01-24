@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <title>$title$</title>
+    <authors>$author$</authors>
+    <owners>$author$</owners>
+    <iconUrl>http://www.bauland.fr/Content/img/Logo-NuGet.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>Initial release of the package.</releaseNotes>
+    <copyright>Copyright 2017</copyright>
+    <tags>TinyClr Adafruit ColorSensor</tags>
+    <dependencies>
+      <dependency id="GHIElectronics.TinyCLR.Core" version="[0.7.0, 0.8.0)" />
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="ColorSensor1334.html" target="" />
+    <file src="Adafruit-ColorSensor1334-PandaIII.jpg" target="" />
+  </files>
+</package>

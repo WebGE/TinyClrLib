@@ -6,6 +6,9 @@ using GHIElectronics.TinyCLR.Devices.Gpio;
 
 namespace Bauland.Gadgeteer
 {
+    /// <summary>
+    /// Wrapper class for Led7R Gadgeteer Module
+    /// </summary>
     public class Led7R
     {
         private readonly GpioPin[] _leds;
@@ -150,7 +153,7 @@ namespace Bauland.Gadgeteer
         /// <param name="remainOn">Whether or not a light should remain on when another one is lit, false if only one light should be lit at a time.</param>
         public void Animate(int switchTime, bool clockwise, bool on, bool remainOn)
         {
-            int length = LedCount - 1;
+            int length = LedCount;
             int i;
             int terminate;
             int dir;
@@ -163,7 +166,7 @@ namespace Bauland.Gadgeteer
             }
             else
             {
-                i = length - 1;
+                i = length-1;
                 terminate = -1;
                 dir = -1;
             }
@@ -175,11 +178,11 @@ namespace Bauland.Gadgeteer
                     if (!remainOn)
                         TurnAllLedsOff();
 
-                    TurnLedOn(i + 1);
+                    TurnLedOn(i);
                 }
                 else
                 {
-                    TurnLedOff(i + 1);
+                    TurnLedOff(i);
                 }
 
                 Thread.Sleep(switchTime);
