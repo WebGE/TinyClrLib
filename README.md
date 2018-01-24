@@ -19,8 +19,8 @@ Documentation is in progress (each file of module documentation is in project fo
 ### Adafruit
 
 Module              | State       | Package                                                                                            | Documentation
-------------------- | ----------- | -------------------------------------------------------------------------------------------------- | -------------
-Color Sensor (1334) | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Adafruit.ColorSensor1334.0.7.0.nupkg) | Not yet
+------------------- | ----------- | -------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------
+Color Sensor (1334) | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Adafruit.ColorSensor1334.0.7.0.nupkg) | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Adafruit/ColorSensor1334/ColorSensor1334.md) 
 
 ### Gadgeteer
 
