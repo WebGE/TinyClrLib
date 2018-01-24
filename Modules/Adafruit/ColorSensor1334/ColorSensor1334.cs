@@ -1,4 +1,6 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
+using GHIElectronics.TinyCLR.Devices.Gpio;
 using GHIElectronics.TinyCLR.Devices.I2c;
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable NotAccessedField.Global
@@ -121,7 +123,7 @@ namespace Bauland.Adafruit
             /// <summary>
             /// 4x gain
             /// </summary>
-            Gain4X = 0x01,  
+            Gain4X = 0x01,
             /// <summary>
             /// 16x gain
             /// </summary>
@@ -129,21 +131,30 @@ namespace Bauland.Adafruit
             /// <summary>
             /// 60x gain
             /// </summary>
-            Gain60X = 0x03 
+            Gain60X = 0x03
         }
         #endregion
 
         private const int Address = 0x29;
 
         private readonly I2cDevice _colorSensorDevice;
+        private readonly GpioPin _led;
         private Gain _gain;
 
         /// <summary>
         /// Constructor of ColorSensor
         /// </summary>
         /// <param name="i2CBus">string which represent I2C bus</param>
-        public ColorSensor1334(string i2CBus)
+        /// <param name="led">If led of sensor is connected to a GpioPin set it, else ignore this paramater or set it to -1</param>
+        public ColorSensor1334(string i2CBus, int led = -1)
         {
+            if (led != -1)
+            {
+                _led = GpioController.GetDefault().OpenPin(led);
+                _led.SetDriveMode(GpioPinDriveMode.Output);
+                _led.Write(GpioPinValue.Low);
+            }
+
             var settings = new I2cConnectionSettings(Address)
             {
                 BusSpeed = I2cBusSpeed.FastMode
@@ -153,6 +164,29 @@ namespace Bauland.Adafruit
             SetGain(Gain.Gain1X);
             Enable(true);
         }
+
+        /// <summary>
+        /// Get or set state of led of sensor
+        /// </summary>
+        /// <exception cref="Exception">Exception is raised if led has't been set in constructor</exception>
+        public bool Led
+        {
+            get
+            {
+                if (IsLedConnected) return _led.Read() == GpioPinValue.High;
+                else throw new Exception("Led pin isn't set from constructor.");
+            }
+            set
+            {
+                if (IsLedConnected) _led.Write(value ? GpioPinValue.High : GpioPinValue.Low);
+                else throw new Exception("Led pin isn't set from constructor.");
+            }
+        }
+
+        /// <summary>
+        /// Indicates if led pin is set in constructor on not
+        /// </summary>
+        public bool IsLedConnected => _led != null;
 
         /// <summary>
         /// Set Integration Time for sensor
