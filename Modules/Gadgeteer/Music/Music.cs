@@ -47,17 +47,9 @@ namespace Bauland.Gadgeteer
         private readonly object _playSyncRoot;
         private readonly object _recordSyncRoot;
         private readonly object _spiSyncRoot;
-        
-        // TODO: cleanup
-        // private GTI.DigitalInput dreq;
+
         private readonly GpioPin _dreq;
-
-        // TODO: cleanup
-        // private GTI.Spi spiCommand;
         private readonly SpiDevice _spiCommand;
-
-        // TODO: cleanup
-        // private GTI.Spi spiData;
         private readonly SpiDevice _spiData;
 
         private readonly byte[] _commandBuffer;
@@ -147,18 +139,29 @@ namespace Bauland.Gadgeteer
             _dreq.SetDriveMode(GpioPinDriveMode.InputPullUp);
 
             // this.spiData = GTI.SpiFactory.Create(socket, new GTI.SpiConfiguration(false, 0, 0, false, true, 2000), GTI.SpiSharing.Shared, socket, Socket.Pin.Five, this);
-            _spiData=SpiDevice.FromId(spiBusId,new SpiConnectionSettings(pin5){ClockFrequency = 2000,SharingMode = SpiSharingMode.Shared});
+            _spiData = SpiDevice.FromId(spiBusId, new SpiConnectionSettings(pin5)
+            {
+                ClockFrequency = 2000 * 1000,
+                SharingMode = SpiSharingMode.Shared,
+                DataBitLength = 8
+            });
 
             // this.spiCommand = GTI.SpiFactory.Create(socket, new GTI.SpiConfiguration(false, 0, 0, false, true, 2000), GTI.SpiSharing.Shared, socket, Socket.Pin.Six, this);
-            _spiCommand=SpiDevice.FromId(spiBusId,new SpiConnectionSettings(pin6){ClockFrequency = 2000,SharingMode = SpiSharingMode.Shared});
+            _spiCommand = SpiDevice.FromId(spiBusId, new SpiConnectionSettings(pin6)
+            {
+                ClockFrequency = 2000 * 1000,
+                SharingMode = SpiSharingMode.Shared,
+                DataBitLength = 8
+            });
 
             Reset();
 
             CommandWrite(SciMode, SmSdinew);
             CommandWrite(SciClockf, 0xA000);
             CommandWrite(SciVol, 0x0101);
+            ushort res = (CommandRead(SciVol));
 
-            if (CommandRead(SciVol) != 0x0101)
+            if (res != 0x0101)
                 throw new InvalidOperationException("Failed to initialize the MP3 decoder.");
 
             SetVolume(200, 200);
@@ -193,7 +196,7 @@ namespace Bauland.Gadgeteer
                 buf[0] = start[i];
 
                 _spiData.Write(buf);
-                while (_dreq.Read()==GpioPinValue.Low)
+                while (_dreq.Read() == GpioPinValue.Low)
                     Thread.Sleep(0);
             }
 
@@ -204,7 +207,7 @@ namespace Bauland.Gadgeteer
                 buf[0] = end[i];
 
                 _spiData.Write(buf);
-                while (_dreq.Read()==GpioPinValue.Low)
+                while (_dreq.Read() == GpioPinValue.Low)
                     Thread.Sleep(0);
             }
         }
@@ -295,12 +298,12 @@ namespace Bauland.Gadgeteer
 
         private void Reset()
         {
-            while (_dreq.Read()==GpioPinValue.Low)
+            while (_dreq.Read() == GpioPinValue.Low)
                 Thread.Sleep(1);
 
             CommandWrite(SciMode, SmSdinew | SmReset);
 
-            while (_dreq.Read()==GpioPinValue.Low)
+            while (_dreq.Read() == GpioPinValue.Low)
                 Thread.Sleep(1);
 
             Thread.Sleep(1);
@@ -312,14 +315,14 @@ namespace Bauland.Gadgeteer
         {
             lock (_spiSyncRoot)
             {
-                while (_dreq.Read()==GpioPinValue.Low)
+                while (_dreq.Read() == GpioPinValue.Low)
                     Thread.Sleep(1);
 
                 _commandBuffer[0] = CmdRead;
                 _commandBuffer[1] = register;
                 _commandBuffer[2] = 0;
                 _commandBuffer[3] = 0;
-                _spiCommand.TransferSequential(_commandBuffer, _readBuffer);
+                _spiCommand.TransferFullDuplex(_commandBuffer, _readBuffer);
 
                 return (ushort)((_readBuffer[2] << 8) | _readBuffer[3]);
             }
@@ -329,7 +332,7 @@ namespace Bauland.Gadgeteer
         {
             lock (_spiSyncRoot)
             {
-                while (_dreq.Read()==GpioPinValue.Low)
+                while (_dreq.Read() == GpioPinValue.Low)
                     Thread.Sleep(1);
 
                 _commandBuffer[0] = CmdWrite;
@@ -350,7 +353,7 @@ namespace Bauland.Gadgeteer
             {
                 Array.Copy(buffer, i, block, 0, 32);
 
-                while (_dreq.Read()==GpioPinValue.Low)
+                while (_dreq.Read() == GpioPinValue.Low)
                     Thread.Sleep(1);
 
                 lock (_spiSyncRoot)
@@ -384,7 +387,7 @@ namespace Bauland.Gadgeteer
             CommandWrite(SciAictrl3, 0);
             CommandWrite(SciAiaddr, 0x0034);
 
-            while (_dreq.Read()==GpioPinValue.Low)
+            while (_dreq.Read() == GpioPinValue.Low)
                 Thread.Sleep(5);
 
             bool stop = false;
@@ -433,7 +436,7 @@ namespace Bauland.Gadgeteer
         {
             for (int i = 0; i < count; i++)
             {
-                _spiCommand.TransferSequential(_sampleBuffer, _recordingBuffer4Bytes);
+                _spiCommand.TransferFullDuplex(_sampleBuffer, _recordingBuffer4Bytes);
                 Array.Copy(_recordingBuffer4Bytes, 2, _recordingBuffer, i * 2, 2);
             }
         }
@@ -464,7 +467,7 @@ namespace Bauland.Gadgeteer
                     {
                         _spiCommand.Write(_commandBuffer);
 
-                        while (_dreq.Read()==GpioPinValue.Low)
+                        while (_dreq.Read() == GpioPinValue.Low)
                             Thread.Sleep(2);
                     }
                 }
@@ -478,7 +481,7 @@ namespace Bauland.Gadgeteer
 
                         _spiCommand.Write(_commandBuffer);
 
-                        while (_dreq.Read()==GpioPinValue.Low)
+                        while (_dreq.Read() == GpioPinValue.Low)
                             Thread.Sleep(2);
                     }
                 }

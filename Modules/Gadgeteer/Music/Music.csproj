@@ -38,10 +38,14 @@
     <DocumentationFile>bin\Release\Bauland.Gadgeteer.Music.xml</DocumentationFile>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="..\..\SharedAssemblyInfo.cs">
+      <Link>Properties\SharedAssemblyInfo.cs</Link>
+    </Compile>
     <Compile Include="Music.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Music.md" />
     <None Include="Music.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -49,6 +53,15 @@
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\GHIElectronics.TinyCLR.Devices.0.7.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
+    <Reference Include="GHIElectronics.TinyCLR.Storage, Version=0.7.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\GHIElectronics.TinyCLR.Storage.0.7.0\lib\net452\GHIElectronics.TinyCLR.Storage.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Gadgeteer-Music-FEZSpiderII.jpg" />
+    <Content Include="Music.html">
+      <DependentUpon>Music.md</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
