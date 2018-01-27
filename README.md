@@ -27,7 +27,7 @@ Color Sensor (1334) | __Working__ | [Package](https://www.bauland.fr/Nuget/Downl
 Module           | State       | Package                                                                                              | Documentation
 ---------------- | ----------- | ---------------------------------------------------------------------------------------------------- | -------------
 AccelG248        | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.AccelG248.0.7.0.nupkg)        | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Gadgeteer/AccelG248/AccelG248.md)
-Bluetooth		 | :construction: | []() | []()
+Bluetooth		 |:__Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Bluetooth.0.7.0.nupkg)        | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Gadgeteer/Bluetooth/Bluetooth.md)
 Button           | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.Button.0.7.0.nupkg)           | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Gadgeteer/Button/Button.md)
 CharacterDisplay | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.CharacterDisplay.0.7.0.nupkg) | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Gadgeteer/CharacterDisplay/CharacterDisplay.md)
 DisplayN18       | __Working__ | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Gadgeteer.DisplayN18.0.7.0.nupkg)       | [Documentation](https://github.com/bauland/TinyClrLib/blob/master/Modules/Gadgeteer/DisplayN18/DisplayN18.md)
