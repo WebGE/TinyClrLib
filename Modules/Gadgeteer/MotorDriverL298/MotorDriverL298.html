@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>MotorDriverL298 modules</title>
+</head>
+<body>
+
+    <h1 id="motordriverl298-modules">MotorDriverL298 modules</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>MotorDriverL298 is connected as followed on <a href="http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html">Cerberus</a>:</p>
+<p><img src="Gadgeteer-MotorDriverL298-Cerberus.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>MotorDriverL298</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socket Type P</td>
+<td>Socket 4</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Don't forget to connect power source for MotorDriverL298 (red and black wire on picture).</strong>
+Motor is connected on M1+ and M1- connector.</p>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Threading;
+using Bauland.Gadgeteer;
+using GHIElectronics.TinyCLR.Pins;
+
+namespace TestMotorDriverL298
+{
+    class Program
+    {
+        static void Main()
+        {
+            // MotorDriverL298 connected on Socket 4 (Type P) of FEZ Cerberus mainboard.
+            MotorDriverL298 motorDriverL298 = new MotorDriverL298(FEZCerberus.GpioPin.Socket4.Pin6,
+                FEZCerberus.GpioPin.Socket4.Pin7, FEZCerberus.PwmPin.Controller3.Socket4.Pin8,
+                FEZCerberus.PwmPin.Controller3.Socket4.Pin9, FEZCerberus.PwmPin.Controller3.Id, FEZCerberus.PwmPin.Controller3.Id);
+
+            while (true)
+            {
+                var motor = MotorDriverL298.Motor.Motor1;
+                motorDriverL298.SetSpeed(motor, 0.7);
+                Thread.Sleep(2000);
+                motorDriverL298.SetSpeed(motor, 0.9);
+                Thread.Sleep(2000);
+                motorDriverL298.SetSpeed(motor, -0.75);
+                Thread.Sleep(2000);
+                motorDriverL298.StopAll();
+                Thread.Sleep(2000);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>

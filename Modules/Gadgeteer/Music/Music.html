@@ -1,0 +1,65 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Music modules</title>
+</head>
+<body>
+
+    <h1 id="music-modules">Music modules</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Music is connected as followed on <a href="http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_spider_ii.html">FEZSpiderII</a>:</p>
+<p><img src="Gadgeteer-Music-FEZSpiderII.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Music</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socket Type S</td>
+<td>Socket 9</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Threading;
+using Bauland.Gadgeteer;
+using GHIElectronics.TinyCLR.Pins;
+using testStreamResource.Properties;
+
+namespace testStreamResource
+{
+    static class Program
+    {
+        static void Main()
+        {
+            // Load file from resources project
+            byte[] mp3 = Resources.GetBytes(Resources.BinaryResources.mpthreetest);
+            // Music is connected on Socket 9 (Type S) of FEZSpider II mainboard.
+            Music music = new Music(FEZSpiderII.GpioPin.Socket9.Pin3, FEZSpiderII.SpiBus.Socket9, FEZSpiderII.GpioPin.Socket9.Pin5, FEZSpiderII.GpioPin.Socket9.Pin6);
+
+            while (true)
+            {
+                music.SetVolume(150, 150);
+                music.RunSineTest();
+                Thread.Sleep(2000);
+                music.StopPlaying();
+                music.SetVolume(255, 255);
+                music.Play(mp3);
+                while (music.IsBusy)
+                {
+                    Thread.Sleep(20);
+                }
+                Thread.Sleep(1000);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>

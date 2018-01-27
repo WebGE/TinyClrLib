@@ -13,7 +13,11 @@
     <copyright>Copyright 2017</copyright>
     <tags>TinyClr Gadgeteer Display N18 DisplayN18</tags>
     <dependencies>
-      <dependency id="GHIElectronics.TinyCLR.Core" version="[0.6.0, 0.7.0)" />
+      <dependency id="GHIElectronics.TinyCLR.Core" version="[0.7.0, 0.8.0)" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="DisplayN18.html" target="" />
+    <file src="Gadgeteer-N18Display-Cerberus.jpg" target="" />
+  </files>
 </package>

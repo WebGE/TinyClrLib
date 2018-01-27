@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Gyro modules</title>
+</head>
+<body>
+
+    <h1 id="gyro-modules">Gyro modules</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Gyro is connected as followed on <a href="http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html">Cerberus</a>:</p>
+<p><img src="Gadgeteer-Gyro-Cerberus.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Gyro</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Socket Type I</td>
+<td>Socket 2</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System;
+using System.Diagnostics;
+using System.Threading;
+using Bauland.Gadgeteer;
+using GHIElectronics.TinyCLR.Pins;
+
+namespace TestGyro
+{
+    static class Program
+    {
+        private static Gyro _gyro;
+        static void Main()
+        {
+            // Gyro connected on Socket 2 (Type I) of FEZ Cerberus mainboard.
+            _gyro = new Gyro(FEZCerberus.I2cBus.Socket2);
+
+            Debug.WriteLine(&quot;Don't move sensor&quot;);
+            _gyro.Calibrate();
+            Thread.Sleep(1000);
+            Debug.WriteLine(&quot;You can move sensor&quot;);
+            _gyro.MeasurementComplete += Gyro_MeasurementComplete;
+            _gyro.MeasurementInterval = TimeSpan.FromSeconds(1);
+            _gyro.StartTakingMeasurements();
+
+            while (true)
+            {
+                Thread.Sleep(20);
+            }
+        }
+
+        private static void Gyro_MeasurementComplete(Gyro sender, Gyro.MeasurementCompleteEventArgs e)
+        {
+            Debug.WriteLine(&quot;Results: Temp.: &quot; + e.Temperature.ToString(&quot;F1&quot;) + &quot;�C, X: &quot; + e.X.ToString(&quot;F1&quot;) + &quot;,Y: &quot; + e.Y.ToString(&quot;F1&quot;) + &quot;,Z: &quot; + e.Z.ToString(&quot;F1&quot;));
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>
