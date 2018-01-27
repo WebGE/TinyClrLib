@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Bluetooth module</title>
+</head>
+<body>
+
+    <h1 id="bluetooth-module">Bluetooth module</h1>
+<p>Version: <strong>0.7.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Bluetooth is connected as followed on <a href="http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_spider.html">FEZSpider</a>:</p>
+<p><img src="Gadgeteer-Bluetooth-FEZSpider.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Module</th>
+<th>Socket Type</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Bluetooth</td>
+<td>Socket Type U</td>
+<td>Socket 9</td>
+</tr>
+<tr>
+<td>Button</td>
+<td>Socket Type X</td>
+<td>Socket 4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Gadgeteer;
+using GHIElectronics.TinyCLR.Pins;
+
+namespace TestBluetooth
+{
+    class Program
+    {
+        private static Button _button;
+        private static Bluetooth _bluetooth;
+        static void Main()
+        {
+            // Button connected on Socket 4 (X type) of FEZ Spider
+            // Bluetooth connected on Socket 9 (U type) of FEZ Spider
+
+            // Button long press (&gt; 2 sec) enables pairing mode
+            // On Tera Term, select COM Port
+            // '0' will light button led off
+            // '1' will light button led on
+
+            Thread.Sleep(2000);
+            _button = new Button(FEZSpider.GpioPin.Socket4.Pin3, FEZSpider.GpioPin.Socket4.Pin4);
+            _button.LongPressed += Button_LongPressed;
+            _bluetooth = new Bluetooth(FEZSpider.GpioPin.Socket9.Pin3, FEZSpider.GpioPin.Socket9.Pin6, FEZSpider.UartPort.Socket9);
+            var client = _bluetooth.ClientMode;
+            _bluetooth.SetDeviceName(&quot;EMX-BT&quot;);
+            _bluetooth.SetPinCode(&quot;1234&quot;);
+            _bluetooth.BluetoothStateChanged += Bt_BluetoothStateChanged;
+            _bluetooth.DataReceived += Bt_DataReceived;
+
+            while (true)
+            {
+                Thread.Sleep(20);
+            }
+        }
+
+        private static void Button_LongPressed(object sender, ButtonEventHandlerArgs args)
+        {
+            _bluetooth?.ClientMode.EnterPairingMode();
+        }
+
+        private static void Bt_DataReceived(Bluetooth sender, string data)
+        {
+            if (data == &quot;0&quot;)
+                _button.Led = false;
+            if (data == &quot;1&quot;)
+                _button.Led = true;
+        }
+
+        private static void Bt_BluetoothStateChanged(Bluetooth sender, Bluetooth.BluetoothState btState)
+        {
+            switch (btState)
+            {
+                case Bluetooth.BluetoothState.Connected:
+                    Debug.WriteLine(&quot;Connected: &quot; + btState);
+                    sender.ClientMode.SendLine(&quot;Hello !&quot;);
+                    break;
+                case Bluetooth.BluetoothState.Connecting:
+                    Debug.WriteLine(&quot;Connecting: &quot; + btState);
+                    break;
+                case Bluetooth.BluetoothState.Disconnected:
+                    Debug.WriteLine(&quot;Disconnected: &quot; + btState);
+                    break;
+                case Bluetooth.BluetoothState.Initializing:
+                    Debug.WriteLine(&quot;Initializing: &quot; + btState);
+                    break;
+                case Bluetooth.BluetoothState.Inquiring:
+                    Debug.WriteLine(&quot;Inquiring: &quot; + btState);
+                    break;
+                case Bluetooth.BluetoothState.Ready:
+                    Debug.WriteLine(&quot;Ready: &quot; + btState);
+                    break;
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>

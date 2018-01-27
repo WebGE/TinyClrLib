@@ -43,6 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Bluetooth.md" />
     <None Include="Bluetooth.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -55,6 +56,12 @@
       <HintPath>..\..\..\packages\GHIElectronics.TinyCLR.Storage.0.7.0\lib\net452\GHIElectronics.TinyCLR.Storage.dll</HintPath>
       <Private>True</Private>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Bluetooth.html">
+      <DependentUpon>Bluetooth.md</DependentUpon>
+    </Content>
+    <Content Include="Gadgeteer-Bluetooth-FEZSpider.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>

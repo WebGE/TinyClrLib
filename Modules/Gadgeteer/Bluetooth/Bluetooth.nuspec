@@ -16,4 +16,8 @@
       <dependency id="GHIElectronics.TinyCLR.Core" version="[0.7.0, 0.8.0)" />
     </dependencies>
   </metadata>
+  <files>
+    <file src="Bluetooth.html" target="" />
+    <file src="Gadgeteer-Bluetooth-FEZSpider.jpg" target="" />
+  </files>
 </package>

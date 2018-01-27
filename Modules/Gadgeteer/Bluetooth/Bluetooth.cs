@@ -1,25 +1,35 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using GHIElectronics.TinyCLR.Devices.Gpio;
 using GHIElectronics.TinyCLR.Devices.SerialCommunication;
 using GHIElectronics.TinyCLR.Storage.Streams;
 // ReSharper disable StringIndexOfIsCultureSpecific.1
 // ReSharper disable StringIndexOfIsCultureSpecific.2
+// ReSharper disable FunctionNeverReturns
+// ReSharper disable PrivateFieldCanBeConvertedToLocalVariable
 // ReSharper disable UnusedMember.Global
 // ReSharper disable EventNeverSubscribedTo.Global
 
+// Driver contributed by TinyCLR communitity members Eduardo Velloso (@eduardo.velloso) and Brett Pound (@Brett).
 namespace Bauland.Gadgeteer
 {
-    /// <summary>
-    /// Wrapper class for Bluetooth Gadgeteer Module
-    /// </summary>
+    /// <summary>A Bluetooth module for Microsoft .NET Gadgeteer</summary>
     public class Bluetooth
     {
-        private readonly GpioPin _reset;
-        private readonly GpioPin _statusInt;
+
+        /// <summary>
+        /// Direct access to Serial Port.
+        /// </summary>
+
+        private readonly SerialDevice _serialPort;
+
         private readonly DataReader _dataReader;
         private readonly DataWriter _dataWriter;
+
+        private readonly GpioPin _reset;
+        private readonly GpioPin _statusInt;
+
+        private readonly Thread _readerThread;
 
         private readonly object _lock = new Object();
 
@@ -79,37 +89,85 @@ namespace Bauland.Gadgeteer
             Disconnected = 5
         }
 
-        /// <summary>Constructs a new instance.</summary>
-        /// <param name="pinStatus">pin to get status of module (usually pin 3 of U Socket)</param>
-        /// <param name="pinReset">pin to reset module (usually pin 6 of U Socket)</param>
-        /// <param name="serialId">string which represent Id of serial port of socket (usually pin 4 and 5 of U Socket)</param>
-        public Bluetooth(int pinStatus, int pinReset, string serialId)
+        /// <summary>
+        /// Construct Bluetooth module
+        /// </summary>
+        /// <param name="pinStatus">GpioPin Pin 3 of U Socket</param>
+        /// <param name="pinReset">GpioPin Pin 6 of U Socket</param>
+        /// <param name="uartId">Uart Id of U Socket</param>
+        public Bluetooth(int pinStatus, int pinReset, string uartId)
         {
-            _reset = GpioController.GetDefault().OpenPin(pinReset, GpioSharingMode.Exclusive);
+            // This finds the Socket instance from the user-specified socket number. This will generate user-friendly error messages if the socket is invalid. If there is more than one socket on this
+            // module, then instead of "null" for the last parameter, put text that identifies the socket to the user (e.g. "S" if there is a socket type S)
+            // Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+
+            //this.reset = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, false, this);
+            _reset = GpioController.GetDefault().OpenPin(pinReset);
             _reset.SetDriveMode(GpioPinDriveMode.Output);
             _reset.Write(GpioPinValue.Low);
 
-            _statusInt = GpioController.GetDefault().OpenPin(pinStatus, GpioSharingMode.Exclusive);
+            // this.statusInt = GTI.InterruptInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingAndFallingEdge, this);
+            _statusInt = GpioController.GetDefault().OpenPin(pinStatus);
             _statusInt.SetDriveMode(GpioPinDriveMode.Input);
+            _statusInt.DebounceTimeout = TimeSpan.FromMilliseconds(1);
 
-            var serialPort = SerialDevice.FromId(serialId);
-            serialPort.BaudRate = 38400;
-            serialPort.Parity = SerialParity.None;
-            serialPort.StopBits = SerialStopBitCount.One;
-            serialPort.DataBits = 8;
-            serialPort.ReadTimeout = TimeSpan.Zero;
-            _dataReader=new DataReader(serialPort.InputStream);
-            _dataWriter=new DataWriter(serialPort.OutputStream);
+            // this.serialPort = GTI.SerialFactory.Create(socket, 38400, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, GTI.HardwareFlowControl.NotRequired, this);
+            _serialPort = SerialDevice.FromId(uartId);
+            _serialPort.BaudRate = 38400;
+            _serialPort.Parity = SerialParity.None;
+            _serialPort.StopBits = SerialStopBitCount.One;
+            _serialPort.Handshake = SerialHandshake.None;
+            _serialPort.ReadTimeout = TimeSpan.MaxValue;
 
             //this.statusInt.Interrupt += GTI.InterruptInputFactory.Create.InterruptEventHandler(statusInt_Interrupt);
+            //           this.serialPort.ReadTimeout = Timeout.Infinite;
+            //           this.serialPort.Open();
+
+            _dataReader = new DataReader(_serialPort.InputStream);
+            _dataWriter = new DataWriter(_serialPort.OutputStream);
 
             Thread.Sleep(5);
             _reset.Write(GpioPinValue.High);
 
-            var readerThread = new Thread(RunReaderThread);
-            readerThread.Start();
+            _readerThread = new Thread(RunReaderThread);
+            _readerThread.Start();
             Thread.Sleep(500);
         }
+
+        // Note: A constructor summary is auto-generated by the doc builder.
+        ///// <summary></summary>
+        ///// <param name="socketNumber">The socket that this module is plugged in to.</param>
+        ///// <param name="baud">The baud rate to communicate with the module with.</param>
+        //public Bluetooth(int socketNumber, long baud)
+        //{
+        //    // This finds the Socket instance from the user-specified socket number. This will generate user-friendly error messages if the socket is invalid. If there is more than one socket on this
+        //    // module, then instead of "null" for the last parameter, put text that identifies the socket to the user (e.g. "S" if there is a socket type S)
+        //    Socket socket = Socket.GetSocket(socketNumber, true, this, null);
+
+        //    this.reset = GTI.DigitalOutputFactory.Create(socket, Socket.Pin.Six, false, this);
+        //    this.statusInt = GTI.InterruptInputFactory.Create(socket, Socket.Pin.Three, GTI.GlitchFilterMode.Off, GTI.ResistorMode.Disabled, GTI.InterruptMode.RisingAndFallingEdge, this);
+        //    this.serialPort = GTI.SerialFactory.Create(socket, 38400, GTI.SerialParity.None, GTI.SerialStopBits.One, 8, GTI.HardwareFlowControl.NotRequired, this);
+
+        //    //this.statusInt.Interrupt += GTI.InterruptInputFactory.Create.InterruptEventHandler(statusInt_Interrupt);
+        //    this.serialPort.ReadTimeout = Timeout.Infinite;
+        //    this.serialPort.Open();
+
+        //    Thread.Sleep(5);
+        //    this.reset.Write(true);
+
+        //    // Poundy added:
+        //    Thread.Sleep(5);
+        //    this.SetDeviceBaud(baud);
+        //    this.serialPort.Flush();
+        //    this.serialPort.Close();
+        //    this.serialPort.BaudRate = (int)baud;
+        //    this.serialPort.Open();
+        //    // Poundy
+
+        //    readerThread = new Thread(new ThreadStart(runReaderThread));
+        //    readerThread.Start();
+        //    Thread.Sleep(500);
+        //}
 
         /// <summary>Hard Reset Bluetooth module</summary>
         public void Reset()
@@ -128,7 +186,7 @@ namespace Bauland.Gadgeteer
         }
 
         /// <summary>Switch the device to the directed speed</summary>
-        /// <param name="baud">value of new speed</param>
+        /// <param name="baud">Speed of device</param>
         public void SetDeviceBaud(long baud)
         {
             string cmd;
@@ -168,7 +226,10 @@ namespace Bauland.Gadgeteer
             }
 
             if (cmd != "")
+            {
                 _dataWriter.WriteString("\r\n+STBD=" + cmd + "\r\n");
+                _dataWriter.Store();
+            }
             Thread.Sleep(500);
         }
 
@@ -177,7 +238,7 @@ namespace Bauland.Gadgeteer
         public void SetPinCode(string pinCode)
         {
             _dataWriter.WriteString("\r\n+STPIN=" + pinCode + "\r\n");
-
+            _dataWriter.Store();
         }
 
         /// <summary>Thread that continuously reads incoming messages from the module, parses them and triggers the corresponding events.</summary>
@@ -186,16 +247,13 @@ namespace Bauland.Gadgeteer
             while (true)
             {
                 String response = "";
-                var i = _dataReader.Load(1);
-                while (i > 0)
+                while (_dataReader.Load(1) > 0)
                 {
                     response = response + (char)_dataReader.ReadByte();
-                    i = _dataReader.Load(1);
+                    Thread.Sleep(1);
                 }
                 if (response.Length > 0)
                 {
-                    Debug.WriteLine(response);
-
                     //Check Bluetooth State Changed
                     if (response.IndexOf("+BTSTATE:") > -1)
                     {
@@ -228,11 +286,9 @@ namespace Bauland.Gadgeteer
                         // Keep reading until the end of the message
                         while (last < 0)
                         {
-                            var j = _dataReader.Load(1);
-                            while (j > 0)
+                            while (_dataReader.Load(1) > 0)
                             {
                                 response = response + (char)_dataReader.ReadByte();
-                                j = _dataReader.Load(1);
                             }
                             last = response.IndexOf("\r", first);
                         }
@@ -251,7 +307,6 @@ namespace Bauland.Gadgeteer
                 }
                 Thread.Sleep(1);  //poundy changed from thread.sleep(10)
             }
-            // ReSharper disable once FunctionNeverReturns
         }
 
         #region DELEGATES AND EVENTS
@@ -352,30 +407,29 @@ namespace Bauland.Gadgeteer
 
             internal Client(Bluetooth bluetooth)
             {
-                Debug.WriteLine("Client Mode");
                 _bluetooth = bluetooth;
-                bluetooth._dataWriter.WriteString("\r\n+STWMOD=0\r\n");
+                _bluetooth._dataWriter.WriteString("\r\n+STWMOD=0\r\n");
+                _bluetooth._dataWriter.Store();
             }
 
             /// <summary>Enters pairing mode</summary>
             public void EnterPairingMode()
             {
-                Debug.WriteLine("Enter Pairing Mode");
                 _bluetooth._dataWriter.WriteString("\r\n+INQ=1\r\n");
+                _bluetooth._dataWriter.Store();
             }
 
             /// <summary>Inputs pin code</summary>
             /// <param name="pinCode">Module's pin code. Default: 0000</param>
             public void InputPinCode(string pinCode)
             {
-                Debug.WriteLine("Inputting pin: " + pinCode);
                 _bluetooth._dataWriter.WriteString("\r\n+RTPIN=" + pinCode + "\r\n");
+                _bluetooth._dataWriter.Store();
             }
 
             /// <summary>Closes current connection. Doesn't work yet.</summary>
             public void Disconnect()
             {
-                Debug.WriteLine("Disconnection is not working...");
                 //NOT WORKING
                 // Documentation states that in order to disconnect, we pull PIO0 HIGH,
                 // but this pin is not available in the socket... (see schematics)
@@ -385,16 +439,16 @@ namespace Bauland.Gadgeteer
             /// <param name="message">String containing the data to be sent</param>
             public void Send(string message)
             {
-                Debug.WriteLine("Sending: " + message);
                 _bluetooth._dataWriter.WriteString(message);
+                _bluetooth._dataWriter.Store();
             }
 
             /// <summary>Sends data through the connection.</summary>
             /// <param name="message">String containing the data to be sent</param>
             public void SendLine(string message)
             {
-                Debug.WriteLine("Sending: " + message);
                 _bluetooth._dataWriter.WriteString(message);
+                _bluetooth._dataWriter.Store();
             }
         }
 
@@ -405,38 +459,37 @@ namespace Bauland.Gadgeteer
 
             internal Host(Bluetooth bluetooth)
             {
-                Debug.WriteLine("Host mode");
                 _bluetooth = bluetooth;
                 bluetooth._dataWriter.WriteString("\r\n+STWMOD=1\r\n");
+                bluetooth._dataWriter.Store();
             }
 
             /// <summary>Starts inquiring for devices</summary>
             public void InquireDevice()
             {
-                Debug.WriteLine("Inquiring device");
                 _bluetooth._dataWriter.WriteString("\r\n+INQ=1\r\n");
+                _bluetooth._dataWriter.Store();
             }
 
             /// <summary>Makes a connection with a device using its MAC address.</summary>
             /// <param name="macAddress">MAC address of the device</param>
             public void Connect(string macAddress)
             {
-                Debug.WriteLine("Connecting to: " + macAddress);
                 _bluetooth._dataWriter.WriteString("\r\n+CONN=" + macAddress + "\r\n");
+                _bluetooth._dataWriter.Store();
             }
 
             /// <summary>Inputs the PIN code.</summary>
             /// <param name="pinCode">PIN code. Default 0000</param>
             public void InputPinCode(string pinCode)
             {
-                Debug.WriteLine("Inputting pin: " + pinCode);
                 _bluetooth._dataWriter.WriteString("\r\n+RTPIN=" + pinCode + "\r\n");
+                _bluetooth._dataWriter.Store();
             }
 
             /// <summary>Closes the current connection. Doesn't work yet.</summary>
             public void Disconnect()
             {
-                Debug.WriteLine("Disconnection is not working...");
                 //NOT WORKING
                 // Documentation states that in order to disconnect, we pull PIO0 HIGH,
                 // but this pin is not available in the socket... (see schematics)
