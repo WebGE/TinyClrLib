@@ -17,7 +17,7 @@ namespace Bauland.Pins
             /// <summary>Led1 definition</summary>
             public const int Led1 = STM32F4.GpioPin.PA1;
             /// <summary>Led2 definition</summary>
-            public const int Led = STM32F4.GpioPin.PA8;
+            public const int Led2 = STM32F4.GpioPin.PA8;
     
             /// <summary>GPIO pin.</summary>
             public const int PA1 = STM32F4.GpioPin.PA1;
