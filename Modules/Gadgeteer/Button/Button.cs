@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics;
 using GHIElectronics.TinyCLR.Devices.Gpio;
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Global
