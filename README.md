@@ -10,9 +10,12 @@ Documentation is in progress (each file of module documentation is in project fo
 ***
 
 ## Core:
-- __Application__ class with Initialization and loop function,
-- __Led__ class to help with test easily,
-- __Button__ class to help with test easily
+Module              | Roles       | Package                                                                                            
+------------------- | ----------- | -------------------------------------------------------------------------------------------------- 
+ __Application__ | Class with Initialization and loop function | Not yet
+__Led__ | Class to help with test easily |
+__Button__ | Class to help with test easily |
+__Pins__ | Include some boards which don't appear in GHI.TinyClr.Pins | [Package]()
 
 ## Modules:
 
