@@ -15,7 +15,7 @@ Module              | Roles       | Package
  __Application__ | Class with Initialization and loop function | Not yet
 __Led__ | Class to help with test easily |
 __Button__ | Class to help with test easily |
-__Pins__ | Include some boards which don't appear in GHI.TinyClr.Pins | [Package]()
+__Pins__ | Include some boards which don't appear in GHI.TinyClr.Pins | [Package](https://www.bauland.fr/Nuget/Download?Path=Bauland.Pins.0.8.0.nupkg)
 
 ## Modules:
 
