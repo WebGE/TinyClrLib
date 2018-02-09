@@ -1,0 +1,57 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Grove Led modules</title>
+</head>
+<body>
+
+    <h1 id="grove-led-modules">Grove Led modules</h1>
+<p>Version: <strong>0.8.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Grove Led is connected as followed on <a href="http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html">Netduino3</a>:</p>
+<p><img src="Led-Netduino3-with-base-shield.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Grove Led</th>
+<th>Mainboard with base shield</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Yellow wire</td>
+<td>Socket D7</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Threading;
+using Bauland.Grove;
+using Bauland.Pins;
+
+namespace TestLed
+{
+    internal static class Program
+    {
+        private static void Main()
+        {
+            // Led Grove module is connected as follow:
+            // * yellow wire on D7
+            // on a base shield connected on Netduino3 
+
+            Led led = new Led(Netduino3.GpioPin.D7);
+            while (true)
+            {
+                led.TurnOn();
+                Thread.Sleep(500);
+                led.TurnOff();
+                Thread.Sleep(500);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>
