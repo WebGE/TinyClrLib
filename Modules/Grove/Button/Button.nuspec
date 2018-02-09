@@ -17,8 +17,8 @@
     </dependencies>
   </metadata>
   <files>
-    <!-- Add documentation and image 
-    <file src="GroveButton.html" target="" />
-    <file src="GroveButton-Netduino3.jpg" target="" /> -->
+    <!-- Add documentation and image -->
+    <file src="Button.html" target="" />
+    <file src="Button-Netduino3-with-base-shield.jpg" target="" />
   </files>
 </package>
