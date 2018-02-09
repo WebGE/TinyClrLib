@@ -43,6 +43,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="FourDigitDisplay.md" />
     <None Include="FourDigitDisplay.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -50,6 +51,12 @@
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\..\packages\GHIElectronics.TinyCLR.Devices.0.8.0\lib\net452\GHIElectronics.TinyCLR.Devices.dll</HintPath>
     </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="FourDigitDisplay-Netduino3-with-base-shield.jpg" />
+    <Content Include="FourDigitDisplay.html">
+      <DependentUpon>FourDigitDisplay.md</DependentUpon>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
