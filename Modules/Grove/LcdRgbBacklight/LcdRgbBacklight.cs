@@ -1,12 +1,14 @@
 ﻿using System.Threading;
 using GHIElectronics.TinyCLR.Devices.I2c;
-
 // ReSharper disable UnusedMember.Local
-// ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
+// ReSharper disable UnusedMember.Global
 
-namespace Modules.Grove
+namespace Bauland.Grove
 {
+    /// <summary>
+    /// Wrapper for LcdRgbBacklight display
+    /// </summary>
     public class LcdRgbBacklight
     {
         private readonly I2cDevice _displayDevice;
@@ -39,16 +41,24 @@ namespace Modules.Grove
         private const byte RegMode2 = 0x01;
         private const byte RegOutput = 0x08;
 
+        /// <summary>
+        /// Constructor of LcdRgbBacklight
+        /// </summary>
+        /// <param name="i2CBus">I2cBus Id</param>
         public LcdRgbBacklight(string i2CBus)
         {
-            var settings = new I2cConnectionSettings(0x7c >> 1) { BusSpeed = I2cBusSpeed.FastMode };
+            var settings = new I2cConnectionSettings(0x7c >> 1)
+            {
+                BusSpeed = I2cBusSpeed.FastMode,
+                SharingMode = I2cSharingMode.Shared
+            };
 
-            //string aqs = I2cDevice.GetDeviceSelector("I2C1");
             _displayDevice = I2cDevice.FromId(i2CBus, settings);
 
             settings = new I2cConnectionSettings(0xc4 >> 1)
             {
-                BusSpeed = I2cBusSpeed.FastMode
+                BusSpeed = I2cBusSpeed.FastMode,
+                SharingMode = I2cSharingMode.Shared
             };
 
             _backlightDevice = I2cDevice.FromId(i2CBus, settings);
@@ -169,6 +179,10 @@ namespace Modules.Grove
 
         /********** high level commands, for the user! */
 
+        /// <summary>
+        /// Write a string on display
+        /// </summary>
+        /// <param name="s">String to display</param>
         public void Write(string s)
         {
 
@@ -176,6 +190,9 @@ namespace Modules.Grove
                 Write((byte)s[i]);
         }
 
+        /// <summary>
+        /// Clear screen
+        /// </summary>
         public void Clear()
         {
             Command(LcdClearDisplay);        // clear display, set cursor position to zero
@@ -183,6 +200,9 @@ namespace Modules.Grove
             Thread.Sleep(2);
         }
 
+        /// <summary>
+        /// Set cursor position to home position
+        /// </summary>
         public void GoHome()
         {
             Command(LcdReturnHome);        // set cursor position to zero
@@ -190,6 +210,11 @@ namespace Modules.Grove
             Thread.Sleep(2);
         }
 
+        /// <summary>
+        /// Set cursor position
+        /// </summary>
+        /// <param name="col"># of column to set cursor</param>
+        /// <param name="row"># of row to set cursor</param>
         public void SetCursor(byte col, byte row)
         {
 
@@ -203,6 +228,10 @@ namespace Modules.Grove
         }
 
         // Turn the display on/off (quickly)
+        /// <summary>
+        /// Enable or disable display
+        /// </summary>
+        /// <param name="on">Enable if true, disable if false</param>
         public void EnableDisplay(bool on)
         {
             if (on)
@@ -228,6 +257,10 @@ namespace Modules.Grove
 
         }
 
+        /// <summary>
+        /// Blink Display
+        /// </summary>
+        /// <param name="on">Blink display if true</param>
         public void BlinkBacklight(bool on)
         {
             // blink period in seconds = (<reg 7> + 1) / 24
@@ -243,6 +276,12 @@ namespace Modules.Grove
                 WriteBacklightReg(0x06, 0xff);
             }
         }
+        /// <summary>
+        /// Set Color of display
+        /// </summary>
+        /// <param name="r">red value</param>
+        /// <param name="g">green value</param>
+        /// <param name="b">blue value</param>
         public void SetBacklightRgb(byte r, byte g, byte b)
         {
 

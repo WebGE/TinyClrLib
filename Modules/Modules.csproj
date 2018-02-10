@@ -34,12 +34,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Grove\Button.cs" />
     <Compile Include="Grove\Buzzer.cs" />
-    <Compile Include="Grove\FourDigitDisplay.cs" />
     <Compile Include="Grove\I2cGroveColor.cs" />
-    <Compile Include="Grove\LcdRgbBacklight.cs" />
-    <Compile Include="Grove\LedSocket.cs" />
     <Compile Include="Grove\LightSensor.cs" />
     <Compile Include="Mikro Click\Bluetooth LE Module\BlepModule.cs" />
     <Compile Include="Mikro Click\Bluetooth LE Module\ByteArrayExtension.cs" />
