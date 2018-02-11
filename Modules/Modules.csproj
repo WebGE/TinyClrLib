@@ -81,4 +81,5 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\GHIElectronics.TinyCLR.Core.0.8.0\build\net452\GHIElectronics.TinyCLR.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GHIElectronics.TinyCLR.Core.0.8.0\build\net452\GHIElectronics.TinyCLR.Core.props'))" />
   </Target>
-</Project>
+  </Project>
+  
