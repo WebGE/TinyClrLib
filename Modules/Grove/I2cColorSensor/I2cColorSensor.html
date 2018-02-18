@@ -1,0 +1,68 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Grove I2cColorSensor modules</title>
+</head>
+<body>
+
+    <h1 id="grove-i2ccolorsensor-modules">Grove I2cColorSensor modules</h1>
+<p>Version: <strong>0.8.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Grove I2cColorSensor is connected as followed on <a href="https://old.ghielectronics.com/catalog/product/474">FEZ Panda III</a>:
+<strong>SDA and SCL must be rewire to D2 and D3 for FEZ Panda III (red and white wire).</strong>
+<img src="I2cColorSensor-FEZPandaIII-with-BaseShield.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Grove I2cColorSensor</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I2C Socket</td>
+<td>I2C Socket</td>
+</tr>
+</tbody>
+</table>
+<p><strong>LED is ON and distance is around to 1cm to test color face of cube</strong>.</p>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Grove;
+using GHIElectronics.TinyCLR.Pins;
+
+namespace TestI2CColorSensor
+{
+    static class Program
+    {
+        static void Main()
+        {
+            // I2CColorSensor module is connected on a I2C connector of base shield module in top of FEZPandaIII
+            I2CColorSensor i2CColorSensor = new I2CColorSensor(FEZPandaIII.I2cBus.I2c1)
+            {
+                LedStatus = true
+            };
+
+            while (true)
+            {
+                // Take a measure and get corrected values
+                var res = i2CColorSensor.GetArgb();
+                // Take a measure and get raw values
+                var raw = i2CColorSensor.GetRawData();
+                // Display data
+                Debug.WriteLine(&quot;Red: 0x&quot; + res[0].ToString(&quot;X&quot;) + &quot;, Green: 0x&quot; + res[1].ToString(&quot;X&quot;) + &quot;, Blue: 0x&quot; + res[2].ToString(&quot;X&quot;) + &quot;, Clear: 0x&quot; + res[3].ToString(&quot;X&quot;));
+                Debug.WriteLine(&quot;Raw data -- Red: 0x&quot; + raw[0].ToString(&quot;X&quot;) + &quot;, Green: 0x&quot; + raw[1].ToString(&quot;X&quot;) + &quot;, Blue: 0x&quot; + raw[2].ToString(&quot;X&quot;) + &quot;, Clear: 0x&quot; + raw[3].ToString(&quot;X&quot;));
+                // Clear interrupt of sensor to get ready to take another measure
+                i2CColorSensor.ClearInterrupt();
+                Thread.Sleep(2000);
+            }
+        }
+    }
+}
+
+</code></pre>
+
+
+</body>
+</html>
