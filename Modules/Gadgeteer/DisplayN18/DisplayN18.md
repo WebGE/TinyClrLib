@@ -1,5 +1,5 @@
 # Gadgeteer N18Display modules
-Version: __0.7.0__
+Version: __0.8.0__
 
 ## Connections ##
 N18Display is connected as followed on [Cerberus](http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html):
