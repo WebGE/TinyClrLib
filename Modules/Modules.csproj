@@ -34,9 +34,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Grove\Buzzer.cs" />
-    <Compile Include="Grove\I2cGroveColor.cs" />
-    <Compile Include="Grove\LightSensor.cs" />
     <Compile Include="Mikro Click\Bluetooth LE Module\BlepModule.cs" />
     <Compile Include="Mikro Click\Bluetooth LE Module\ByteArrayExtension.cs" />
     <Compile Include="Mikro Click\Bluetooth LE Module\Commands\AciOpCode.cs" />
@@ -52,7 +49,6 @@
     <Compile Include="Mikro Click\Bluetooth LE Module\State.cs" />
     <Compile Include="Mikro Click\Bluetooth LE Module\StatusCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Grove\Relay.cs" />
     <Compile Include="Grove\RotaryAngleSensor.cs" />
     <Compile Include="Grove\Rtc.cs" />
     <Compile Include="Grove\ServoMotor.cs" />
@@ -81,5 +77,4 @@
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\GHIElectronics.TinyCLR.Core.0.8.0\build\net452\GHIElectronics.TinyCLR.Core.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\GHIElectronics.TinyCLR.Core.0.8.0\build\net452\GHIElectronics.TinyCLR.Core.props'))" />
   </Target>
-  </Project>
-  
+</Project>
