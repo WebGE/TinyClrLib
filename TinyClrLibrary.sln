@@ -83,6 +83,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "I2CColorSensor", "Modules\G
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Buzzer", "Modules\Grove\Buzzer\Buzzer.csproj", "{EC3A0EF0-E7E0-4DE0-AA3B-EDBF86AD7FC7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LightSensor", "Modules\Grove\LightSensor\LightSensor.csproj", "{123C95BB-7B83-4B21-AEFB-96D8A505DF8D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -201,6 +203,10 @@ Global
 		{EC3A0EF0-E7E0-4DE0-AA3B-EDBF86AD7FC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EC3A0EF0-E7E0-4DE0-AA3B-EDBF86AD7FC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EC3A0EF0-E7E0-4DE0-AA3B-EDBF86AD7FC7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{123C95BB-7B83-4B21-AEFB-96D8A505DF8D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{123C95BB-7B83-4B21-AEFB-96D8A505DF8D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{123C95BB-7B83-4B21-AEFB-96D8A505DF8D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{123C95BB-7B83-4B21-AEFB-96D8A505DF8D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -238,6 +244,7 @@ Global
 		{030E79CF-499D-42F0-953D-A54EB3463631} = {909B1F40-DF80-403C-B729-A1502DB38AC9}
 		{F4D23A0F-2013-4CD1-99C3-12AD0BDA6051} = {909B1F40-DF80-403C-B729-A1502DB38AC9}
 		{EC3A0EF0-E7E0-4DE0-AA3B-EDBF86AD7FC7} = {909B1F40-DF80-403C-B729-A1502DB38AC9}
+		{123C95BB-7B83-4B21-AEFB-96D8A505DF8D} = {909B1F40-DF80-403C-B729-A1502DB38AC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DFE8F872-04F4-4FB3-97A0-0280C96B9F74}

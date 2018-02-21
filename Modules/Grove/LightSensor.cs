@@ -1,18 +1,19 @@
 ﻿using GHIElectronics.TinyCLR.Devices.Adc;
+// ReSharper disable UnusedMember.Global
 
-namespace SeeedGrove
+namespace Modules.Grove
 {
     public class LightSensor
     {
-        private AdcChannel Channel;
-        public LightSensor(int AdcPinNumber)
+        private readonly AdcChannel _channel;
+        public LightSensor(int adcPinNumber)
         {
-            Channel = AdcController.GetDefault().OpenChannel(AdcPinNumber);
+            _channel = AdcController.GetDefault().OpenChannel(adcPinNumber);
         }
         // between 0 and 100
         public double ReadLightLevel()
         {
-            return Channel.ReadRatio() * 100;
+            return _channel.ReadRatio() * 100;
         }
     }
 }
