@@ -49,7 +49,6 @@
     <Compile Include="Mikro Click\Bluetooth LE Module\State.cs" />
     <Compile Include="Mikro Click\Bluetooth LE Module\StatusCode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Grove\RotaryAngleSensor.cs" />
     <Compile Include="Grove\Rtc.cs" />
     <Compile Include="Grove\ServoMotor.cs" />
     <Compile Include="Grove\SoundSensor.cs" />
