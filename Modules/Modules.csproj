@@ -52,7 +52,6 @@
     <Compile Include="Grove\Rtc.cs" />
     <Compile Include="Grove\ServoMotor.cs" />
     <Compile Include="Grove\TemperatureSensor.cs" />
-    <Compile Include="Grove\TouchSensor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
