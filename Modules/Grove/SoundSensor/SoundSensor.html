@@ -1,0 +1,54 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Grove SoundSensor modules</title>
+</head>
+<body>
+
+    <h1 id="grove-soundsensor-modules">Grove SoundSensor modules</h1>
+<p>Version: <strong>0.8.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Grove SoundSensor is connected as followed on <a href="http://developer.wildernesslabs.co/Netduino/About/">Netduino3</a>:</p>
+<p><img src="SoundSensor-Netduino3-with-base-shield.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Grove SoundSensor</th>
+<th>Mainboard with base shield</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Yellow wire</td>
+<td>Socket A0</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Grove;
+using Bauland.Pins;
+
+namespace TestSoundSensor
+{
+    static class Program
+    {
+        static void Main()
+        {
+            // Grove SoundSensor module is connected on pin A0 of Netduino3 with base shield
+            SoundSensor soundSensor=new SoundSensor(Netduino3.AdcChannel.A0);
+
+            while (true)
+            {
+                Debug.WriteLine(&quot;Level: &quot;+soundSensor.ReadLevel().ToString(&quot;F&quot;));
+                Thread.Sleep(1000);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>
