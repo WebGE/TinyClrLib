@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Grove ServoMotor modules</title>
+</head>
+<body>
+
+    <h1 id="grove-servomotor-modules">Grove ServoMotor modules</h1>
+<p>Version: <strong>0.8.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Grove ServoMotor is connected as followed on <a href="http://developer.wildernesslabs.co/Netduino/About/">Netduino 3</a>:</p>
+<p><img src="ServoMotor-Netduino3-with-base-shield.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Grove Rtc</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Yellow wire</td>
+<td>D7</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Threading;
+using Bauland.Grove;
+using Bauland.Pins;
+
+namespace TestServoMotor
+{
+    static class Program
+    {
+        static void Main()
+        {
+            // Grove ServoMotor is connected on D7 pin of Netduino 3 with base shield
+            ServoMotor servoMotor = new ServoMotor(Netduino3.PwmPin.Controller5.Id, Netduino3.PwmPin.Controller5.D7);
+
+            while (true)
+            {
+                servoMotor.SetPosition(0);
+                Thread.Sleep(1000);
+                servoMotor.SetPosition(45);
+                Thread.Sleep(1000);
+                servoMotor.SetPosition(90);
+                Thread.Sleep(1000);
+                servoMotor.SetPosition(135);
+                Thread.Sleep(1000);
+                servoMotor.SetPosition(180);
+                Thread.Sleep(1000);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>
