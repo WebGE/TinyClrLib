@@ -45,7 +45,9 @@
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="ServoMotor.md" />
-    <None Include="ServoMotor.nuspec" />
+    <None Include="ServoMotor.nuspec">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
