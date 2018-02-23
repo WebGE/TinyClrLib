@@ -1,24 +1,63 @@
 ﻿using GHIElectronics.TinyCLR.Devices.I2c;
+// ReSharper disable UnusedMember.Global
+// ReSharper disable MemberCanBePrivate.Global
 
-namespace Modules.Grove
+namespace Bauland.Grove
 {
     /// <summary>
     /// Days of the week which are represented in Rtc
     /// </summary>
-    public enum DayOfWeek { Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday }
+    public enum DayOfWeek
+    {
+        /// <summary> Monday </summary>
+        Monday,
+        /// <summary> Tuesday </summary>
+        Tuesday,
+        /// <summary> Wednesday </summary>
+        Wednesday,
+        /// <summary> Thursday </summary>
+        Thursday,
+        /// <summary> Friday </summary>
+        Friday,
+        /// <summary> Saturday </summary>
+        Saturday,
+        /// <summary> Sunday </summary>
+        Sunday
+    }
 
     /// <summary>
-    /// Object to manage rtc component
+    /// Wrapper for Grove Rtc module
     /// </summary>
     public class Rtc
     {
         private readonly I2cDevice _rtcDevice;
+        /// <summary>
+        /// Seconds 
+        /// </summary>
         public byte Seconds;
+        /// <summary>
+        /// Minutes
+        /// </summary>
         public byte Minutes;
+        /// <summary>
+        /// Hours
+        /// </summary>
         public byte Hours;
+        /// <summary>
+        /// Day
+        /// </summary>
         public byte Day;
+        /// <summary>
+        /// Day of the week
+        /// </summary>
         public DayOfWeek DayOfWeek;
+        /// <summary>
+        /// Month
+        /// </summary>
         public byte Month;
+        /// <summary>
+        /// Year
+        /// </summary>
         public ushort Year;
         /// <summary>
         /// Set true to use AM/PM mode, false to use 24 Hrs mode
@@ -43,9 +82,14 @@ namespace Modules.Grove
             return (byte)((b / 10 * 16) + (b % 10));
         }
 
+        /// <summary>
+        /// Get string to display number to 2 digits
+        /// </summary>
+        /// <param name="number">Number to display</param>
+        /// <returns>string that contains 2 digits</returns>
         public static string To2Digit(int number)
         {
-                return number < 10 ? ("0" + number) : number.ToString();
+            return number < 10 ? ("0" + number) : number.ToString();
         }
 
         private byte BcdToDec(byte b)
