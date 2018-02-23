@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Grove Rtc modules</title>
+</head>
+<body>
+
+    <h1 id="grove-rtc-modules">Grove Rtc modules</h1>
+<p>Version: <strong>0.8.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Grove Rtc is connected as followed on <a href="http://developer.wildernesslabs.co/Netduino/About/">Netduino 3</a>:</p>
+<p><img src="Rtc-Netduino3-with-base-shield.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Grove Rtc</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I2C Socket</td>
+<td>I2C Socket</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Grove;
+using Bauland.Pins;
+
+namespace TestRtc
+{
+    static class Program
+    {
+        static void Main()
+        {
+            // Grove Rtc module is connected on I2C bus of Netduino 3 with base shield
+            Rtc rtc = new Rtc(Netduino3.I2cBus.I2c);
+
+            while (true)
+            {
+                rtc.GetTime();
+                Display(rtc);
+                Thread.Sleep(1000);
+            }
+        }
+
+        private static void Display(Rtc rtc)
+        {
+            Debug.WriteLine(&quot;Date: &quot; + rtc.DayOfWeek + &quot; &quot; + rtc.Day + &quot;/&quot; + rtc.Month + &quot;/&quot; + rtc.Year);
+            Debug.WriteLine(&quot;Time: &quot; + rtc.Hours + &quot;:&quot; + rtc.Minutes + &quot;:&quot; + rtc.Seconds);
+        }
+
+        private static void SetTime(Rtc rtc)
+        {
+            // To set Rtc with winter time
+            rtc.GetTime();
+            rtc.Hours += 1;
+            rtc.SetTime();
+
+            // To set Rtc with specific Date/Time
+            rtc.Year = 2018;
+            rtc.Month = 02;
+            rtc.Day = 23;
+            rtc.DayOfWeek = DayOfWeek.Friday;
+            rtc.Hours = 18;
+            rtc.Minutes = 30;
+            rtc.Seconds = 30;
+            rtc.SetTime();
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>

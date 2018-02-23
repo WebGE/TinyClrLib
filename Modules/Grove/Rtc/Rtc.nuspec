@@ -17,8 +17,8 @@
     </dependencies>
   </metadata>
   <files>
-    <!-- Add documentation and image
+    <!-- Add documentation and image -->
     <file src="Rtc.html" target="" />
-    <file src="Rtc-Netduino3-with-base-shield.jpg" target="" /> -->
+    <file src="Rtc-Netduino3-with-base-shield.jpg" target="" /> 
   </files>
 </package>
