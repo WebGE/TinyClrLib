@@ -24,7 +24,7 @@ namespace Bauland.Pins
             public const int SdCardDetect = STM32F4.GpioPin.PB2;
             /// <summary>SD Card Power Control definition</summary>
             public const int SdCardPwrCtrl = STM32F4.GpioPin.PB1;
-           
+
             /// <summary>GPIO pin.</summary>
             public const int D0 = STM32F4.GpioPin.PC7;
             /// <summary>GPIO pin.</summary>
@@ -180,8 +180,14 @@ namespace Bauland.Pins
             {
                 /// <summary>Id of PwnProvider</summary>
                 public const string Id = "GHIElectronics.TinyCLR.NativeApis.STM32F4.PwmProvider\\0";
-                /// <summary></summary>
+                /// <summary>Pwm0 definition</summary>
+                public const int Led_Goport1 = 0;
+                /// <summary>Pwm1 definition</summary>
+                public const int Led_Goport2 = 1;
+                /// <summary>Pwm2 definition</summary>
                 public const int Led = 2;
+                /// <summary>Pwm3 definition</summary>
+                public const int Led_Goport3 = 3;
             }
 
             /// <summary>Pwm Controller2 definition</summary>
@@ -189,19 +195,8 @@ namespace Bauland.Pins
             {
                 /// <summary>Id of PwnProvider</summary>
                 public const string Id = "GHIElectronics.TinyCLR.NativeApis.STM32F4.PwmProvider\\1";
-                /// <summary>Pwm3 definition</summary>
-                public const int Pwm3 = 2;
-            }
-
-            /// <summary>Pwm Controller4 definition</summary>
-            public static class Controller4
-            {
-                /// <summary>Id of PwnProvider</summary>
-                public const string Id = "GHIElectronics.TinyCLR.NativeApis.STM32F4.PwmProvider\\3";
-                /// <summary>Pwm0 definition</summary>
-                public const int Pwm0 = 2;
-                /// <summary>Pwm1 definition</summary>
-                public const int Pwm1 = 3;
+                /// <summary>Pwm2 definition</summary>
+                public const int D10 = 2;
             }
 
             /// <summary>Pwm Controller5 definition</summary>
@@ -209,8 +204,25 @@ namespace Bauland.Pins
             {
                 /// <summary>Id of PwnProvider</summary>
                 public const string Id = "GHIElectronics.TinyCLR.NativeApis.STM32F4.PwmProvider\\4";
-                /// <summary>Pwm4 definition</summary>
-                public const int Pwm4 = 2;
+                /// <summary>Pwm0 definition</summary>
+                public const int D8 = 0;
+                /// <summary>Pwm1 definition</summary>
+                public const int D7 = 1;
+                /// <summary>Pwm2 definition</summary>
+                public const int D3 = 2;
+                /// <summary>Pwm3 definition</summary>
+                public const int D2 = 3;
+            }
+
+            /// <summary>Pwm Controller8 definition</summary>
+            public static class Controller8
+            {
+                /// <summary>Id of PwnProvider</summary>
+                public const string Id = "GHIElectronics.TinyCLR.NativeApis.STM32F4.PwmProvider\\7";
+                /// <summary>Pwm0 definition</summary>
+                public const int D1 = 0;
+                /// <summary>Pwm1 definition</summary>
+                public const int D0 = 1;
             }
 
             /// <summary>Pwm Controller9 definition</summary>
@@ -218,17 +230,26 @@ namespace Bauland.Pins
             {
                 /// <summary>Id of PwnProvider</summary>
                 public const string Id = "GHIElectronics.TinyCLR.NativeApis.STM32F4.PwmProvider\\8";
-                /// <summary>Pwm2 definition</summary>
-                public const int Pwm2 = 0;
+                /// <summary>Pwm0 definition</summary>
+                public const int D9 = 0;
             }
 
-            /// <summary>Pwm Controller12 definition</summary>
-            public static class Controller12
+            /// <summary>Pwm Controller10 definition</summary>
+            public static class Controller10
             {
                 /// <summary>Id of PwnProvider</summary>
-                public const string Id = "GHIElectronics.TinyCLR.NativeApis.STM32F4.PwmProvider\\11";
-                /// <summary>Pwm5 definition</summary>
-                public const int Pwm5 = 1;
+                public const string Id = "GHIElectronics.TinyCLR.NativeApis.STM32F4.PwmProvider\\9";
+                /// <summary>Pwm0 definition</summary>
+                public const int D5 = 0;
+            }
+
+            /// <summary>Pwm Controller11 definition</summary>
+            public static class Controller11
+            {
+                /// <summary>Id of PwnProvider</summary>
+                public const string Id = "GHIElectronics.TinyCLR.NativeApis.STM32F4.PwmProvider\\10";
+                /// <summary>Pwm0 definition</summary>
+                public const int D6 = 0;
             }
         }
     }
