@@ -1,0 +1,61 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Grove BarometerSensorBME280 modules</title>
+</head>
+<body>
+
+    <h1 id="grove-barometersensorbme280-modules">Grove BarometerSensorBME280 modules</h1>
+<p>Version: <strong>0.8.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Grove BarometerSensorBME280 is connected as followed on <a href="http://developer.wildernesslabs.co/Netduino/About/">Netduino3</a>:</p>
+<p><img src="BarometerSensorBME280-Netduino3-with-base-shield.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Grove BarometerSensorBME280</th>
+<th>Mainboard with base shield</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>I2C</td>
+<td>Socket I2C</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code">Example of code:</h2>
+<pre><code class="language-CSharp">using System.Diagnostics;
+using System.Threading;
+using Bauland.Grove;
+using Bauland.Pins;
+
+namespace TestBarometerBME280
+{
+    static class Program
+    {
+        static void Main()
+        {
+            // Barometer module is connected on I2C bus of Netduino 3
+            BarometerSensorBme280 barometer = new BarometerSensorBme280(Netduino3.I2cBus.I2c);
+
+            while (true)
+            {
+                var temperature = barometer.GetTemperature();
+                var pressure = barometer.GetPressure();
+                var altitude = barometer.CalculateAltitude(pressure);
+                var humidity = barometer.GetHumidity();
+                Debug.WriteLine(&quot;Temperature: &quot; + temperature.ToString(&quot;F1&quot;) + &quot; �C, &quot; +
+                                &quot;Pressure: &quot; + (pressure / 100.0).ToString(&quot;F1&quot;) + &quot; hPa, &quot; +
+                                &quot;Altitude: &quot; + altitude.ToString(&quot;F1&quot;) + &quot; m, &quot; +
+                                &quot;Humidity: &quot; + humidity.ToString(&quot;F1&quot;) + &quot; %&quot;);
+                Thread.Sleep(1000);
+            }
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>
