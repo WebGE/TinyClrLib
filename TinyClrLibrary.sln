@@ -99,6 +99,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServoMotor", "Modules\Grove
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BarometerSensorBME280", "Modules\Grove\BarometerSensorBME280\BarometerSensorBME280.csproj", "{7F07F5B6-0E91-4C6E-A1C1-795AD8D08ADC}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SerialBluetooth3", "Modules\Grove\SerialBluetooth3\SerialBluetooth3.csproj", "{8D80E58F-94FC-4F99-AAE4-B8ECAB3F4EB5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -249,6 +251,10 @@ Global
 		{7F07F5B6-0E91-4C6E-A1C1-795AD8D08ADC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7F07F5B6-0E91-4C6E-A1C1-795AD8D08ADC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7F07F5B6-0E91-4C6E-A1C1-795AD8D08ADC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8D80E58F-94FC-4F99-AAE4-B8ECAB3F4EB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8D80E58F-94FC-4F99-AAE4-B8ECAB3F4EB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8D80E58F-94FC-4F99-AAE4-B8ECAB3F4EB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8D80E58F-94FC-4F99-AAE4-B8ECAB3F4EB5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -294,6 +300,7 @@ Global
 		{AA042428-546A-4764-B348-1C41FFE08A23} = {909B1F40-DF80-403C-B729-A1502DB38AC9}
 		{588991FD-BCB1-4F2B-80A8-8A05F6808AED} = {909B1F40-DF80-403C-B729-A1502DB38AC9}
 		{7F07F5B6-0E91-4C6E-A1C1-795AD8D08ADC} = {909B1F40-DF80-403C-B729-A1502DB38AC9}
+		{8D80E58F-94FC-4F99-AAE4-B8ECAB3F4EB5} = {909B1F40-DF80-403C-B729-A1502DB38AC9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {DFE8F872-04F4-4FB3-97A0-0280C96B9F74}
