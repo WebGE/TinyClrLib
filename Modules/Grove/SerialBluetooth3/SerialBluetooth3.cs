@@ -1,15 +1,34 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading;
 using GHIElectronics.TinyCLR.Devices.SerialCommunication;
 using GHIElectronics.TinyCLR.Storage.Streams;
 // ReSharper disable UnusedMember.Global
 // ReSharper disable MemberCanBePrivate.Global
 // ReSharper disable UnusedMember.Local
-#pragma warning disable 1591
+// ReSharper disable UnusedMethodReturnValue.Local
 
 namespace Bauland.Grove
 {
+
+    /// <summary>
+    /// Define accessible rates for communication speed
+    /// </summary>
+    public enum BaudRate
+    {
+        /// <summary> </summary>
+        BaudRate9600 = 4,
+        /// <summary> </summary>
+        BaudRate19200 = 5,
+        /// <summary> </summary>
+        BaudRate38400 = 6,
+        /// <summary> </summary>
+        BaudRate57600 = 7,
+        /// <summary> </summary>
+        BaudRate115200 = 8,
+        /// <summary> </summary>
+        BaudRate230400 = 9,
+    }
+
     /// <summary>
     /// Wrapper for Grove Serail Bluetooth 3 module
     /// </summary>
@@ -20,46 +39,160 @@ namespace Bauland.Grove
         private DataWriter _writer;
         private readonly string _uart;
         private BaudRate _baudRate;
+        private readonly Thread _readerThread;
+        private const int Delay = 100;
 
-        public enum BaudRate
+        private readonly object _lock = new Object();
+
+        private Client _client;
+        /// <summary>Sets Bluetooth module to work in Client mode.</summary>
+        public Client ClientMode
         {
-            BaudRate9600 = 4,
-            BaudRate19200=5,
-            BaudRate38400 = 6,
-            BaudRate57600=7,
-            BaudRate115200=8,
-            BaudRate230400=9,
+            get
+            {
+                lock (_lock)
+                {
+                    return _client ?? (_client = new Client(this));
+                }
+            }
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public class Client
+        {
+            private readonly SerialBluetooth3 _bluetooth;
+
+            internal Client(SerialBluetooth3 bluetooth)
+            {
+                _bluetooth = bluetooth;
+                _bluetooth.QueryResponse("AT+ROLES");
+                _bluetooth._readerThread.Start();
+            }
+
+            /// <summary>Sends data through the connection.</summary>
+            /// <param name="message">String containing the data to be sent</param>
+            public void SendString(string message)
+            {
+                _bluetooth._writer.WriteString(message);
+                _bluetooth._writer.Store();
+            }
+
+            /// <summary>Sends data through the connection.</summary>
+            /// <param name="b">Byte containing the data to be sent</param>
+            public void SendByte(byte b)
+            {
+                _bluetooth._writer.WriteByte(b);
+                _bluetooth._writer.Store();
+            }
+
+            /// <summary>Sends data through the connection.</summary>
+            /// <param name="bytesArray">Bytes containing the data to be sent</param>
+            public void SendBytes(byte[] bytesArray)
+            {
+                _bluetooth._writer.WriteBytes(bytesArray);
+                _bluetooth._writer.Store();
+            }
+        }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="data"></param>
+        public delegate void DataReceivedHandler(SerialBluetooth3 sender, string data);
+
+        /// <summary>Event raised when the bluetooth module changes its state.</summary>
+        public event DataReceivedHandler OnDataReceived;
 
         /// <summary>
         /// Constructor of Grove SerialBluetooth3 module
         /// </summary>
         /// <param name="idUart"></param>
         /// <param name="baudRate">Set initial rate of module (default is 9600)</param>
-        public SerialBluetooth3(string idUart,BaudRate baudRate=BaudRate.BaudRate9600)
+        public SerialBluetooth3(string idUart, BaudRate baudRate = BaudRate.BaudRate9600)
         {
             _uart = idUart;
             OpenSerial(idUart, baudRate);
+            _readerThread = new Thread(RunReaderThread);
         }
 
-        private void OpenSerial(string idUart, BaudRate baudRate)
+        /// <summary>
+        /// If false, led is always off.
+        /// </summary>
+        public bool LedMode
         {
-            _serial = SerialDevice.FromId(idUart);
-            _baudRate = baudRate;
-            _serial.BaudRate = GetBaudRate(baudRate);
-            _serial.ReadTimeout = TimeSpan.FromMilliseconds(200);
-            _reader = new DataReader(_serial.InputStream);
-            _writer = new DataWriter(_serial.OutputStream);
+            get => GetLedMode().Response == "1";
+            set => SetLedMode(value);
         }
-        private void CloseSerial()
+
+        public bool Key
         {
-            _writer.Dispose();
-            _writer = null;
-            _reader.Dispose();
-            _reader = null;
-            _serial.Dispose();
-            _serial = null;
+            get => GetKey().Response == "1";
         }
+
+        private QueryResponse GetKey()
+        {
+            return QueryResponse("AT+KEY?");
+        }
+
+        /// <summary>
+        /// Get notification when module is connected/disconnected
+        /// </summary>
+        public bool Notification
+        {
+            get => GetNotification().Response == "1";
+            set => SetNotification(value);
+        }
+
+        private QueryResponse SetNotification(bool value)
+        {
+            return QueryResponse("AT+NOTI" + (value ? "1" : "0"));
+        }
+
+        private QueryResponse GetNotification()
+        {
+            return QueryResponse("AT+NOTI?");
+        }
+
+
+        /// <summary>
+        /// Name of bluetooth module
+        /// </summary>
+        public string Name
+        {
+            get => GetName().Response;
+            set => SetName(value);
+        }
+
+        /// <summary>
+        /// Pin code of bluetooth module
+        /// </summary>
+        public string Pin
+        {
+            get => GetName().Response;
+            set => SetName(value);
+        }
+
+        /// <summary>
+        /// BaudRate of bluetooth module
+        /// </summary>
+        public BaudRate BaudRate
+        {
+            get => GetBaudRateFromIndex(int.Parse(GetBaudRate().Response));
+            set => SetBaudRate(value);
+        }
+
+        /// <summary>
+        /// Get Address of module
+        /// </summary>
+        public string Address => GetAddress().Response;
+
+        /// <summary>
+        /// Get Version of module
+        /// </summary>
+        public string Version => GetVersion().Response;
 
         /// <summary>
         /// Check if device is present(if it is not connected on master)
@@ -67,50 +200,123 @@ namespace Bauland.Grove
         /// <returns>true if present, else false</returns>
         public bool CheckDevice()
         {
-            string expected = "OK";
-            _writer.WriteString("AT");
-            _writer.Store();
-            var read = _reader.Load((uint)expected.Length);
-            if (read == (uint)expected.Length)
-            {
-                var str = _reader.ReadString((uint)expected.Length);
-                if (str == expected)
-                    return true;
-            }
-            return false;
+            return QueryResponse("AT").Response == "OK";
+        }
+
+        private QueryResponse GetAddress()
+        {
+            return QueryResponse("AT+ADDR?");
+        }
+
+        private QueryResponse GetLedMode()
+        {
+            return QueryResponse("AT+LED?");
+        }
+
+        private QueryResponse SetLedMode(bool blink)
+        {
+            var command = "AT+LED" + (blink ? "0" : "1");
+            return QueryResponse(command);
+        }
+
+        private QueryResponse GetName()
+        {
+            return QueryResponse("AT+NAME?");
+        }
+
+        private QueryResponse SetName(string name)
+        {
+            if (name.Length > 12)
+                throw new ArgumentOutOfRangeException(nameof(name), "Max length of name is 12.");
+
+            return QueryResponse("AT+NAME" + name);
+        }
+
+        private QueryResponse GetPin()
+        {
+            return QueryResponse("AT+PIN?");
+        }
+
+        private QueryResponse SetPin(string pinCode)
+        {
+            if (pinCode.Length > 12)
+                throw new ArgumentOutOfRangeException(nameof(pinCode), "Max length of name is 12.");
+            return QueryResponse("AT+PIN" + pinCode);
+        }
+
+        private QueryResponse GetBaudRate()
+        {
+            return QueryResponse("AT+BAUD?");
+        }
+
+        private static BaudRate GetBaudRateFromIndex(int parse)
+        {
+            return (BaudRate)parse;
+        }
+
+        private QueryResponse SetBaudRate(BaudRate baudRate)
+        {
+            var qr = QueryResponse("AT+BAUD" + baudRate);
+            ChangeSerial(baudRate);
+            return qr;
+        }
+
+        private QueryResponse GetVersion()
+        {
+            return QueryResponse("AT+VERSION?");
         }
 
         /// <summary>
-        /// Change Baud Rate to communicate with module
+        /// Restore default values of module (long task ~12sec)
         /// </summary>
-        /// <param name="baudRate">Value of baud rate</param>
-        /// <returns>true if change has been made, false if an error occurs</returns>
-        public bool ChangeBaudRate(BaudRate baudRate)
+        /// <returns>Result of query is in Response member</returns>
+        public QueryResponse RestoreDefault()
         {
-            string str = "AT+BAUD" + baudRate;
-            _writer.WriteString(str);
+            _writer.WriteString("AT+DEFAULT");
             _writer.Store();
-            var read = _reader.Load(2);
-            if (read == 2)
+            ChangeSerial(BaudRate.BaudRate9600);
+            Thread.Sleep(12000);
+            var read = _reader.Load(30);
+            var rep = _reader.ReadString(read);
+            var indexPlus = rep.IndexOf('+');
+            var response = new QueryResponse();
+
+            if (indexPlus >= 0)
             {
-                var rep = _reader.ReadString(read);
-                if (rep == "OK")
-                {
-                    read = _reader.Load(15);
-                    rep = _reader.ReadString(read);
-                    Debug.WriteLine("ChangeBaudRate:"+rep);
-                    SetSerial(baudRate);
-                    while (!CheckDevice())
-                    {
-                        Thread.Sleep(20);
-                    }
-                    return true;
-                }
+                response.Result = rep.Substring(0, indexPlus);
+                response.Type = rep.Substring(indexPlus + 1, rep.Length - indexPlus - 1);
+                response.Response = "";
             }
-            return false;
+            else
+            {
+                response.Result = "FAILED";
+                response.Type = "DEFAULT";
+                response.Response = "";
+            }
+            return response;
         }
 
-        public static uint GetBaudRate(BaudRate baudRate)
+        private void RunReaderThread()
+        {
+            while (true)
+            {
+                String response = "";
+                while (_reader.Load(1) > 0)
+                {
+                    response = response + (char)_reader.ReadByte();
+                    Thread.Sleep(1);
+                }
+
+                if (response.Length > 0)
+                {
+                    OnDataReceived?.Invoke(this, response);
+                }
+                Thread.Sleep(1);
+            }
+            // ReSharper disable once FunctionNeverReturns
+        }
+
+        private static uint GetBaudRateToValue(BaudRate baudRate)
         {
             switch (baudRate)
             {
@@ -131,14 +337,60 @@ namespace Bauland.Grove
             }
         }
 
-        private void SetSerial(BaudRate baudRate)
+        private QueryResponse QueryResponse(string command)
+        {
+            _writer.WriteString(command);
+            _writer.Store();
+            var read = _reader.Load(30);
+            var rep = _reader.ReadString(read);
+            var response = TreatResponse(rep);
+            return response;
+        }
+
+        private static QueryResponse TreatResponse(string rep)
+        {
+            var response = new QueryResponse();
+            var plusIndex = rep.IndexOf('+');
+            if (plusIndex == -1)
+            {
+                response.Response = rep;
+                response.Result = "";
+                response.Type = "";
+            }
+            else
+            {
+                response.Result = rep.Substring(0, plusIndex);
+                response.Type = rep.Substring(plusIndex + 1, rep.IndexOf(':') - plusIndex - 1);
+                response.Response = rep.Substring(rep.IndexOf(':') + 1, rep.Length - rep.IndexOf(':') - 1);
+            }
+            return response;
+        }
+        private void OpenSerial(string idUart, BaudRate baudRate)
+        {
+            _serial = SerialDevice.FromId(idUart);
+            _baudRate = baudRate;
+            _serial.BaudRate = GetBaudRateToValue(baudRate);
+            _serial.ReadTimeout = TimeSpan.FromMilliseconds(200);
+            _reader = new DataReader(_serial.InputStream);
+            _writer = new DataWriter(_serial.OutputStream);
+        }
+        private void CloseSerial()
+        {
+            _writer.Dispose();
+            _writer = null;
+            _reader.Dispose();
+            _reader = null;
+            _serial.Dispose();
+            _serial = null;
+        }
+        private void ChangeSerial(BaudRate baudRate)
         {
             if (baudRate == _baudRate)
                 // Nothing to do
                 return;
             CloseSerial();
             Thread.Sleep(1000);
-            OpenSerial(_uart,baudRate);
+            OpenSerial(_uart, baudRate);
         }
     }
 }

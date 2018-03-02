@@ -39,11 +39,13 @@
     <Compile Include="..\..\SharedAssemblyInfo.cs">
       <Link>Properties\SharedAssemblyInfo.cs</Link>
     </Compile>
+    <Compile Include="QueryResponse.cs" />
     <Compile Include="SerialBluetooth3.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
+    <None Include="SerialBluetooth3.nuspec" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="GHIElectronics.TinyCLR.Devices, Version=0.8.0.0, Culture=neutral, processorArchitecture=MSIL">
