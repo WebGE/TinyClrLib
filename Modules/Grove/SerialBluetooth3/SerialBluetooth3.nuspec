@@ -17,8 +17,8 @@
     </dependencies>
   </metadata>
   <files>
-    <!-- Add documentation and image 
-    <file src="Rtc.html" target="" />
-    <file src="Rtc-Netduino3-with-base-shield.jpg" target="" />-->
+    <!-- Add documentation and image -->
+    <file src="SerialBluetooth3.html" target="" />
+    <file src="SerialBluetooth3-Netduino3-with-base-shield.jpg" target="" />
   </files>
 </package>

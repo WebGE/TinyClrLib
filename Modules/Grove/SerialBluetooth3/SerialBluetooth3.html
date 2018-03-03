@@ -1,0 +1,161 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>Grove SerialBluetooth3 modules</title>
+</head>
+<body>
+
+    <h1 id="grove-serialbluetooth3-modules">Grove SerialBluetooth3 modules</h1>
+<p>Version: <strong>0.8.0</strong></p>
+<h2 id="connections">Connections</h2>
+<p>Grove SerialBluetooth3 is connected as followed on <a href="http://developer.wildernesslabs.co/Netduino/About/">Netduino 3</a>:</p>
+<p><img src="SerialBluetooth3-Netduino3-with-base-shield.jpg" alt="Schematic" /></p>
+<table>
+<thead>
+<tr>
+<th>Grove Rtc</th>
+<th>Mainboard</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UART Socket</td>
+<td>UART Socket</td>
+</tr>
+</tbody>
+</table>
+<h2 id="example-of-code-this-is-master-code">Example of code: <strong>(this is master code)</strong></h2>
+<pre><code class="language-CSharp">using System;
+using System.Diagnostics;
+using System.Runtime.InteropServices;
+using System.Threading;
+using Bauland.Grove;
+using Bauland.Pins;
+using GHIElectronics.TinyCLR.Pins;
+
+namespace TestSerialBluetooth3
+{
+    static class Program
+    {
+        private static SerialBluetooth3 _bluetooth3;
+
+        private const string RemoteDeviceAddress= &quot;000EEACF35DC&quot;;
+
+        static void Main()
+        {
+            // Config Hardware
+            Config();
+
+            // Config Bluetooth module
+            SetupBluetoothModule();
+
+            // Setup events
+            _bluetooth3.DataReceived += _bluetooth3_OnDataReceived;
+            _bluetooth3.Connected += _bluetooth3_Connected;
+            _bluetooth3.Disconnected += _bluetooth3_Disconnected;
+            _bluetooth3.ConnectionFailed += _bluetooth3_ConnectionFailed;
+            _bluetooth3.ConnectionStarted += _bluetooth3_ConnectionStarted;
+            _bluetooth3.ScanDevice += _bluetooth3_ScanDevice;
+            _bluetooth3.ScanEnded += _bluetooth3_ScanEnded;
+            _bluetooth3.ScanStarted += _bluetooth3_ScanStarted;
+
+            // Set as Master, this line start message pump
+            var master = _bluetooth3.MasterMode;
+
+            master.Scan();
+
+            while (true)
+            {
+                Thread.Sleep(20);
+            }
+        }
+
+        private static void _bluetooth3_ScanStarted(SerialBluetooth3 sender)
+        {
+            Debug.WriteLine(&quot;Scan started...&quot;);
+        }
+
+        private static void Config()
+        {
+            switch (DeviceInformation.DeviceName)
+            {
+                case &quot;netduino3&quot;:
+                    // Grove SerialBluetooth3 module is connected on UART port of Netduino 3 with base shield
+                    _bluetooth3 =
+                       new SerialBluetooth3(Netduino3.UartPort.Uart6, BaudRate.BaudRate9600);
+                    break;
+                case &quot;G80&quot;:
+                    // Grove SerialBluetooth3 module is connected on UART port of FEZ Panda III with base shield
+                    _bluetooth3 =
+                        new SerialBluetooth3(FEZPandaIII.UartPort.Usart1, BaudRate.BaudRate9600);
+                    break;
+            }
+            if (_bluetooth3 == null)
+                throw new ArgumentNullException(nameof(_bluetooth3), &quot;_bluetooh is not initialized correctly.&quot;);
+        }
+
+        private static void SetupBluetoothModule()
+        {
+            Debug.WriteLine(&quot;Default: &quot; + _bluetooth3.RestoreDefault().Result);
+            Debug.WriteLine(&quot;Present: &quot; + _bluetooth3.IsPresent);
+
+            // Defaults values, just to remember
+            _bluetooth3.Name = &quot;HMSoft&quot;;
+            _bluetooth3.Pin = &quot;1234&quot;;
+            Debug.WriteLine(&quot;Name: &quot; + _bluetooth3.Name);
+            Debug.WriteLine(&quot;Pin code: &quot; + _bluetooth3.Pin);
+
+            // Configure Notification to have info on connection/disconnection (false as default)
+            _bluetooth3.Notification = true;
+
+            Debug.WriteLine(&quot;Notification: &quot; + _bluetooth3.Notification);
+            Debug.WriteLine(&quot;GetVersion: &quot; + _bluetooth3.Version);
+            Debug.WriteLine(&quot;QueryAddress: &quot; + _bluetooth3.Address);
+            Debug.WriteLine(&quot;LedMode: &quot; + _bluetooth3.LedMode);
+        }
+
+        private static void _bluetooth3_ScanEnded(SerialBluetooth3 sender)
+        {
+            Debug.WriteLine(&quot;Scan ended.&quot;);
+            sender.MasterMode.Connect(RemoteDeviceAddress);
+        }
+
+        private static void _bluetooth3_ScanDevice(SerialBluetooth3 sender, string macAddress)
+        {
+            Debug.WriteLine(&quot;Device found: &quot; + macAddress);
+        }
+
+        private static void _bluetooth3_ConnectionStarted(SerialBluetooth3 sender)
+        {
+            Debug.WriteLine(&quot;# Connection started...&quot;);
+        }
+
+        private static void _bluetooth3_ConnectionFailed(SerialBluetooth3 sender)
+        {
+            Debug.WriteLine(&quot;# Connection has failed.&quot;);
+            // Try again
+            sender.MasterMode.Connect(RemoteDeviceAddress);
+        }
+
+        private static void _bluetooth3_Disconnected(SerialBluetooth3 sender)
+        {
+            Debug.WriteLine(&quot;# Disconnnected&quot;);
+        }
+
+        private static void _bluetooth3_Connected(SerialBluetooth3 sender)
+        {
+            Debug.WriteLine(&quot;# Connnected&quot;);
+            sender.SendString(&quot;Hello !&quot;);
+        }
+
+        private static void _bluetooth3_OnDataReceived(SerialBluetooth3 sender, string data)
+        {
+            Debug.WriteLine(&quot;# Data:&quot; + data);
+        }
+    }
+}
+</code></pre>
+
+
+</body>
+</html>
