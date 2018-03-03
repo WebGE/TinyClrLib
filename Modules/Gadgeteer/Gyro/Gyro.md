@@ -1,5 +1,5 @@
 # Gyro modules
-Version: __0.8.0__
+Version: __0.9.0__
 
 ## Connections ##
 Gyro is connected as followed on [Cerberus](http://docs.ghielectronics.com/hardware/legacy_products/gadgeteer/fez_cerberus.html):
